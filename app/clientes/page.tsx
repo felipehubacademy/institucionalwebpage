@@ -380,7 +380,7 @@ export default function ClientesPage() {
                   ></iframe>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">IDEMIA do Brasil</h3>
+                  <h3 className="text-xl font-bold text-[#161533] mb-2">TechSolutions Brasil</h3>
                   <p className="text-gray-600 mb-4">
                     A TechSolutions implementou um programa de inglês técnico para sua equipe de desenvolvimento,
                     resultando em uma melhoria significativa na colaboração com equipes internacionais e na documentação
