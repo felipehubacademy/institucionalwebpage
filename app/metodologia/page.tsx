@@ -95,27 +95,41 @@ export default function MetodologiaPage() {
                     imediatamente em seu contexto de trabalho.
                   </p>
                 </div>
+                <h3 className="text-xl font-medium text-[#161533] mb-2">Metodologia S.P.O.</h3>
                 <div className="flex flex-col gap-4 pt-4">
                   <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-[#a3ff3c] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#161533]">Aprendizado contextualizado</h3>
-                      <p className="text-gray-600">Conteúdo adaptado à sua área de atuação e objetivos profissionais</p>
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#e8ffd4] flex items-center justify-center mt-1">
+                      <span className="text-[#161533] font-bold text-base">S</span>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-[#a3ff3c] mt-1" />
                     <div>
-                      <h3 className="font-medium text-[#161533]">Prática intensiva</h3>
-                      <p className="text-gray-600">Foco em situações reais do seu ambiente de trabalho</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-[#a3ff3c] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#161533]">Acompanhamento estratégico</h3>
+                      <h3 className="font-medium text-[#161533]">Structure</h3>
                       <p className="text-gray-600">
-                        Monitoramento contínuo do seu progresso com ajustes personalizados
+                        Ensinamos a estrutura do idioma de forma prática e direta, focando em comunicação clara, sem
+                        "decorebas" nem aulas engessadas.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#e8ffd4] flex items-center justify-center mt-1">
+                      <span className="text-[#161533] font-bold text-base">P</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#161533]">Personal Growth</h3>
+                      <p className="text-gray-600">
+                        Usamos o idioma como meio para desenvolver habilidades como autoconhecimento, liderança e
+                        comunicação assertiva.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#e8ffd4] flex items-center justify-center mt-1">
+                      <span className="text-[#161533] font-bold text-base">O</span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#161533]">Oratory</h3>
+                      <p className="text-gray-600">
+                        Trabalhamos a confiança para falar em público com fluência, em dinâmicas reais como reuniões,
+                        apresentações, entrevistas e muitas outras.
                       </p>
                     </div>
                   </div>
@@ -123,10 +137,10 @@ export default function MetodologiaPage() {
               </div>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spo-xcfv2WNKH3NAbqG7hYmDE72v38YxMJ.png"
                   width={600}
                   height={600}
-                  alt="Método Hub Academy em ação"
+                  alt="Profissional ilustrando conceitos do método Hub Academy com diagramas e ícones de negócios"
                   className="mx-auto aspect-square overflow-hidden rounded-xl object-cover"
                 />
               </div>
@@ -218,8 +232,7 @@ export default function MetodologiaPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    Plataformas digitais e recursos tecnológicos que complementam o aprendizado presencial, permitindo
-                    prática contínua e acesso a conteúdos exclusivos.
+                    Plataformas digitais e recursos de inteligência artificial (AI) que potencializam o aprendizado.
                   </p>
                 </CardContent>
               </Card>
@@ -238,102 +251,6 @@ export default function MetodologiaPage() {
                   </p>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-[#161533]">
-                  Como Funciona na Prática
-                </h2>
-                <p className="max-w-[700px] text-gray-600 md:text-xl">
-                  Conheça o passo a passo da jornada de aprendizado com o Método Hub
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-8 max-w-4xl mx-auto">
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">1</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Avaliação Inicial</h3>
-                  <p className="text-gray-600">
-                    Realizamos uma avaliação completa do seu nível atual, objetivos profissionais e necessidades
-                    específicas. Esta etapa inclui testes de proficiência, entrevista com especialistas e análise do seu
-                    contexto de trabalho.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">2</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Plano Personalizado</h3>
-                  <p className="text-gray-600">
-                    Com base na avaliação, desenvolvemos um plano de estudos totalmente personalizado, com objetivos
-                    claros, cronograma adaptado à sua disponibilidade e conteúdos específicos para sua área de atuação.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">3</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Sessões de Aprendizado</h3>
-                  <p className="text-gray-600">
-                    Aulas dinâmicas e interativas focadas em situações reais do seu ambiente profissional. Combinamos
-                    teoria e prática intensiva para desenvolver suas habilidades de comunicação no idioma.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">4</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Prática Contínua</h3>
-                  <p className="text-gray-600">
-                    Acesso à nossa plataforma digital com exercícios complementares, materiais exclusivos e ferramentas
-                    de prática que permitem continuar seu desenvolvimento entre as sessões presenciais.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">5</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Avaliações Periódicas</h3>
-                  <p className="text-gray-600">
-                    Realizamos avaliações regulares para medir seu progresso e fazer ajustes no plano de estudos quando
-                    necessário. Você recebe feedback detalhado e orientações específicas para continuar evoluindo.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="bg-[#e8ffd4] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 md:mt-2">
-                  <span className="text-xl font-bold text-[#161533]">6</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Aplicação Prática</h3>
-                  <p className="text-gray-600">
-                    Simulações de situações reais do seu trabalho, como reuniões, apresentações e negociações,
-                    permitindo que você aplique o idioma com confiança em seu ambiente profissional.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </section>

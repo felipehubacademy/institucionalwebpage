@@ -81,7 +81,7 @@ export default function SobrePage() {
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
               <div>
                 <Image
-                  src="/founders_new.png"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/founders_new-d9hCBQPfxGpFmADI4MPw8MjxukTmWM.png"
                   width={600}
                   height={600}
                   alt="Fundadores da Hub Academy posando em frente à tela de projeção com o logo da empresa"
@@ -241,50 +241,52 @@ export default function SobrePage() {
               <div className="flex flex-col items-center text-center">
                 <div className="relative w-32 h-32 mb-4">
                   <Image
-                    src="/placeholder.svg?height=128&width=128"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Felipe_avatar-tYXf2OGWWWUoaUCEKs7F5volaBLZSi.svg"
                     width={128}
                     height={128}
                     alt="Foto do Diretor"
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-[#161533]">André Martins</h3>
-                <p className="text-[#a3ff3c] font-medium">Diretor Executivo</p>
+                <h3 className="text-xl font-bold text-[#161533]">Felipe Xavier</h3>
+                <p className="text-[#a3ff3c] font-medium">Head de novos negócios</p>
                 <p className="mt-2 text-gray-600 text-sm">
-                  Especialista em educação corporativa com mais de 15 anos de experiência em desenvolvimento
+                  Especialista em educação linguística corporativa com mais de 15 anos de experiência em desenvolvimento
                   profissional.
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="relative w-32 h-32 mb-4">
                   <Image
-                    src="/placeholder.svg?height=128&width=128"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rod_avatar-98ObwQWqPVFq6HPWd50omVYH3e9Zne.svg"
                     width={128}
                     height={128}
                     alt="Foto da Diretora Pedagógica"
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-[#161533]">Camila Rocha</h3>
-                <p className="text-[#a3ff3c] font-medium">Diretora Pedagógica</p>
+                <h3 className="text-xl font-bold text-[#161533]">Rodolfo Hott</h3>
+                <p className="text-[#a3ff3c] font-medium">Head de L&D</p>
                 <p className="mt-2 text-gray-600 text-sm">
-                  Mestre em Linguística Aplicada com foco em metodologias inovadoras para ensino de idiomas.
+                  Une o ensino de idiomas ao desenvolvimento pessoal, com uma abordagem que valoriza a comunicação e o
+                  autoconhecimento.
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="relative w-32 h-32 mb-4">
                   <Image
-                    src="/placeholder.svg?height=128&width=128"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Lale_avatar-ql8Hkd7iBWjB1Pr183HoYk2CqMpfQz.svg"
                     width={128}
                     height={128}
                     alt="Foto do Diretor de Operações"
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-[#161533]">Rafael Oliveira</h3>
-                <p className="text-[#a3ff3c] font-medium">Diretor de Operações</p>
+                <h3 className="text-xl font-bold text-[#161533]">Laleska Portela</h3>
+                <p className="text-[#a3ff3c] font-medium">CX Specialist</p>
                 <p className="mt-2 text-gray-600 text-sm">
-                  Especialista em gestão de projetos educacionais e implementação de programas corporativos.
+                  Cuida da experiência dos alunos com atenção aos detalhes, organização e empatia. Atua no atendimento
+                  direto e oferece suporte constante.
                 </p>
               </div>
             </div>

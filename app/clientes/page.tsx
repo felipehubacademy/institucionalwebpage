@@ -17,6 +17,7 @@ const clientLogos = [
   { name: "IDEMIA", file: "Logo_IDEMIA.svg", width: 260, height: 83 },
   { name: "Eureciclo", file: "Logo_Eureciclo.svg", width: 260, height: 97 },
   { name: "Libbs", file: "Logo_Libbs.svg", width: 260, height: 138 },
+  { name: "Amazon", file: "Logo_Amazon.svg", width: 240, height: 93 },
 ]
 
 export default function ClientesPage() {
@@ -81,7 +82,8 @@ export default function ClientesPage() {
   
   .logo-carousel {
     display: flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll 60s linear infinite; /* Animação mais lenta de 60s */
+    width: fit-content;
   }
   
   .logo-carousel:hover {
@@ -93,7 +95,7 @@ export default function ClientesPage() {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(calc((-180px - 16px) * 10));
     }
   }
   
@@ -133,20 +135,21 @@ export default function ClientesPage() {
               </div>
             </div>
 
-            <div className="logo-carousel-container w-full overflow-hidden relative">
+            {/* Carrossel de logos */}
+            <div className="logo-carousel-container w-full overflow-hidden relative my-12">
               <div className="logo-carousel flex items-center">
                 {/* Primeiro conjunto de logos */}
                 {clientLogos.map((logo, i) => (
                   <div
                     key={`logo-1-${i}`}
-                    className="logo-slide bg-white p-6 rounded-lg shadow-sm flex items-center justify-center h-24 min-w-[200px] mx-4"
+                    className="logo-slide bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-20 w-[180px] mx-2"
                   >
                     <Image
                       src={`/images/logos/${logo.file}`}
                       width={logo.width}
                       height={logo.height}
                       alt={`Logo de ${logo.name}`}
-                      className="max-h-12 w-auto"
+                      className="max-h-10 w-auto max-w-[150px]"
                     />
                   </div>
                 ))}
@@ -154,14 +157,14 @@ export default function ClientesPage() {
                 {clientLogos.map((logo, i) => (
                   <div
                     key={`logo-2-${i}`}
-                    className="logo-slide bg-white p-6 rounded-lg shadow-sm flex items-center justify-center h-24 min-w-[200px] mx-4"
+                    className="logo-slide bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-20 w-[180px] mx-2"
                   >
                     <Image
                       src={`/images/logos/${logo.file}`}
                       width={logo.width}
                       height={logo.height}
                       alt={`Logo de ${logo.name}`}
-                      className="max-h-12 w-auto"
+                      className="max-h-10 w-auto max-w-[150px]"
                     />
                   </div>
                 ))}
@@ -364,18 +367,20 @@ export default function ClientesPage() {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                <div className="relative h-64">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    fill
-                    alt="Equipe da TechSolutions em reunião internacional"
-                    className="object-cover"
-                  />
+            <div className="flex justify-center">
+              <div className="bg-white rounded-xl overflow-hidden shadow-md max-w-2xl">
+                <div className="relative h-0 pb-[56.25%]">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/fXu0KCpnMfo?rel=0&modestbranding=1&controls=1"
+                    title="Alessandro Cantalejo - IDEMIA"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">TechSolutions Brasil</h3>
+                  <h3 className="text-xl font-bold text-[#161533] mb-2">IDEMIA do Brasil</h3>
                   <p className="text-gray-600 mb-4">
                     A TechSolutions implementou um programa de inglês técnico para sua equipe de desenvolvimento,
                     resultando em uma melhoria significativa na colaboração com equipes internacionais e na documentação
@@ -397,45 +402,6 @@ export default function ClientesPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                <div className="relative h-64">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    fill
-                    alt="Equipe da Global Hospitality em treinamento"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Global Hospitality Group</h3>
-                  <p className="text-gray-600 mb-4">
-                    A rede de hotéis implementou um programa de espanhol para sua equipe de atendimento, melhorando
-                    significativamente a experiência de hóspedes latino-americanos e expandindo sua presença no mercado
-                    hispânico.
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Aumento de 25% na satisfação de clientes hispânicos</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Crescimento de 35% em reservas de países hispânicos</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">ROI de 280% em 12 meses</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-center mt-12">
-              <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                Ver mais casos de sucesso
-              </Button>
             </div>
           </div>
         </section>

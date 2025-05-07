@@ -1,10 +1,17 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, CheckCircle, Building, User, Briefcase, GraduationCap, Globe } from "lucide-react"
+import { ArrowLeft, CheckCircle, Building, User, Briefcase, Globe, Users } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react"
 
 export default function SolucoesPage() {
+  const [showMeetupPopup, setShowMeetupPopup] = useState(false)
+  const [showBusinessEnglishPopup, setShowBusinessEnglishPopup] = useState(false)
+  const [showBusinessSpanishPopup, setShowBusinessSpanishPopup] = useState(false)
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
@@ -121,11 +128,12 @@ export default function SolucoesPage() {
               </div>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250505_1406_Reunia%CC%83o%20Criativa%20Alegre_remix_01jtgpgqnqfq2sq655b27e4anr-pPthBaNZpRueBkeCPsFySl30wbqZjP.png"
                   width={600}
                   height={600}
-                  alt="Profissionais em treinamento na Hub Academy"
+                  alt="Grupo diverso de profissionais sorrindo durante treinamento na Hub Academy"
                   className="mx-auto aspect-square overflow-hidden rounded-xl object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -169,36 +177,12 @@ export default function SolucoesPage() {
                   </ul>
                 </CardContent>
                 <CardFooter className="flex justify-center pt-6">
-                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Saiba mais</Button>
-                </CardFooter>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-[#e8ffd4] flex items-center justify-center mb-4">
-                    <GraduationCap className="h-6 w-6 text-[#161533]" />
-                  </div>
-                  <CardTitle>Inglês Técnico</CardTitle>
-                  <CardDescription>Para engenheiros, profissionais de TI e cientistas</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
-                      <span>Vocabulário técnico e terminologia</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
-                      <span>Documentação e redação técnica</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
-                      <span>Apresentações de projetos e colaboração</span>
-                    </li>
-                  </ul>
-                </CardContent>
-                <CardFooter className="flex justify-center pt-6">
-                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Saiba mais</Button>
+                  <Button
+                    onClick={() => setShowBusinessEnglishPopup(true)}
+                    className="bg-[#161533] hover:bg-[#232244] text-white rounded-full"
+                  >
+                    Saiba mais
+                  </Button>
                 </CardFooter>
               </Card>
 
@@ -227,14 +211,53 @@ export default function SolucoesPage() {
                   </ul>
                 </CardContent>
                 <CardFooter className="flex justify-center pt-6">
-                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Saiba mais</Button>
+                  <Button
+                    onClick={() => setShowBusinessSpanishPopup(true)}
+                    className="bg-[#161533] hover:bg-[#232244] text-white rounded-full"
+                  >
+                    Saiba mais
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-full bg-[#e8ffd4] flex items-center justify-center mb-4">
+                    <Users className="h-6 w-6 text-[#161533]" />
+                  </div>
+                  <CardTitle>Hub Immersive Meetups</CardTitle>
+                  <CardDescription>Prática real, conexões reais</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
+                      <span>Encontros presenciais para prática intensiva</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
+                      <span>Cases reais de negócios e debates</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-[#a3ff3c] shrink-0 mt-0.5" />
+                      <span>Networking com profissionais de diversas áreas</span>
+                    </li>
+                  </ul>
+                </CardContent>
+                <CardFooter className="flex justify-center pt-6">
+                  <Button
+                    onClick={() => setShowMeetupPopup(true)}
+                    className="bg-[#161533] hover:bg-[#232244] text-white rounded-full"
+                  >
+                    Saiba mais
+                  </Button>
                 </CardFooter>
               </Card>
             </div>
 
             <div className="flex justify-center mt-8">
               <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                Ver todos os programas individuais
+                Agendar uma aula demonstrativa
               </Button>
             </div>
           </div>
@@ -387,6 +410,187 @@ export default function SolucoesPage() {
           </div>
         </div>
       </footer>
+
+      {/* Popup para Hub Immersive Meetups */}
+      {showMeetupPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#161533]">Hub Immersive Meetups</h2>
+                  <p className="text-[#a3ff3c] font-medium">Prática real, conexões reais.</p>
+                </div>
+                <button onClick={() => setShowMeetupPopup(false)} className="text-gray-500 hover:text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  Os Hub Immersive Meetups são encontros presenciais criados para profissionais que querem levar seu
+                  inglês ou espanhol para o próximo nível. Em cada meetup, os participantes exploram cases reais de
+                  negócios, debatem soluções, trocam experiências e desenvolvem a comunicação em contexto estratégico —
+                  tudo no idioma de estudo.
+                </p>
+                <p>
+                  Além da prática intensiva, os meetups promovem networking com outros profissionais engajados no
+                  desenvolvimento pessoal e carreira internacional.
+                </p>
+                <p className="font-medium text-[#161533]">Comunicação, pensamento crítico e conexões em um só lugar.</p>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <Button
+                  onClick={() => setShowMeetupPopup(false)}
+                  className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full"
+                >
+                  Fechar
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popup para Inglês para Negócios */}
+      {showBusinessEnglishPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#161533]">Inglês para Negócios</h2>
+                  <p className="text-[#a3ff3c] font-medium">Idioma como ferramenta de performance.</p>
+                </div>
+                <button
+                  onClick={() => setShowBusinessEnglishPopup(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  Nosso programa de Inglês para Negócios é voltado para profissionais que atuam em ambientes
+                  corporativos e precisam se comunicar com clareza, confiança e profissionalismo.
+                </p>
+                <p>Durante as aulas, desenvolvemos habilidades essenciais como:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Comunicação em contextos empresariais e negociações</li>
+                  <li>Condução de reuniões e apresentações com impacto</li>
+                  <li>Redação de e-mails, relatórios e mensagens estratégicas</li>
+                </ul>
+                <p>Tudo com foco na realidade do aluno e nas demandas do seu dia a dia de trabalho.</p>
+                <p className="font-medium text-[#161533]">
+                  Prático, direto ao ponto e feito para quem usa o idioma como ferramenta de trabalho.
+                </p>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <Button
+                  onClick={() => setShowBusinessEnglishPopup(false)}
+                  className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full"
+                >
+                  Fechar
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popup para Espanhol para Negócios */}
+      {showBusinessSpanishPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#161533]">Espanhol para Negócios</h2>
+                  <p className="text-[#a3ff3c] font-medium">Conecte-se com os mercados hispânicos com confiança.</p>
+                </div>
+                <button
+                  onClick={() => setShowBusinessSpanishPopup(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-x"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  O programa de Espanhol para Negócios é voltado para profissionais que atuam ou desejam atuar com
+                  países de língua espanhola, oferecendo as ferramentas linguísticas e culturais necessárias para uma
+                  comunicação eficaz.
+                </p>
+                <p>Nas aulas, trabalhamos:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Comunicação empresarial e negociação em espanhol</li>
+                  <li>Cultura corporativa latino-americana</li>
+                  <li>Escrita de e-mails, relatórios e correspondência profissional</li>
+                </ul>
+                <p>Tudo adaptado às demandas reais do ambiente de trabalho.</p>
+                <p className="font-medium text-[#161533]">
+                  Idioma, contexto e cultura – para você se destacar em mercados hispânicos.
+                </p>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <Button
+                  onClick={() => setShowBusinessSpanishPopup(false)}
+                  className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full"
+                >
+                  Fechar
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
