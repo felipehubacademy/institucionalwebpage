@@ -169,47 +169,39 @@ export default function ContatoPage() {
                       <Mail className="h-5 w-5 text-[#a3ff3c] mt-0.5" />
                       <div>
                         <h3 className="font-medium text-[#161533]">Email</h3>
-                        <p className="text-gray-600">contato@hubacademy.com.br</p>
+                        <p className="text-gray-600">contato@hubacademybr.com</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Phone className="h-5 w-5 text-[#a3ff3c] mt-0.5" />
                       <div>
                         <h3 className="font-medium text-[#161533]">Telefone</h3>
-                        <p className="text-gray-600">(11) 4567-8901</p>
+                        <p className="text-gray-600">+55 11 97481-1737</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <MapPin className="h-5 w-5 text-[#a3ff3c] mt-0.5" />
                       <div>
                         <h3 className="font-medium text-[#161533]">Endereço</h3>
-                        <p className="text-gray-600">
-                          Av. Paulista, 1234, 10º andar
-                          <br />
-                          São Paulo, SP 01310-100
-                        </p>
+                        <p className="text-gray-600">São Paulo, Brasil</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Clock className="h-5 w-5 text-[#a3ff3c] mt-0.5" />
                       <div>
                         <h3 className="font-medium text-[#161533]">Horário de Atendimento</h3>
-                        <p className="text-gray-600">
-                          Segunda a Sexta: 8:00 - 20:00
-                          <br />
-                          Sábado: 9:00 - 13:00
-                        </p>
+                        <p className="text-gray-600">Segunda a Sexta: 8:00 - 20:00</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold mb-4 text-[#161533]">Agende uma Visita</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-[#161533]">Agende uma Aula</h2>
                   <p className="text-gray-600 mb-4">
-                    Conheça nossa estrutura e metodologia pessoalmente. Agende uma visita e descubra como podemos ajudar
-                    você a alcançar seus objetivos com o idioma.
+                    Conheça nossa estrutura e metodologia. Agende uma aula e descubra como podemos ajudar você a
+                    alcançar seus objetivos com o idioma.
                   </p>
-                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Agendar Visita</Button>
+                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Agendar Aula</Button>
                 </div>
                 <div className="mt-8">
                   <h2 className="text-2xl font-bold mb-4 text-[#161533]">Siga-nos</h2>

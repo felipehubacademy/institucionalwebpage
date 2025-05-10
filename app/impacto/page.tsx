@@ -78,54 +78,40 @@ export default function ImpactoPage() {
 
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-              <div className="flex flex-col justify-center space-y-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-[#161533]">Transformando o Aprendizado em Resultados</h2>
-                  <p className="mt-4 text-gray-600">
-                    Na Hub Academy, acreditamos que o aprendizado de idiomas deve ir além da fluência linguística. Nossa
-                    missão é transformar o domínio de idiomas em uma ferramenta estratégica para o crescimento
-                    profissional e empresarial.
-                  </p>
-                  <p className="mt-4 text-gray-600">
-                    Através de nossa metodologia exclusiva e abordagem personalizada, temos ajudado profissionais a
-                    avançarem em suas carreiras e empresas a expandirem seus horizontes no mercado global. Nosso impacto
-                    é medido não apenas pelo nível de proficiência alcançado, mas pelos resultados concretos que nossos
-                    alunos e clientes corporativos obtêm.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 pt-4">
-                  <div className="flex items-start gap-2">
-                    <Award className="h-5 w-5 text-[#a3ff3c] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#161533]">Reconhecimento do mercado</h3>
-                      <p className="text-gray-600">Referência em ensino profissionalizante de idiomas no Brasil</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Users className="h-5 w-5 text-[#a3ff3c] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#161533]">Comunidade em crescimento</h3>
-                      <p className="text-gray-600">Mais de 2.000 profissionais e 150 empresas impactados</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Globe className="h-5 w-5 text-[#a3ff3c] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#161533]">Alcance internacional</h3>
-                      <p className="text-gray-600">Alunos e empresas atuando em mais de 20 países</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="flex flex-col items-center max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-[#161533] mb-6">Transformando o Aprendizado em Resultados</h2>
+                <p className="text-gray-600 mb-4">
+                  Na Hub Academy, acreditamos que o aprendizado de idiomas deve ir além da fluência linguística. Nossa
+                  missão é transformar o domínio de idiomas em uma ferramenta estratégica para o crescimento
+                  profissional e empresarial.
+                </p>
+                <p className="text-gray-600">
+                  Através de nossa metodologia exclusiva e abordagem personalizada, temos ajudado profissionais a
+                  avançarem em suas carreiras e empresas a expandirem seus horizontes no mercado global. Nosso impacto é
+                  medido não apenas pelo nível de proficiência alcançado, mas pelos resultados concretos que nossos
+                  alunos e clientes corporativos obtêm.
+                </p>
               </div>
-              <div className="relative">
-                <Image
-                  src="/placeholder.svg?height=600&width=600"
-                  width={600}
-                  height={600}
-                  alt="Profissionais em reunião internacional"
-                  className="mx-auto aspect-square overflow-hidden rounded-xl object-cover"
-                />
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                  <Award className="h-12 w-12 text-[#a3ff3c] mb-4" />
+                  <h3 className="font-bold text-xl text-[#161533] mb-2">Reconhecimento do mercado</h3>
+                  <p className="text-gray-600">Referência em ensino profissionalizante de idiomas no Brasil</p>
+                </div>
+
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                  <Users className="h-12 w-12 text-[#a3ff3c] mb-4" />
+                  <h3 className="font-bold text-xl text-[#161533] mb-2">Comunidade em crescimento</h3>
+                  <p className="text-gray-600">Mais de 500 profissionais e diversas empresas impactadas</p>
+                </div>
+
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                  <Globe className="h-12 w-12 text-[#a3ff3c] mb-4" />
+                  <h3 className="font-bold text-xl text-[#161533] mb-2">Alcance internacional</h3>
+                  <p className="text-gray-600">Alunos e empresas atuando em mais de 5 países</p>
+                </div>
               </div>
             </div>
           </div>
@@ -152,7 +138,7 @@ export default function ImpactoPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="text-4xl font-bold text-[#161533] mb-2">2.000+</h3>
+                  <h3 className="text-4xl font-bold text-[#161533] mb-2">500+</h3>
                   <p className="text-gray-600">Profissionais capacitados</p>
                 </CardContent>
               </Card>
@@ -164,7 +150,7 @@ export default function ImpactoPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="text-4xl font-bold text-[#161533] mb-2">150+</h3>
+                  <h3 className="text-4xl font-bold text-[#161533] mb-2">30+</h3>
                   <p className="text-gray-600">Empresas atendidas</p>
                 </CardContent>
               </Card>
@@ -176,7 +162,7 @@ export default function ImpactoPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="text-4xl font-bold text-[#161533] mb-2">20+</h3>
+                  <h3 className="text-4xl font-bold text-[#161533] mb-2">5+</h3>
                   <p className="text-gray-600">Países de atuação</p>
                 </CardContent>
               </Card>
@@ -188,7 +174,7 @@ export default function ImpactoPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="text-4xl font-bold text-[#161533] mb-2">92%</h3>
+                  <h3 className="text-4xl font-bold text-[#161533] mb-2">98%</h3>
                   <p className="text-gray-600">Taxa de satisfação</p>
                 </CardContent>
               </Card>
@@ -332,92 +318,6 @@ export default function ImpactoPage() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-[#161533]">Impacto nas Empresas</h2>
-                <p className="max-w-[700px] text-gray-600 md:text-xl">
-                  Como nossos programas corporativos têm transformado negócios
-                </p>
-              </div>
-            </div>
-
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                <div className="relative h-64">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    fill
-                    alt="Equipe da TechSolutions em reunião internacional"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">TechSolutions Brasil</h3>
-                  <p className="text-gray-600 mb-4">
-                    Após implementar um programa de inglês técnico para 50 colaboradores, a empresa conseguiu:
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Aumentar em 40% as negociações internacionais</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Reduzir em 30% o tempo de documentação técnica</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Expandir para 3 novos mercados internacionais</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">ROI de 320% em 18 meses</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                <div className="relative h-64">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    fill
-                    alt="Equipe da Global Hospitality em treinamento"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">Global Hospitality Group</h3>
-                  <p className="text-gray-600 mb-4">
-                    Com um programa de espanhol para 30 colaboradores da equipe de atendimento, a rede de hotéis
-                    conseguiu:
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Aumentar em 25% a satisfação de clientes hispânicos</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Crescer 35% em reservas de países hispânicos</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Reduzir em 40% as reclamações por barreiras de comunicação</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">ROI de 280% em 12 meses</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

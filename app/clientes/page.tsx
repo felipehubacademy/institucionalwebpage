@@ -2,9 +2,8 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Quote, User } from "lucide-react"
+import { ArrowLeft, User, Quote } from "lucide-react"
 import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
 
 // Array com informações dos logos
 const clientLogos = [
@@ -102,6 +101,15 @@ export default function ClientesPage() {
   .logo-slide {
     flex: 0 0 auto;
   }
+
+.video-carousel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.video-carousel::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
 `}</style>
 
       <main className="flex-1">
@@ -178,180 +186,128 @@ export default function ClientesPage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <div className="space-y-2 flex flex-col items-center text-center w-full">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-[#161533]">
-                  Depoimentos de Clientes
+                  Depoimentos de Alunos
                 </h2>
                 <p className="max-w-[700px] text-gray-600 md:text-xl mx-auto">
-                  Veja o que nossos clientes dizem sobre sua experiência com a Hub Academy.
+                  Veja o que nossos alunos dizem sobre sua experiência com a Hub Academy.
                 </p>
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "A metodologia da Hub Academy transformou nossa equipe de vendas. Em apenas 6 meses, conseguimos
-                      aumentar em 40% as negociações com clientes internacionais. O investimento teve retorno muito
-                      rápido."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Marcelo Santos"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Marcelo Santos</p>
-                        <p className="text-sm text-gray-500">Diretor Comercial, TechSolutions Brasil</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="relative max-w-4xl mx-auto">
+              {/* Controles do carrossel */}
+              <button
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-[#161533] p-2 rounded-full shadow-md -ml-4 md:-ml-6"
+                onClick={() => {
+                  const container = document.querySelector(".video-carousel")
+                  if (container) {
+                    container.scrollBy({ left: -300, behavior: "smooth" })
+                  }
+                }}
+                aria-label="Vídeo anterior"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
 
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "Como empresa global, precisávamos de um parceiro que entendesse nossas necessidades específicas.
-                      A Hub Academy desenvolveu um programa personalizado que superou nossas expectativas. Recomendo
-                      fortemente."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Ana Oliveira"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Ana Oliveira</p>
-                        <p className="text-sm text-gray-500">Gerente de RH, Global Enterprises</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <button
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-[#161533] p-2 rounded-full shadow-md -mr-4 md:-mr-6"
+                onClick={() => {
+                  const container = document.querySelector(".video-carousel")
+                  if (container) {
+                    container.scrollBy({ left: 300, behavior: "smooth" })
+                  }
+                }}
+                aria-label="Próximo vídeo"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
 
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "O programa executivo da Hub Academy foi fundamental para minha promoção. A abordagem focada em
-                      situações reais de negócios me deu confiança para liderar reuniões internacionais e expandir nossa
-                      operação."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Roberto Mendes"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Roberto Mendes</p>
-                        <p className="text-sm text-gray-500">Diretor de Operações, Nexus Indústrias</p>
-                      </div>
+              {/* Container do carrossel */}
+              <div className="video-carousel flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-6 -mx-4 px-4">
+                <div className="flex-shrink-0 w-[280px] snap-center mx-3">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <div className="relative h-0 pb-[177.77%]">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/6eF14dFaPz8"
+                        title="Depoimento de Cliente Hub Academy"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "Implementamos o programa da Hub Academy para toda nossa equipe de atendimento. O resultado foi
-                      uma melhoria significativa na satisfação dos clientes internacionais e um aumento de 25% nas
-                      vendas para esse público."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Carla Rodrigues"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Carla Rodrigues</p>
-                        <p className="text-sm text-gray-500">CEO, Hospitality Group</p>
-                      </div>
+                <div className="flex-shrink-0 w-[280px] snap-center mx-3">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <div className="relative h-0 pb-[177.77%]">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/ZIZppX_zxaQ"
+                        title="Depoimento de Cliente Hub Academy"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "A flexibilidade do programa e a qualidade dos professores são diferenciais claros da Hub Academy.
-                      Conseguimos adaptar o treinamento à rotina agitada dos nossos executivos sem perder qualidade."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Paulo Ferreira"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Paulo Ferreira</p>
-                        <p className="text-sm text-gray-500">Diretor de Desenvolvimento, Finance Corp</p>
-                      </div>
+                <div className="flex-shrink-0 w-[280px] snap-center mx-3">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <div className="relative h-0 pb-[177.77%]">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/pFoCoO9icLg"
+                        title="Depoimento de Cliente Hub Academy"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <Quote className="h-8 w-8 text-[#a3ff3c]" />
-                    <p className="text-gray-600 italic">
-                      "O que mais me impressionou foi o acompanhamento personalizado. Os relatórios de progresso e as
-                      métricas claras nos permitiram ver o retorno do investimento de forma tangível."
-                    </p>
-                    <div className="flex items-center gap-4 pt-4">
-                      <div className="rounded-full bg-gray-200 p-1">
-                        <Image
-                          src="/placeholder.svg?height=48&width=48"
-                          width={48}
-                          height={48}
-                          alt="Foto de Luciana Costa"
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p className="font-medium">Luciana Costa</p>
-                        <p className="text-sm text-gray-500">Gerente de Treinamento, Innovate Tech</p>
-                      </div>
+                <div className="flex-shrink-0 w-[280px] snap-center mx-3">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <div className="relative h-0 pb-[177.77%]">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/Jt_YDsEIzKI"
+                        title="Depoimento de Cliente Hub Academy"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -367,8 +323,8 @@ export default function ClientesPage() {
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="bg-white rounded-xl overflow-hidden shadow-md max-w-2xl">
+            <div className="flex flex-col items-center">
+              <div className="bg-white rounded-xl overflow-hidden shadow-md max-w-2xl mb-8">
                 <div className="relative h-0 pb-[56.25%]">
                   <iframe
                     className="absolute inset-0 w-full h-full"
@@ -380,25 +336,48 @@ export default function ClientesPage() {
                   ></iframe>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#161533] mb-2">TechSolutions Brasil</h3>
+                  <h3 className="text-xl font-bold text-[#161533] mb-2">IDEMIA do Brasil</h3>
                   <p className="text-gray-600 mb-4">
-                    A TechSolutions implementou um programa de inglês técnico para sua equipe de desenvolvimento,
-                    resultando em uma melhoria significativa na colaboração com equipes internacionais e na documentação
-                    de projetos.
+                    A IDEMIA Brasil implementou um programa de inglês para seus funcionários, com a parceria da Hub, que
+                    resultou em melhorias significativas na comunicação internacional e no desenvolvimento profissional
+                    da equipe.
                   </p>
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">40% de aumento nas negociações internacionais</p>
+                      <p className="text-sm font-medium">Melhoria na comunicação em reuniões internacionais</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Redução de 30% no tempo de documentação</p>
+                      <p className="text-sm font-medium">Aumento de engajamento e motivação</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Expansão para 3 novos mercados internacionais</p>
+                      <p className="text-sm font-medium">Aproximação com o corporativo global</p>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
+                      <p className="text-sm font-medium">Desenvolvimento contínuo e acompanhamento</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
+                      <p className="text-sm font-medium">Cultura de aprendizado</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Citação do Alessandro Cantalejo */}
+              <div className="max-w-2xl bg-[#f8f9fa] border-l-4 border-[#a3ff3c] p-6 rounded-xl shadow-sm">
+                <div className="flex gap-4">
+                  <Quote className="h-10 w-10 text-[#a3ff3c] flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-700 italic text-lg">
+                      "A Hub traz uma coisa mais jovem, mais atualizada, uma abordagem voltada ao negócio. Os
+                      professores têm uma energia lá no alto, colocam os alunos no alto, mostram para os alunos o que
+                      eles devem fazer para melhorar."
+                    </p>
+                    <p className="text-right mt-4 font-medium text-[#161533]">Alessandro Cantalejo, IDEMIA do Brasil</p>
                   </div>
                 </div>
               </div>
