@@ -126,15 +126,15 @@ export default function SolucoesPage() {
                   </div>
                 </div>
               </div>
-              <div className="relative">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250505_1406_Reunia%CC%83o%20Criativa%20Alegre_remix_01jtgpgqnqfq2sq655b27e4anr-pPthBaNZpRueBkeCPsFySl30wbqZjP.png"
-                  width={600}
-                  height={600}
-                  alt="Grupo diverso de profissionais sorrindo durante treinamento na Hub Academy"
-                  className="mx-auto aspect-square overflow-hidden rounded-xl object-cover"
-                  priority
-                />
+              <div className="relative flex items-center justify-center">
+                <div className="rounded-xl shadow-md overflow-hidden w-full">
+                  <img
+                    src="/images/meetup-illustration.svg"
+                    alt="Ilustração de um evento Immersive Meetup da Hub Academy"
+                    className="w-full h-auto"
+                    style={{ display: "block" }}
+                  />
+                </div>
               </div>
             </div>
           </div>

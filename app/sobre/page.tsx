@@ -303,9 +303,15 @@ export default function SobrePage() {
               profissionais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
-                Agendar uma aula gratuita
-              </Button>
+              <Link
+                href="https://api.whatsapp.com/send/?phone=551152865668&text=Oi%2C+vim+do+site+da+Hub+e+gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+programas.&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                  Agendar uma aula gratuita
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"

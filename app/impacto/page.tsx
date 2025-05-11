@@ -331,15 +331,23 @@ export default function ImpactoPage() {
               Descubra como podemos transformar sua carreira ou empresa através do domínio estratégico de idiomas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
-                Agendar uma avaliação gratuita
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita."
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Conhecer nossos programas
-              </Button>
+                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                  Agendar uma avaliação gratuita
+                </Button>
+              </Link>
+              <Link href="/solucoes">
+                <Button
+                  variant="outline"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                >
+                  Conhecer nossos programas
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

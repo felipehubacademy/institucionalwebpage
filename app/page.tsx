@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CheckCircle, Globe, Users, Volume2, VolumeX, User } from "lucide-react"
 import Image from "next/image"
 import { useState, useRef } from "react"
+import { CookieBanner } from "@/components/cookie-banner"
 
 // Modifique o array clientLogos para colocar os logos problemáticos mais próximos do início
 const clientLogos = [
@@ -162,7 +163,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                 >
                   <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                    Fale com um especialista
+                    Agendar uma demonstração gratuita
                   </Button>
                 </Link>
               </div>
@@ -785,6 +786,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* Adicione o CookieBanner aqui, antes do fechamento da div principal */}
+      <CookieBanner />
     </div>
   )
 }

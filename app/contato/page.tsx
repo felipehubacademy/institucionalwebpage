@@ -169,7 +169,12 @@ export default function ContatoPage() {
                       <Mail className="h-5 w-5 text-[#a3ff3c] mt-0.5" />
                       <div>
                         <h3 className="font-medium text-[#161533]">Email</h3>
-                        <p className="text-gray-600">contato@hubacademybr.com</p>
+                        <a
+                          href="mailto:contato@hubacademybr.com?subject=Contato%20do%20Site&body=Olá,%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
+                          className="text-gray-600 hover:text-[#a3ff3c] underline"
+                        >
+                          contato@hubacademybr.com
+                        </a>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
@@ -201,7 +206,13 @@ export default function ContatoPage() {
                     Conheça nossa estrutura e metodologia. Agende uma aula e descubra como podemos ajudar você a
                     alcançar seus objetivos com o idioma.
                   </p>
-                  <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Agendar Aula</Button>
+                  <Link
+                    href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20demonstrativa."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-[#161533] hover:bg-[#232244] text-white rounded-full">Agendar Aula</Button>
+                  </Link>
                 </div>
                 <div className="mt-8">
                   <h2 className="text-2xl font-bold mb-4 text-[#161533]">Siga-nos</h2>
@@ -291,9 +302,15 @@ export default function ContatoPage() {
               Agende uma aula experimental gratuita e descubra como nossa metodologia exclusiva pode ajudar você a
               alcançar seus objetivos profissionais.
             </p>
-            <Button className="bg-white text-[#161533] hover:bg-[#161533] hover:text-[#a3ff3c] hover:border-white border transition-colors rounded-full">
-              Agendar Aula Gratuita
-            </Button>
+            <Link
+              href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20demonstrativa."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-white text-[#161533] hover:bg-[#161533] hover:text-[#a3ff3c] hover:border-white border transition-colors rounded-full">
+                Agendar Aula Gratuita
+              </Button>
+            </Link>
           </div>
         </section>
       </main>
@@ -321,9 +338,6 @@ export default function ContatoPage() {
             </Link>
             <Link href="/termos-de-uso" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
               Termos de Uso
-            </Link>
-            <Link href="/contato" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Contato
             </Link>
           </div>
         </div>

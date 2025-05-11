@@ -381,11 +381,11 @@ export default function CoursesPage() {
             </p>
           </div>
           <div className="flex gap-4">
-            <Link href="#" className="text-sm text-gray-500 hover:underline">
+            <Link href="/politica-de-privacidade" className="text-sm text-gray-500 hover:underline">
               Política de Privacidade
             </Link>
-            <Link href="#" className="text-sm text-gray-500 hover:underline">
-              Termos de Serviço
+            <Link href="/termos-de-uso" className="text-sm text-gray-500 hover:underline">
+              Termos de Uso
             </Link>
             <Link href="#" className="text-sm text-gray-500 hover:underline">
               Contato
