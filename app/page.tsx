@@ -214,17 +214,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="relative">
-              {/* Textura superior */}
-              <div className="absolute w-[120%] h-[120%] -top-[10%] -right-[10%] -z-10 opacity-100">
-                <Image
-                  src="/images/texture-site.svg"
-                  alt="Textura decorativa superior"
-                  width={800}
-                  height={800}
-                  className="w-full h-full object-contain transform rotate-45"
-                />
-              </div>
+            <div className="relative">             
 
               {/* Imagem principal */}
               <Image
@@ -235,16 +225,6 @@ export default function Home() {
                 className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover relative z-10 shadow-xl"
               />
 
-              {/* Textura inferior */}
-              <div className="absolute w-[120%] h-[120%] -bottom-[10%] -left-[10%] -z-10 opacity-100">
-                <Image
-                  src="/images/texture-site.svg"
-                  alt="Textura decorativa inferior"
-                  width={800}
-                  height={800}
-                  className="w-full h-full object-contain transform -rotate-45"
-                />
-              </div>
             </div>
           </div>
         </div>
