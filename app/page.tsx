@@ -158,7 +158,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link
-                  href="https://api.whatsapp.com/send/?phone=551152865668&text=Oi%2C+vim+do+site+da+Hub+e+gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+programas.&type=phone_number&app_absent=0"
+                  href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20demonstrativa."
                   target="_blank"
                   rel="noopener noreferrer"
                 >

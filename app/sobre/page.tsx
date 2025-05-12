@@ -290,6 +290,60 @@ export default function SobrePage() {
                 </p>
               </div>
             </div>
+            <div className="mx-auto grid max-w-5xl gap-6 py-8 md:grid-cols-4">
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-24 h-24 mb-3">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Arthur-Yv6EuVtrTJrtUo2DJsTBY40cLXHSjG.png"
+                    width={96}
+                    height={96}
+                    alt="Foto de Arthur Ohtaguro"
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-[#161533]">Arthur Ohtaguro</h3>
+                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-24 h-24 mb-3">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Junqueira-1iFHROcSIPpIpznzoTkJ6gvenZxHSA.png"
+                    width={96}
+                    height={96}
+                    alt="Foto de Felipe Junqueira"
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-[#161533]">Felipe Junqueira</h3>
+                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-24 h-24 mb-3">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Diogo-sjvds3Q6XRDEWc61wikYDautXiQ44o.png"
+                    width={96}
+                    height={96}
+                    alt="Foto de Diogo Santos"
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-[#161533]">Diogo Santos</h3>
+                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="relative w-24 h-24 mb-3">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Debhora-7yj0IjswK1DGHeOubJnksPmjdMpZ3i.png"
+                    width={96}
+                    height={96}
+                    alt="Foto de Debhora Bianchi"
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-[#161533]">Debhora Bianchi</h3>
+                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -304,7 +358,7 @@ export default function SobrePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="https://api.whatsapp.com/send/?phone=551152865668&text=Oi%2C+vim+do+site+da+Hub+e+gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+programas.&type=phone_number&app_absent=0"
+                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20demonstrativa."
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -312,12 +366,18 @@ export default function SobrePage() {
                   Agendar uma aula gratuita
                 </Button>
               </Link>
-              <Button
-                variant="outline"
-                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20vim%20do%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Falar com um especialista
-              </Button>
+                <Button
+                  variant="outline"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                >
+                  Falar com um especialista
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

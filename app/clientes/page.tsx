@@ -394,15 +394,23 @@ export default function ClientesPage() {
               Descubra como podemos desenvolver uma solução personalizada para sua empresa ou carreira.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
-                Solicitar uma proposta
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+              <Link href="/contato#formulario">
+                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                  Solicitar uma proposta
+                </Button>
+              </Link>
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita."
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Agendar uma consultoria gratuita
-              </Button>
+                <Button
+                  variant="outline"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                >
+                  Agendar uma consultoria gratuita
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

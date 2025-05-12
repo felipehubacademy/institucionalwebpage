@@ -195,45 +195,30 @@ export default function ImpactoPage() {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-2">
               <Card className="border-none shadow-md">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="rounded-full bg-gray-200 p-1">
                       <Image
-                        src="/placeholder.svg?height=64&width=64"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Bianca-DUWWkA5MVUUbuAdfHBiWyMoQ94H74Z.svg"
                         width={64}
                         height={64}
-                        alt="Foto de Carlos Silva"
+                        alt="Foto de Bianca Lucena"
                         className="rounded-full"
                       />
                     </div>
                     <div>
-                      <CardTitle>Carlos Silva</CardTitle>
-                      <p className="text-sm text-gray-500">Engenheiro de Software</p>
+                      <CardTitle>Bianca Lucena</CardTitle>
+                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">
-                    "Após 6 meses no programa de inglês técnico da Hub Academy, consegui uma promoção para liderar um
-                    projeto internacional. Meu salário aumentou em 40% e agora trabalho diretamente com equipes nos EUA
-                    e Europa."
+                    "Desde que eu comecei a estudar na Hub, eu estou me sentindo mais confiante para poder conversar em
+                    inglês, até mesmo com os nativos no meu serviço"
                   </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Promoção para cargo de liderança</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Aumento salarial de 40%</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Atuação em projetos internacionais</p>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
 
@@ -242,39 +227,24 @@ export default function ImpactoPage() {
                   <div className="flex items-center gap-4 mb-4">
                     <div className="rounded-full bg-gray-200 p-1">
                       <Image
-                        src="/placeholder.svg?height=64&width=64"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Daniela-o0sxizKja1w2t3f1QqTLKdJryygJld.svg"
                         width={64}
                         height={64}
-                        alt="Foto de Mariana Costa"
+                        alt="Foto de Daniela Lazarin"
                         className="rounded-full"
                       />
                     </div>
                     <div>
-                      <CardTitle>Mariana Costa</CardTitle>
-                      <p className="text-sm text-gray-500">Gerente de Marketing</p>
+                      <CardTitle>Daniela Lazarin</CardTitle>
+                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">
-                    "O programa de espanhol para negócios me permitiu expandir nossa estratégia de marketing para países
-                    da América Latina. Em um ano, conseguimos entrar em 3 novos mercados e aumentar o faturamento da
-                    empresa em 35%."
+                    "Eu faço aulas com a Hub Academy há mais de dois anos, eu gosto muito das aulas, são aulas bem
+                    customizadas e focadas no que o aluno realmente quer aprender"
                   </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Expansão para 3 novos mercados</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Aumento de 35% no faturamento</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Reconhecimento como líder de inovação</p>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
 
@@ -283,39 +253,50 @@ export default function ImpactoPage() {
                   <div className="flex items-center gap-4 mb-4">
                     <div className="rounded-full bg-gray-200 p-1">
                       <Image
-                        src="/placeholder.svg?height=64&width=64"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Samuel-HPtwZ4eJfBoOxq7EBbvoQ4PCNiRE2I.svg"
                         width={64}
                         height={64}
-                        alt="Foto de Rafael Mendes"
+                        alt="Foto de Samuel Santana"
                         className="rounded-full"
                       />
                     </div>
                     <div>
-                      <CardTitle>Rafael Mendes</CardTitle>
-                      <p className="text-sm text-gray-500">Médico Especialista</p>
+                      <CardTitle>Samuel Santana</CardTitle>
+                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">
-                    "O inglês médico da Hub Academy me abriu portas para participar de congressos internacionais e
-                    publicar artigos em revistas de prestígio. Hoje sou referência na minha área e recebi convite para
-                    lecionar em uma universidade nos EUA."
+                    "Essa experiencia tem sido muito importante e bacana para mim, porque eu estou superando os meus
+                    medos, principalmente de falar"
                   </p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Publicações em revistas internacionais</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-md">
+                <CardHeader>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="rounded-full bg-gray-200 p-1">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Elivelton-QuirCKTT2D4qq4sYConPCCs1JVRkxH.svg"
+                        width={64}
+                        height={64}
+                        alt="Foto de José Elivelton Barbosa"
+                        className="rounded-full"
+                      />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Participação em congressos globais</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-[#a3ff3c]"></div>
-                      <p className="text-sm font-medium">Convite para lecionar no exterior</p>
+                    <div>
+                      <CardTitle>José Elivelton Barbosa</CardTitle>
+                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
                     </div>
                   </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    "É uma excelente escola, adoro muito a metodologia utilizada.....Nos ajuda muito no nosso
+                    entendimento do que é o inglês"
+                  </p>
                 </CardContent>
               </Card>
             </div>
