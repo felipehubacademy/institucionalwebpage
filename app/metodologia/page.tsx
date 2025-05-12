@@ -265,27 +265,15 @@ export default function MetodologiaPage() {
               domínio de idiomas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20gratuita."
-                target="_blank"
-                rel="noopener noreferrer"
+              <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                Agendar uma aula experimental
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
               >
-                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
-                  Agendar uma aula experimental
-                </Button>
-              </Link>
-              <Link
-                href="https://wa.me/551152865668?text=Olá,%20vim%20do%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="outline"
-                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
-                >
-                  Falar com um especialista
-                </Button>
-              </Link>
+                Falar com um especialista
+              </Button>
             </div>
           </div>
         </section>

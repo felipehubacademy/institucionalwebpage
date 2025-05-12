@@ -228,11 +228,11 @@ export default function Home() {
 
               {/* Imagem principal */}
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MeetUp_2024-iDmVS9iLSU0XQPlLqZyu5yg1rbNYZN.png"
-                width={600}
-                height={600}
+                src="/images/MeetUP_02.jpg"
+                width={800}
+                height={450}
                 alt="Encontro de alunos da Hub Academy mostrando participantes com ecobags da marca"
-                className="mx-auto aspect-square overflow-hidden rounded-xl object-cover relative z-10"
+                className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover relative z-10 shadow-xl"
               />
 
               {/* Textura inferior */}

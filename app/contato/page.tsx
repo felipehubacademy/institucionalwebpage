@@ -217,12 +217,7 @@ export default function ContatoPage() {
                 <div className="mt-8">
                   <h2 className="text-2xl font-bold mb-4 text-[#161533]">Siga-nos</h2>
                   <div className="flex gap-4">
-                    <Link
-                      href="https://www.instagram.com/hubacademybr/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[#a3ff3c]"
-                    >
+                    <Link href="https://instagram.com" className="text-gray-600 hover:text-[#a3ff3c]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -240,12 +235,7 @@ export default function ContatoPage() {
                         <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                       </svg>
                     </Link>
-                    <Link
-                      href="https://www.linkedin.com/company/hubacademyenglish"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[#a3ff3c]"
-                    >
+                    <Link href="https://linkedin.com" className="text-gray-600 hover:text-[#a3ff3c]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -263,12 +253,23 @@ export default function ContatoPage() {
                         <circle cx="4" cy="4" r="2" />
                       </svg>
                     </Link>
-                    <Link
-                      href="https://www.youtube.com/@hubacademybr"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-[#a3ff3c]"
-                    >
+                    <Link href="https://facebook.com" className="text-gray-600 hover:text-[#a3ff3c]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-6 w-6"
+                      >
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                      </svg>
+                    </Link>
+                    <Link href="https://youtube.com" className="text-gray-600 hover:text-[#a3ff3c]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
