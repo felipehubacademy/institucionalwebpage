@@ -6,6 +6,7 @@ import { ArrowLeft, CheckCircle, Building, User, Briefcase, Globe, Users } from 
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState } from "react"
+import Breadcrumbs from "@/components/breadcrumbs"
 
 export default function SolucoesPage() {
   const [showMeetupPopup, setShowMeetupPopup] = useState(false)
@@ -75,6 +76,7 @@ export default function SolucoesPage() {
               </Link>
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Nossas Soluções</h1>
+                <Breadcrumbs items={[{ label: "Soluções", href: "/solucoes", isCurrent: true }]} />
                 <p className="max-w-[700px] text-gray-300 md:text-xl">
                   Programas personalizados de inglês e espanhol para profissionais e empresas que buscam resultados
                   reais.
