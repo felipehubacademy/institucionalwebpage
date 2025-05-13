@@ -256,9 +256,15 @@ export default function SolucoesPage() {
             </div>
 
             <div className="flex justify-center mt-8">
-              <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                Agendar uma aula demonstrativa
-              </Button>
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
+                  Agendar uma aula demonstrativa
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -308,9 +314,11 @@ export default function SolucoesPage() {
                   </ul>
                 </CardContent>
                 <CardFooter className="flex justify-center pt-6">
-                  <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                    Solicitar proposta
-                  </Button>
+                  <Link href="/contato#formulario">
+                    <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
+                      Solicitar proposta
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
 
@@ -347,9 +355,15 @@ export default function SolucoesPage() {
                   </ul>
                 </CardContent>
                 <CardFooter className="flex justify-center pt-6">
-                  <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                    Falar com especialista
-                  </Button>
+                  <Link
+                    href="https://api.whatsapp.com/send/?phone=551152865668&text=Oi%2C+vim+do+site+da+Hub+e+gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+programas.&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
+                      Falar com especialista
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
             </div>
@@ -366,15 +380,23 @@ export default function SolucoesPage() {
               necessidades.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
-                Solicitar uma proposta
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+              <Link href="/contato#formulario">
+                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                  Solicitar uma proposta
+                </Button>
+              </Link>
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita."
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Agendar uma consultoria
-              </Button>
+                <Button
+                  variant="outline"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                >
+                  Agendar uma consultoria
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

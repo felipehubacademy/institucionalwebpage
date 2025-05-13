@@ -366,12 +366,18 @@ export default function SobrePage() {
                   Agendar uma aula gratuita
                 </Button>
               </Link>
-              <Button
-                variant="outline"
-                className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+              <Link
+                href="https://wa.me/551152865668?text=Olá,%20vim%20do%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Falar com um especialista
-              </Button>
+                <Button
+                  variant="outline"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                >
+                  Falar com um especialista
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

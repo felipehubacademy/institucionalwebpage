@@ -214,17 +214,21 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="relative">             
+            <div className="relative">
+              
 
               {/* Imagem principal */}
-              <Image
-                src="/images/MeetUP_02.jpg"
-                width={800}
-                height={450}
-                alt="Encontro de alunos da Hub Academy mostrando participantes com ecobags da marca"
-                className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover relative z-10 shadow-xl"
-              />
+              <div className="relative z-10 overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src="/images/MeetUP02.png"
+                  width={600}
+                  height={450}
+                  alt="Encontro de alunos da Hub Academy mostrando participantes com ecobags da marca"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
 
+              
             </div>
           </div>
         </div>
