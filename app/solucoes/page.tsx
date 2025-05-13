@@ -127,11 +127,11 @@ export default function SolucoesPage() {
                 </div>
               </div>
               <div className="relative flex items-center justify-center">
-                <div className="rounded-xl shadow-md overflow-hidden w-full">
+                <div className="overflow-hidden rounded-xl shadow-lg w-full">
                   <img
-                    src="/images/meetup-illustration.svg"
-                    alt="Ilustração de um evento Immersive Meetup da Hub Academy"
-                    className="w-full h-auto"
+                    src="/images/Rodolfo_Felipe_meetup.png"
+                    alt="Apresentadores conduzindo um evento Immersive Meetup da Hub Academy"
+                    className="w-full h-auto object-cover"
                     style={{ display: "block" }}
                   />
                 </div>
