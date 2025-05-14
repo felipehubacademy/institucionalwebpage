@@ -18,6 +18,7 @@ interface TouchCarouselProps {
   loop?: boolean
   slidesToShow?: number
   gap?: number
+  onSlideChange?: (index: number) => void
 }
 
 export function TouchCarousel({
@@ -31,6 +32,7 @@ export function TouchCarousel({
   loop = true,
   slidesToShow = 1,
   gap = 16,
+  onSlideChange,
 }: TouchCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStartX, setTouchStartX] = useState(0)
@@ -90,6 +92,10 @@ export function TouchCarousel({
 
     setCurrentIndex(targetIndex)
     setTranslateX(-(getSlideWidth() + gap) * targetIndex)
+
+    if (onSlideChange) {
+      onSlideChange(targetIndex)
+    }
   }
 
   const goToPrev = () => goToSlide(currentIndex - 1)
@@ -215,10 +221,10 @@ export function TouchCarousel({
   }
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative touch-carousel-container", className)}>
       <div
         ref={containerRef}
-        className="overflow-hidden px-1 py-2"
+        className="overflow-hidden px-1 py-2 max-w-full"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -278,14 +284,11 @@ export function TouchCarousel({
       )}
 
       {showDots && totalSlides > slidesToShow && (
-        <div className="flex justify-center mt-4 gap-1.5">
+        <div className="carousel-dots-container">
           {Array.from({ length: maxIndex + 1 }).map((_, index) => (
             <button
               key={index}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all",
-                currentIndex === index ? "bg-primary w-4" : "bg-gray-300",
-              )}
+              className={cn("carousel-dot", currentIndex === index && "active")}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />

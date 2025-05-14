@@ -120,10 +120,10 @@ export default function Home() {
             <div className="absolute inset-0 bg-[#161533]/40"></div>
             <button
               onClick={toggleMute}
-              className="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 p-2 rounded-full text-white z-10 transition-colors"
+              className="audio-control-btn"
               aria-label={isMuted ? "Ativar som" : "Desativar som"}
             >
-              {isMuted ? <Volume2 size={20} /> : <VolumeX size={20} />}
+              {isMuted ? <Volume2 size={14} /> : <VolumeX size={14} />}
             </button>
           </div>
 

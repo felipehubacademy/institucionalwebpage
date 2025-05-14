@@ -63,7 +63,7 @@ export default function ClientesPage() {
             </div>
 
             {/* Carrossel de logos */}
-            <div className="my-8 md:my-12">
+            <div className="my-8 md:my-12 max-w-full overflow-hidden px-4">
               <ClientLogosCarousel logos={clientLogos} />
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function ClientesPage() {
               </div>
             </div>
 
-            <div className="relative max-w-4xl mx-auto">
+            <div className="relative max-w-full mx-auto overflow-hidden px-4">
               {/* Video carousel with touch gestures */}
               <TouchCarousel slidesToShow={isMobile ? 1 : 3} gap={16} showDots={true} loop={true}>
                 <div className="w-full">
