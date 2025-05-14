@@ -57,7 +57,7 @@ export default function ClientesPage() {
   }, [isMobile])
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       {/* Header */}
       <SiteHeader />
 

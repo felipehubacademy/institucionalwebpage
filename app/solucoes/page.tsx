@@ -15,7 +15,7 @@ export default function SolucoesPage() {
   const [showBusinessSpanishPopup, setShowBusinessSpanishPopup] = useState(false)
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       {/* Header */}
       <SiteHeader />
 

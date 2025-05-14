@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/site-footer"
 
 export default function MetodologiaPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       {/* Header */}
       <SiteHeader />
 

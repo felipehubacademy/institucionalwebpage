@@ -97,7 +97,7 @@ export default function Home() {
   return (
     <>
       <StructuredData data={structuredData} />
-      <div className="flex flex-col min-h-screen overflow-x-hidden">
+      <div className="overflow-x-hidden">
         {/* Header */}
         <SiteHeader />
 

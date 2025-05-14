@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function TermosDeUsoPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       {/* Header */}
       <header className="sticky top-0 z-40 w-full bg-[#161533] text-white">
         <div className="container flex h-16 items-center justify-between">

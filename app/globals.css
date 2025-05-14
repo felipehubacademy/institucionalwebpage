@@ -637,3 +637,27 @@ textarea {
     display: none;
   }
 }
+
+/* Fixed header styles */
+.fixed-header-spacer {
+  height: var(--header-height, 64px);
+}
+
+/* Smooth scroll for anchor links with fixed header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height, 64px);
+}
+
+/* Ensure content doesn't get hidden under fixed header on anchor links */
+:target {
+  scroll-margin-top: var(--header-height, 64px);
+}
+
+/* Adjust mobile menu for fixed header */
+@media (max-width: 767px) {
+  .mobile-menu-container {
+    top: var(--header-height, 64px);
+    height: calc(100vh - var(--header-height, 64px));
+  }
+}

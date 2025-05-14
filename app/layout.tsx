@@ -3,6 +3,8 @@ import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
+// Import the LayoutWrapper component
+import { LayoutWrapper } from "@/components/layout-wrapper"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -116,7 +118,7 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <LayoutWrapper>{children}</LayoutWrapper>
         </ThemeProvider>
       </body>
     </html>

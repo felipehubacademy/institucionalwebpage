@@ -5,19 +5,36 @@ import { User } from "lucide-react"
 import { MobileMenu } from "@/components/mobile-menu"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [logoError, setLogoError] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [scrolled])
 
   const isActive = (path: string) => {
     return pathname === path
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#161533] text-white">
-      <div className="container flex h-16 items-center justify-between">
+    <header
+      className={`fixed top-0 z-50 w-full bg-[#161533] text-white transition-all duration-200 ${
+        scrolled ? "h-14 shadow-md" : "h-16"
+      }`}
+    >
+      <div className={`container flex items-center justify-between h-full`}>
         <div className="flex items-center gap-2">
           <Link href="/">
             <Image
@@ -25,7 +42,7 @@ export function SiteHeader() {
               alt="Logo Hub Academy"
               width={140}
               height={40}
-              className="h-8 w-auto"
+              className={`w-auto transition-all duration-200 ${scrolled ? "h-6" : "h-8"}`}
               onError={() => setLogoError(true)}
             />
           </Link>
