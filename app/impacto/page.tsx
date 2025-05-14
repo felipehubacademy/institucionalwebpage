@@ -271,14 +271,14 @@ export default function ImpactoPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full w-full sm:w-auto min-w-[180px] h-10 px-4 py-2 text-sm font-medium">
                   Agendar uma avaliação gratuita
                 </Button>
               </Link>
               <Link href="/solucoes">
                 <Button
                   variant="outline"
-                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full w-full sm:w-auto min-w-[180px] h-10 px-4 py-2 text-sm font-medium"
                 >
                   Conhecer nossos programas
                 </Button>
