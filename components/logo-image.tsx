@@ -35,8 +35,8 @@ export function LogoImage({
   // For SVG files, use a different approach to ensure crisp rendering
   if (src.endsWith(".svg") && !error) {
     // Calculate dimensions based on device pixel ratio for better quality
-    const adjustedWidth = width ? Math.round(width * (devicePixelRatio > 1 ? 1.5 : 1)) : undefined
-    const adjustedHeight = height ? Math.round(height * (devicePixelRatio > 1 ? 1.5 : 1)) : undefined
+    const adjustedWidth = width ? Math.round(width * (devicePixelRatio > 1 ? 2 : 1.5)) : undefined
+    const adjustedHeight = height ? Math.round(height * (devicePixelRatio > 1 ? 2 : 1.5)) : undefined
 
     return (
       <div
@@ -53,7 +53,7 @@ export function LogoImage({
           height={adjustedHeight}
           className="object-contain"
           priority={priority}
-          quality={quality}
+          quality={100} // Force maximum quality
           onError={() => setError(true)}
           style={{
             maxWidth: "100%",
@@ -62,9 +62,12 @@ export function LogoImage({
             height: "auto",
             margin: "auto",
             position: "relative",
-            // Apply special rendering for high DPI screens
-            imageRendering: devicePixelRatio > 1 ? "-webkit-optimize-contrast" : "auto",
+            // Enhanced rendering for SVGs
+            imageRendering: "-webkit-optimize-contrast",
             transform: "translateZ(0)", // Hardware acceleration
+            backfaceVisibility: "hidden", // Prevent blurring during animations
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
           }}
         />
       </div>
@@ -83,11 +86,11 @@ export function LogoImage({
       <Image
         src={error ? "/placeholder.svg" : src}
         alt={alt}
-        width={width}
-        height={height}
+        width={width ? Math.round(width * 1.5) : width}
+        height={height ? Math.round(height * 1.5) : height}
         className="object-contain"
         priority={priority}
-        quality={quality}
+        quality={100} // Force maximum quality
         onError={() => setError(true)}
         style={{
           maxWidth: "100%",
@@ -96,6 +99,9 @@ export function LogoImage({
           height: "auto",
           margin: "auto",
           position: "relative",
+          imageRendering: "-webkit-optimize-contrast",
+          transform: "translateZ(0)",
+          backfaceVisibility: "hidden",
         }}
       />
     </div>
