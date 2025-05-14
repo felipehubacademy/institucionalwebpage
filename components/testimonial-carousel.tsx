@@ -90,6 +90,21 @@ export function TestimonialCarousel({ testimonials, className }: TestimonialCaro
             className={cn("carousel-dot", currentIndex === index && "active")}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Go to testimonial ${index + 1}`}
+            style={{
+              width: isMobile ? "1px" : "1px",
+              height: isMobile ? "1px" : "1px",
+              borderRadius: "50%",
+              backgroundColor: "#d1d5db",
+              margin: "0 1px",
+              padding: 0,
+              border: "none",
+              ...(currentIndex === index && {
+                width: isMobile ? "3px" : "3px",
+                height: isMobile ? "1px" : "1px",
+                borderRadius: isMobile ? "0" : "0.5px",
+                backgroundColor: "#a3ff3c",
+              }),
+            }}
           />
         ))}
       </div>

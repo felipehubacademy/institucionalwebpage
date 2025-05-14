@@ -237,7 +237,7 @@ export function TouchCarousel({
             transform: `translateX(${isTouching ? translateX : -(currentIndex * (getSlideWidth() + gap))}px)`,
             gap: `${gap}px`,
             transitionProperty: isTouching ? "none" : "transform",
-            padding: "4px 0",
+            padding: "8px 0",
           }}
         >
           {children.map((child, index) => (
@@ -291,6 +291,21 @@ export function TouchCarousel({
               className={cn("carousel-dot", currentIndex === index && "active")}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
+              style={{
+                width: isMobile ? "1px" : "1px",
+                height: isMobile ? "1px" : "1px",
+                borderRadius: "50%",
+                backgroundColor: "#d1d5db",
+                margin: "0 1px",
+                padding: 0,
+                border: "none",
+                ...(currentIndex === index && {
+                  width: isMobile ? "3px" : "3px",
+                  height: isMobile ? "1px" : "1px",
+                  borderRadius: isMobile ? "0" : "0.5px",
+                  backgroundColor: "#a3ff3c",
+                }),
+              }}
             />
           ))}
         </div>

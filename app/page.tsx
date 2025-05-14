@@ -102,7 +102,7 @@ export default function Home() {
         <SiteHeader />
 
         {/* Hero Section */}
-        <section className="w-full pt-24 pb-12 md:py-24 lg:py-32 xl:py-48 bg-[#161533] text-white relative overflow-hidden">
+        <section className="w-full pt-8 pb-24 md:py-24 lg:py-32 xl:py-48 bg-[#161533] text-white relative overflow-hidden">
           {/* Video Background */}
           <div className="absolute inset-0 w-full h-full">
             <video
@@ -129,7 +129,7 @@ export default function Home() {
 
           <div className="container px-4 md:px-6 relative z-10">
             <div className="grid gap-6">
-              <div className="flex flex-col justify-center space-y-4">
+              <div className="flex flex-col justify-center space-y-4 pt-0 md:pt-4">
                 <div className="space-y-2">
                   <h1 className="text-2xl sm:text-3xl font-bold tracking-tighter md:text-5xl xl:text-6xl/none">
                     Domine o inglês e o espanhol com <br className="hidden sm:inline" />
@@ -141,7 +141,7 @@ export default function Home() {
                     <span className="text-[#a3ff3c]">empresas</span>.
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-3 mt-2 mb-16 md:mb-8">
                   <Link
                     href="https://wa.me/551152865668?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20demonstrativa."
                     target="_blank"
