@@ -1,5 +1,5 @@
 {
-  "name": "Hub Academy",
+  "name": "Hub Academy - Inglês e Espanhol para Profissionais",
   "short_name": "Hub Academy",
   "icons": [
     {
@@ -15,5 +15,9 @@
   ],
   "theme_color": "#a3ff3c",
   "background_color": "#161533",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait",
+  "scope": "/",
+  "description": "Domine o inglês e o espanhol com confiança e propósito. Aprenda idiomas como ferramenta de crescimento profissional."
 }

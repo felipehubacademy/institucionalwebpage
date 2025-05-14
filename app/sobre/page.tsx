@@ -2,61 +2,14 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Users, Award, BookOpen, ArrowLeft, CheckCircle } from "lucide-react"
 import Image from "next/image"
-import { User } from "lucide-react"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function SobrePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full bg-[#161533] text-white">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image
-                src="/images/Logo_horizontal_green.svg"
-                alt="Logo Hub Academy"
-                width={140}
-                height={40}
-                className="h-8 w-auto"
-              />
-            </Link>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Home
-            </Link>
-            <Link href="/sobre" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Sobre
-            </Link>
-            <Link href="/metodologia" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Metodologia
-            </Link>
-            <Link href="/solucoes" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Soluções
-            </Link>
-            <Link href="/clientes" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Clientes
-            </Link>
-            <Link href="/impacto" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Impacto
-            </Link>
-            <Link href="/contato" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Contato
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://lms.hubacademybr.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium hover:text-[#a3ff3c] transition-colors flex items-center gap-1"
-            >
-              <User size={14} />
-              Login
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-[#161533] text-white">
@@ -239,7 +192,7 @@ export default function SobrePage() {
 
             <div className="mx-auto grid max-w-5xl gap-8 py-12 md:grid-cols-3">
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-32 h-32 mb-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Felipe_avatar-tYXf2OGWWWUoaUCEKs7F5volaBLZSi.svg"
                     width={128}
@@ -256,7 +209,7 @@ export default function SobrePage() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-32 h-32 mb-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rod_avatar-98ObwQWqPVFq6HPWd50omVYH3e9Zne.svg"
                     width={128}
@@ -273,7 +226,7 @@ export default function SobrePage() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-32 h-32 mb-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Lale_avatar-ql8Hkd7iBWjB1Pr183HoYk2CqMpfQz.svg"
                     width={128}
@@ -290,9 +243,9 @@ export default function SobrePage() {
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-8 md:grid-cols-4">
+            <div className="mx-auto grid max-w-5xl gap-6 py-8 grid-cols-2 md:grid-cols-4">
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-24 h-24 mb-3">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-3">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Arthur-Yv6EuVtrTJrtUo2DJsTBY40cLXHSjG.png"
                     width={96}
@@ -301,11 +254,11 @@ export default function SobrePage() {
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-[#161533]">Arthur Ohtaguro</h3>
-                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+                <h3 className="text-base sm:text-lg font-bold text-[#161533]">Arthur Ohtaguro</h3>
+                <p className="text-[#a3ff3c] font-medium text-xs sm:text-sm">Language Specialist</p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-24 h-24 mb-3">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-3">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Junqueira-1iFHROcSIPpIpznzoTkJ6gvenZxHSA.png"
                     width={96}
@@ -314,11 +267,11 @@ export default function SobrePage() {
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-[#161533]">Felipe Junqueira</h3>
-                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+                <h3 className="text-base sm:text-lg font-bold text-[#161533]">Felipe Junqueira</h3>
+                <p className="text-[#a3ff3c] font-medium text-xs sm:text-sm">Language Specialist</p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-24 h-24 mb-3">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-3">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Diogo-sjvds3Q6XRDEWc61wikYDautXiQ44o.png"
                     width={96}
@@ -327,11 +280,11 @@ export default function SobrePage() {
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-[#161533]">Diogo Santos</h3>
-                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+                <h3 className="text-base sm:text-lg font-bold text-[#161533]">Diogo Santos</h3>
+                <p className="text-[#a3ff3c] font-medium text-xs sm:text-sm">Language Specialist</p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="relative w-24 h-24 mb-3">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 mb-3">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Debhora-7yj0IjswK1DGHeOubJnksPmjdMpZ3i.png"
                     width={96}
@@ -340,8 +293,8 @@ export default function SobrePage() {
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-[#161533]">Debhora Bianchi</h3>
-                <p className="text-[#a3ff3c] font-medium text-sm">Language Specialist</p>
+                <h3 className="text-base sm:text-lg font-bold text-[#161533]">Debhora Bianchi</h3>
+                <p className="text-[#a3ff3c] font-medium text-xs sm:text-sm">Language Specialist</p>
               </div>
             </div>
           </div>
@@ -349,10 +302,10 @@ export default function SobrePage() {
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-[#161533] text-white">
           <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter md:text-4xl mb-6">
               Pronto para transformar seu domínio de idiomas?
             </h2>
-            <p className="max-w-[700px] mx-auto text-white/80 md:text-xl mb-8">
+            <p className="max-w-[700px] mx-auto text-white/80 text-base md:text-xl mb-8">
               Conheça nossa metodologia exclusiva e descubra como podemos ajudar você a alcançar seus objetivos
               profissionais.
             </p>
@@ -362,7 +315,7 @@ export default function SobrePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button className="bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
+                <Button className="w-full sm:w-auto bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] rounded-full">
                   Agendar uma aula gratuita
                 </Button>
               </Link>
@@ -373,7 +326,7 @@ export default function SobrePage() {
               >
                 <Button
                   variant="outline"
-                  className="bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
+                  className="w-full sm:w-auto mt-2 sm:mt-0 bg-white text-[#161533] border-white hover:bg-[#161533] hover:text-[#a3ff3c] transition-colors rounded-full"
                 >
                   Falar com um especialista
                 </Button>
@@ -384,35 +337,7 @@ export default function SobrePage() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t py-6 md:py-0 bg-[#161533] text-white border-[#232244]">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image
-                src="/images/Logo_horizontal_green.svg"
-                alt="Logo Hub Academy"
-                width={120}
-                height={36}
-                className="h-6 w-auto"
-              />
-            </Link>
-            <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Hub Academy. Todos os direitos reservados.
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <Link href="/politica-de-privacidade" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Política de Privacidade
-            </Link>
-            <Link href="/termos-de-uso" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Termos de Uso
-            </Link>
-            <Link href="/contato" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Contato
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, CheckCircle, Building, User, Briefcase, Globe, Users } from "lucide-react"
-import Image from "next/image"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { ArrowLeft, CheckCircle, Building, Globe, Users, Briefcase } from "lucide-react"
 import { useState } from "react"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Breadcrumbs from "@/components/breadcrumbs"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function SolucoesPage() {
   const [showMeetupPopup, setShowMeetupPopup] = useState(false)
@@ -16,55 +17,7 @@ export default function SolucoesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full bg-[#161533] text-white">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image
-                src="/images/Logo_horizontal_green.svg"
-                alt="Logo Hub Academy"
-                width={140}
-                height={40}
-                className="h-8 w-auto"
-              />
-            </Link>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Home
-            </Link>
-            <Link href="/sobre" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Sobre
-            </Link>
-            <Link href="/metodologia" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Metodologia
-            </Link>
-            <Link href="/solucoes" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Soluções
-            </Link>
-            <Link href="/clientes" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Clientes
-            </Link>
-            <Link href="/impacto" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Impacto
-            </Link>
-            <Link href="/contato" className="text-sm font-medium hover:text-[#a3ff3c] transition-colors">
-              Contato
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://lms.hubacademybr.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium hover:text-[#a3ff3c] transition-colors flex items-center gap-1"
-            >
-              <User size={14} />
-              Login
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-[#161533] text-white">
@@ -405,35 +358,7 @@ export default function SolucoesPage() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t py-6 md:py-0 bg-[#161533] text-white border-[#232244]">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image
-                src="/images/Logo_horizontal_green.svg"
-                alt="Logo Hub Academy"
-                width={120}
-                height={36}
-                className="h-6 w-auto"
-              />
-            </Link>
-            <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Hub Academy. Todos os direitos reservados.
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <Link href="/politica-de-privacidade" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Política de Privacidade
-            </Link>
-            <Link href="/termos-de-uso" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Termos de Uso
-            </Link>
-            <Link href="/contato" className="text-sm text-gray-400 hover:text-[#a3ff3c]">
-              Contato
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Popup para Hub Immersive Meetups */}
       {showMeetupPopup && (
