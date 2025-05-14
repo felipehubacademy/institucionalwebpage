@@ -190,11 +190,11 @@ body {
 /* Audio control button styling - made to match carousel dots style */
 .audio-control-btn {
   position: absolute;
-  left: 16px;
+  right: 16px;
   bottom: 16px;
-  z-index: 50;
-  width: 24px;
-  height: 24px;
+  z-index: 30;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -292,15 +292,15 @@ body {
 
   /* Move the audio button to create more space */
   .audio-control-btn {
-    left: 16px !important;
+    right: 16px !important;
     bottom: 24px !important;
-    width: 18px !important;
-    height: 18px !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 
   .audio-control-btn svg {
-    width: 10px !important;
-    height: 10px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   input,
