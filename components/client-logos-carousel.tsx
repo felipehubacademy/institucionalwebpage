@@ -81,20 +81,23 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
             onClick={() => setCurrentIndex(index)}
             aria-label={`Go to logo group ${index + 1}`}
             style={{
-              width: isMobile ? "0.5px" : "1px",
-              height: isMobile ? "0.5px" : "1px",
-              borderRadius: "50%",
-              backgroundColor: "#d1d5db",
-              margin: "0 1px",
+              width: isMobile ? "2px !important" : "1px",
+              height: isMobile ? "2px !important" : "1px",
+              borderRadius: "50% !important",
+              backgroundColor: "#a3ff3c !important", // Using bright color for all dots
+              margin: "0 3px !important",
               padding: 0,
-              border: "none",
-              minWidth: isMobile ? "0.5px" : "1px",
-              minHeight: isMobile ? "0.5px" : "1px",
+              border: isMobile ? "1px solid #161533 !important" : "none",
+              minWidth: isMobile ? "2px !important" : "1px",
+              minHeight: isMobile ? "2px !important" : "1px",
+              display: "block !important",
+              opacity: "1 !important",
               ...(currentIndex === index && {
-                width: isMobile ? "1.5px" : "3px",
-                height: isMobile ? "0.5px" : "1px",
-                borderRadius: "0",
-                backgroundColor: "#a3ff3c",
+                width: isMobile ? "6px !important" : "3px",
+                height: isMobile ? "2px !important" : "1px",
+                borderRadius: isMobile ? "1px !important" : "0",
+                backgroundColor: "#161533 !important", // Dark color for active dot
+                border: isMobile ? "1px solid #a3ff3c !important" : "none",
               }),
             }}
           />

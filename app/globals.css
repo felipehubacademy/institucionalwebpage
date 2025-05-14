@@ -231,31 +231,42 @@ body {
     height: 18px !important;
   }
 
-  /* Carousel dots - extremely tiny for mobile */
+  /* Carousel dots - extremely visible for mobile */
   .carousel-dot {
-    width: 0.5px !important;
-    height: 0.5px !important;
+    width: 2px !important;
+    height: 2px !important;
     border-radius: 50% !important;
-    margin: 0 1px !important;
-    background-color: #d1d5db !important;
+    margin: 0 3px !important;
+    background-color: #a3ff3c !important;
     transition: all 0.2s ease-in-out !important;
-    min-width: 0.5px !important;
-    min-height: 0.5px !important;
+    min-width: 2px !important;
+    min-height: 2px !important;
     padding: 0 !important;
-    border: none !important;
+    border: 1px solid #161533 !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .carousel-dot.active {
-    width: 1.5px !important;
-    height: 0.5px !important;
-    border-radius: 0 !important;
-    background-color: #a3ff3c !important;
+    width: 6px !important;
+    height: 2px !important;
+    border-radius: 1px !important;
+    background-color: #161533 !important;
+    border: 1px solid #a3ff3c !important;
   }
 
-  /* Make carousel dots container more compact */
+  /* Make carousel dots container more visible */
   .carousel-dots-container {
-    margin-top: 0.125rem !important;
-    gap: 0.0625rem !important;
+    margin-top: 8px !important;
+    gap: 2px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 10px !important;
   }
 
   /* Move the audio button to create more space */

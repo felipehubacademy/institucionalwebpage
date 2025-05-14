@@ -84,7 +84,16 @@ export default function ClientesPage() {
 
             <div className="relative max-w-full mx-auto overflow-hidden px-4">
               {/* Video carousel with touch gestures */}
-              <TouchCarousel slidesToShow={isMobile ? 1 : 3} gap={16} showDots={true} loop={true}>
+              <TouchCarousel
+                slidesToShow={isMobile ? 1 : 3}
+                gap={16}
+                showDots={true}
+                loop={true}
+                enableSwipe={true}
+                swipeThreshold={20}
+                onSwipeLeft={() => console.log("Swiped left")}
+                onSwipeRight={() => console.log("Swiped right")}
+              >
                 <div className="w-full">
                   <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
                     <div className="relative h-0 pb-[177.77%]">
