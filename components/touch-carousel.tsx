@@ -106,6 +106,51 @@ export function TouchCarousel({
     setIsTouching(true)
     setTouchStartX(e.touches[0].clientX)
     setTouchEndX(e.touches[0].clientX)
+
+    // Prevent default only for horizontal swipes
+    const touchStartY = e.touches[0].clientY
+
+    // Store the initial Y position for later comparison
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touchCurrentY = moveEvent.touches[0].clientY
+      const touchCurrentX = moveEvent.touches[0].clientX
+
+      // Calculate the horizontal and vertical distance moved
+      const deltaX = Math.abs(touchCurrentX - e.touches[0].clientX)
+      const deltaY = Math.abs(touchCurrentY - touchStartY)
+
+      // If horizontal movement is greater than vertical, it's likely a swipe
+      // and we should prevent default to avoid page scrolling
+      if (deltaX > deltaY && deltaX > 10) {
+        moveEvent.preventDefault()
+      }
+
+      setTouchEndX(touchCurrentX)
+    }
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove)
+      document.removeEventListener("touchend", handleTouchEnd)
+
+      setIsTouching(false)
+
+      const diff = touchStartX - touchEndX
+      const threshold = getSlideWidth() * 0.2 // 20% of slide width
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          goToNext()
+        } else {
+          goToPrev()
+        }
+      } else {
+        // Return to current slide if threshold not met
+        goToSlide(currentIndex)
+      }
+    }
+
+    document.addEventListener("touchmove", handleTouchMove, { passive: false })
+    document.addEventListener("touchend", handleTouchEnd)
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {

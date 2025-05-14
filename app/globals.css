@@ -491,3 +491,113 @@ textarea {
     margin-top: 0.75rem;
   }
 }
+
+/* Swipe indicators for mobile carousels */
+.swipe-indicator-container {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.swipe-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(163, 255, 60, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.swipe-indicator.active {
+  opacity: 1;
+  animation: pulse 1.5s ease-out;
+}
+
+.swipe-indicator.left::after,
+.swipe-indicator.right::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(22, 21, 51, 0.7);
+  border-right: 2px solid rgba(22, 21, 51, 0.7);
+  display: block;
+}
+
+.swipe-indicator.left::after {
+  transform: rotate(-135deg);
+  margin-left: 5px;
+}
+
+.swipe-indicator.right::after {
+  transform: rotate(45deg);
+  margin-right: 5px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* Improve touch handling for mobile carousels */
+.touch-carousel-mobile {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+
+.touch-carousel-mobile:active {
+  cursor: grabbing;
+}
+
+/* Make carousel items fully clickable */
+.touch-carousel-mobile .pointer-events-auto {
+  pointer-events: auto;
+}
+
+/* Prevent iframe from capturing touch events */
+.touch-carousel-mobile iframe {
+  pointer-events: none;
+}
+.touch-carousel-mobile iframe:focus-within {
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  /* Enhanced mobile swipe experience */
+  .touch-carousel-mobile {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Only show swipe indicators on mobile */
+  .swipe-indicator-container {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Hide swipe indicators on desktop */
+  .swipe-indicator-container {
+    display: none;
+  }
+}
