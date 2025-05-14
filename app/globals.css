@@ -240,6 +240,47 @@ body {
     padding: 0 !important;
   }
 
+  /* Update icon button size for mobile */
+  button[size="icon"],
+  button[data-size="icon"] {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    padding: 0 !important;
+  }
+
+  /* Mobile menu button - make it just the icon */
+  .site-header button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-height: unset !important;
+    min-width: unset !important;
+    height: auto !important;
+    width: auto !important;
+    padding: 0 !important;
+  }
+
+  /* Add hover effect to mobile menu button */
+  .md\:hidden button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-height: unset !important;
+    min-width: unset !important;
+    height: auto !important;
+    width: auto !important;
+    padding: 0 !important;
+  }
+
+  /* Add hover effect to mobile menu button */
+  .md\:hidden button:hover {
+    color: #a3ff3c !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+
   /* Carousel navigation arrows */
   .carousel-arrow {
     width: 36px !important;

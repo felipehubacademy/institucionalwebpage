@@ -3,13 +3,10 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
-  const [logoError, setLogoError] = useState(false)
   const pathname = usePathname()
 
   const toggleMenu = () => {
@@ -44,16 +41,14 @@ export function MobileMenu() {
 
   return (
     <div className="md:hidden">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="text-white hover:bg-white/10"
+      <button
+        className="inline-flex items-center justify-center text-white hover:text-[#a3ff3c] focus:outline-none"
         onClick={toggleMenu}
         aria-label="Menu"
         aria-expanded={isOpen}
       >
         <Menu size={24} />
-      </Button>
+      </button>
 
       {/* Overlay */}
       {isOpen && (
@@ -75,26 +70,14 @@ export function MobileMenu() {
         aria-label="Menu principal"
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b border-[#232244]">
-            <Link href="/" onClick={closeMenu}>
-              <Image
-                src={logoError ? "/placeholder.svg" : "/images/Logo_horizontal_green.svg"}
-                alt="Logo Hub Academy"
-                width={120}
-                height={36}
-                className="h-6 w-auto"
-                onError={() => setLogoError(true)}
-              />
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/10"
+          <div className="flex items-center justify-end p-4 border-b border-[#232244]">
+            <button
+              className="text-white hover:text-[#a3ff3c] focus:outline-none"
               onClick={closeMenu}
               aria-label="Fechar menu"
             >
               <X size={24} />
-            </Button>
+            </button>
           </div>
 
           <nav className="flex-1 overflow-y-auto py-4">
