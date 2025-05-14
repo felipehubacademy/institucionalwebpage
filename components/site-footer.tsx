@@ -1,24 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
+import { LogoImage } from "@/components/logo-image"
 
 export function SiteFooter() {
-  const [logoError, setLogoError] = useState(false)
-
   return (
     <footer className="w-full border-t py-6 md:py-0 bg-[#161533] text-white border-[#232244]">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
         <div className="flex flex-col md:flex-row items-center gap-2">
           <Link href="/">
-            <Image
-              src={logoError ? "/placeholder.svg" : "/images/Logo_horizontal_green.svg"}
+            <LogoImage
+              src="/images/Logo_horizontal_green.svg"
               alt="Logo Hub Academy"
               width={120}
               height={36}
               className="h-6 w-auto"
-              onError={() => setLogoError(true)}
             />
           </Link>
           <p className="text-sm text-gray-400 text-center md:text-left mt-2 md:mt-0">

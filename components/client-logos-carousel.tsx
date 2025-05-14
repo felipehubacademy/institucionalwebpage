@@ -1,7 +1,7 @@
 "use client"
 
 import { TouchCarousel } from "@/components/touch-carousel"
-import Image from "next/image"
+import { LogoImage } from "@/components/logo-image"
 import { useIsMobile, useIsTablet } from "@/hooks/use-media-query"
 import { useState, useRef } from "react"
 import { cn } from "@/lib/utils"
@@ -61,17 +61,17 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
             key={index}
             className="bg-white p-3 md:p-4 rounded-lg shadow-sm flex items-center justify-center h-16 md:h-24 w-full min-h-[80px]"
           >
-            <Image
-              src={failedLogos[logo.file] ? "/placeholder.svg" : `/images/logos/${logo.file}`}
-              width={logo.width}
-              height={logo.height}
-              alt={`Logo de ${logo.name}`}
-              className="max-h-10 md:max-h-14 w-auto object-contain"
-              onError={() => handleImageError(logo.file)}
-              quality={100}
-              priority={index < 4}
-              loading={index < 4 ? "eager" : "lazy"}
-            />
+            <div className="relative w-full h-full flex items-center justify-center">
+              <LogoImage
+                src={failedLogos[logo.file] ? fallbackLogo : `/images/logos/${logo.file}`}
+                alt={`Logo de ${logo.name}`}
+                width={logo.width}
+                height={logo.height}
+                className="max-h-10 md:max-h-14 w-auto"
+                priority={index < 4}
+                quality={100}
+              />
+            </div>
           </div>
         ))}
       </TouchCarousel>

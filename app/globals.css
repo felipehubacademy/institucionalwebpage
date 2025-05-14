@@ -702,3 +702,30 @@ html {
     height: calc(100vh - var(--header-height, 64px));
   }
 }
+
+/* High DPI screen optimizations for logos */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo-container img {
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Prevent blurry SVGs during transitions */
+.logo-container {
+  will-change: transform;
+}
+
+/* Ensure SVGs render crisply */
+.logo-container svg {
+  shape-rendering: geometricPrecision;
+}
+
+/* Prevent image stretching */
+.logo-container img,
+.logo-container svg {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}

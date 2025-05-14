@@ -4,12 +4,11 @@ import Link from "next/link"
 import { User } from "lucide-react"
 import { MobileMenu } from "@/components/mobile-menu"
 import { usePathname } from "next/navigation"
-import Image from "next/image"
+import { LogoImage } from "@/components/logo-image"
 import { useState, useEffect } from "react"
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const [logoError, setLogoError] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -28,6 +27,10 @@ export function SiteHeader() {
     return pathname === path
   }
 
+  // Calculate logo dimensions based on scroll state
+  const logoWidth = scrolled ? 120 : 140
+  const logoHeight = scrolled ? 36 : 42
+
   return (
     <header
       className={`fixed top-0 z-50 w-full bg-[#161533] text-white transition-all duration-200 ${
@@ -36,14 +39,14 @@ export function SiteHeader() {
     >
       <div className={`container flex items-center justify-between h-full`}>
         <div className="flex items-center gap-2">
-          <Link href="/">
-            <Image
-              src={logoError ? "/placeholder.svg" : "/images/Logo_horizontal_green.svg"}
+          <Link href="/" className="flex items-center">
+            <LogoImage
+              src="/images/Logo_horizontal_green.svg"
               alt="Logo Hub Academy"
-              width={140}
-              height={40}
-              className={`w-auto transition-all duration-200 ${scrolled ? "h-6" : "h-8"}`}
-              onError={() => setLogoError(true)}
+              width={logoWidth}
+              height={logoHeight}
+              priority={true}
+              className="transition-all duration-200"
             />
           </Link>
         </div>
