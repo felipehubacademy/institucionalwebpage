@@ -83,31 +83,32 @@ export function TestimonialCarousel({ testimonials, className }: TestimonialCaro
           </Card>
         ))}
       </TouchCarousel>
-      <div className="carousel-dots-container">
-        {Array.from({ length: testimonials.length }).map((_, index) => (
-          <button
-            key={index}
-            className={cn("carousel-dot", currentIndex === index && "active")}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to testimonial ${index + 1}`}
-            style={{
-              width: isMobile ? "1px" : "1px",
-              height: isMobile ? "1px" : "1px",
-              borderRadius: "50%",
-              backgroundColor: "#d1d5db",
-              margin: "0 1px",
-              padding: 0,
-              border: "none",
-              ...(currentIndex === index && {
-                width: isMobile ? "3px" : "3px",
-                height: isMobile ? "1px" : "1px",
-                borderRadius: isMobile ? "0" : "0.5px",
-                backgroundColor: "#a3ff3c",
-              }),
-            }}
-          />
-        ))}
-      </div>
+      {/* Only show dots if there are more testimonials than slides shown */}
+      {testimonials.length > slidesToShow && (
+        <div className="carousel-dots-container">
+          {Array.from({ length: testimonials.length }).map((_, index) => (
+            <button
+              key={index}
+              className={cn("carousel-dot", currentIndex === index && "active")}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to testimonial ${index + 1}`}
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                backgroundColor: currentIndex === index ? "#a3ff3c" : "#d1d5db",
+                margin: "0 4px",
+                padding: 0,
+                border: "none",
+                minWidth: "8px",
+                minHeight: "8px",
+                display: "block",
+                opacity: 1,
+              }}
+            />
+          ))}
+        </div>
+      )}
     </>
   )
 }

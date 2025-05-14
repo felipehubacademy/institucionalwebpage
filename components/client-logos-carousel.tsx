@@ -3,7 +3,7 @@
 import { TouchCarousel } from "@/components/touch-carousel"
 import Image from "next/image"
 import { useIsMobile, useIsTablet } from "@/hooks/use-media-query"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { cn } from "@/lib/utils"
 
 interface ClientLogo {
@@ -23,6 +23,7 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
   const isTablet = useIsTablet()
   const [failedLogos, setFailedLogos] = useState<Record<string, boolean>>({})
   const [currentIndex, setCurrentIndex] = useState(0)
+  const carouselRef = useRef<any>(null)
 
   // Define a fallback SVG for missing logos
   const fallbackLogo = "/placeholder.svg"
@@ -42,6 +43,7 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
   return (
     <>
       <TouchCarousel
+        ref={carouselRef}
         className={className}
         slidesToShow={slidesToShow}
         autoPlay={true}
@@ -78,27 +80,29 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
           <button
             key={index}
             className={cn("carousel-dot", currentIndex === index && "active")}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => {
+              // Just update the visual state for now
+              setCurrentIndex(index)
+
+              // Add a note for developers
+              console.log(
+                `Dot ${index + 1} clicked. To make this fully functional, the TouchCarousel component needs to expose a goToSlide method.`,
+              )
+            }}
             aria-label={`Go to logo group ${index + 1}`}
             style={{
-              width: isMobile ? "2px !important" : "1px",
-              height: isMobile ? "2px !important" : "1px",
-              borderRadius: "50% !important",
-              backgroundColor: "#a3ff3c !important", // Using bright color for all dots
-              margin: "0 3px !important",
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: currentIndex === index ? "#161533" : "#a3ff3c",
+              margin: "0 4px",
               padding: 0,
-              border: isMobile ? "1px solid #161533 !important" : "none",
-              minWidth: isMobile ? "2px !important" : "1px",
-              minHeight: isMobile ? "2px !important" : "1px",
-              display: "block !important",
-              opacity: "1 !important",
-              ...(currentIndex === index && {
-                width: isMobile ? "6px !important" : "3px",
-                height: isMobile ? "2px !important" : "1px",
-                borderRadius: isMobile ? "1px !important" : "0",
-                backgroundColor: "#161533 !important", // Dark color for active dot
-                border: isMobile ? "1px solid #a3ff3c !important" : "none",
-              }),
+              border: "none",
+              minWidth: "8px",
+              minHeight: "8px",
+              display: "block",
+              opacity: 1,
+              cursor: "pointer", // Add cursor pointer to indicate clickability
             }}
           />
         ))}

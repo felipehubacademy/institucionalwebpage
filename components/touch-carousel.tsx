@@ -2,8 +2,6 @@
 
 import type React from "react"
 import { useState, useRef, useEffect, type ReactNode } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-media-query"
 
@@ -297,36 +295,7 @@ export function TouchCarousel({
         </div>
       </div>
 
-      {showArrows && !isMobile && children.length > slidesToShow && (
-        <>
-          <Button
-            variant="outline"
-            size="icon"
-            className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white w-8 h-8 md:w-10 md:h-10",
-              !loop && currentIndex === 0 && "opacity-50 cursor-not-allowed",
-            )}
-            onClick={goToPrev}
-            disabled={!loop && currentIndex === 0}
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white w-8 h-8 md:w-10 md:h-10",
-              !loop && currentIndex === maxIndex && "opacity-50 cursor-not-allowed",
-            )}
-            onClick={goToNext}
-            disabled={!loop && currentIndex === maxIndex}
-            aria-label="Next slide"
-          >
-            <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
-          </Button>
-        </>
-      )}
+      {/* Arrows removed as requested */}
 
       {showDots && totalSlides > slidesToShow && (
         <div className="carousel-dots-container">
@@ -337,19 +306,16 @@ export function TouchCarousel({
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
               style={{
-                width: isMobile ? "1px" : "1px",
-                height: isMobile ? "1px" : "1px",
+                width: "8px",
+                height: "8px",
                 borderRadius: "50%",
-                backgroundColor: "#d1d5db",
-                margin: "0 1px",
+                backgroundColor: currentIndex === index ? "#a3ff3c" : "#d1d5db",
+                margin: "0 4px",
                 padding: 0,
                 border: "none",
-                ...(currentIndex === index && {
-                  width: isMobile ? "3px" : "3px",
-                  height: isMobile ? "1px" : "1px",
-                  borderRadius: isMobile ? "0" : "0.5px",
-                  backgroundColor: "#a3ff3c",
-                }),
+                display: "block",
+                opacity: 1,
+                visibility: "visible",
               }}
             />
           ))}

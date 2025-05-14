@@ -9,7 +9,7 @@ import { CookieBanner } from "@/components/cookie-banner"
 import StructuredData from "@/components/structured-data"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { FallbackImage } from "@/components/fallback-image"
+import Image from "next/image"
 import { ClientLogosCarousel } from "@/components/client-logos-carousel"
 import { TestimonialCarousel } from "@/components/testimonial-carousel"
 import { validateImagePaths } from "@/utils/image-validator"
@@ -202,13 +202,17 @@ export default function Home() {
               <div className="relative">
                 {/* Imagem principal */}
                 <div className="relative z-10 overflow-hidden rounded-xl shadow-lg">
-                  <FallbackImage
+                  <Image
                     src="/images/MeetUP02.png"
                     width={600}
                     height={450}
                     alt="Encontro de alunos da Hub Academy mostrando participantes com ecobags da marca"
                     className="w-full h-auto object-cover"
-                    fallbackSrc="/placeholder.svg"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement
+                      target.src = "/placeholder.svg"
+                    }}
                   />
                 </div>
               </div>
