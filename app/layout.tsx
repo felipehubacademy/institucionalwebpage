@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
 // Import the LayoutWrapper component
 import { LayoutWrapper } from "@/components/layout-wrapper"
+import { FaviconLoader } from "@/app/favicon-loader"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -118,6 +119,7 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <FaviconLoader />
           <LayoutWrapper>{children}</LayoutWrapper>
         </ThemeProvider>
       </body>
