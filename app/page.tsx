@@ -13,6 +13,7 @@ import Image from "next/image"
 import { ClientLogosCarousel } from "@/components/client-logos-carousel"
 import { TestimonialCarousel } from "@/components/testimonial-carousel"
 import { validateImagePaths } from "@/utils/image-validator"
+import HubSpotForm from "@/components/hubspot-form"
 
 // Client logos data
 const clientLogos = [
@@ -104,7 +105,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="w-full pt-8 pb-24 md:py-24 lg:py-32 xl:py-48 bg-[#161533] text-white relative overflow-hidden">
           {/* Video Background */}
-          <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 w-full h-full pt-16">
             <video
               ref={videoRef}
               autoPlay
@@ -504,69 +505,7 @@ export default function Home() {
                     <CardDescription>Preencha o formulário abaixo e retornaremos em até 24 horas.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form className="grid gap-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <label htmlFor="first-name" className="text-sm font-medium leading-none">
-                            Nome
-                          </label>
-                          <input
-                            id="first-name"
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            placeholder="Digite seu nome"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label htmlFor="last-name" className="text-sm font-medium leading-none">
-                            Sobrenome
-                          </label>
-                          <input
-                            id="last-name"
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            placeholder="Digite seu sobrenome"
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium leading-none">
-                          Email
-                        </label>
-                        <input
-                          id="email"
-                          type="email"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          placeholder="Digite seu email"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="phone" className="text-sm font-medium leading-none">
-                          Telefone
-                        </label>
-                        <input
-                          id="phone"
-                          type="tel"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          placeholder="Digite seu telefone"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="interest" className="text-sm font-medium leading-none">
-                          Interesse
-                        </label>
-                        <select
-                          id="interest"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          <option value="">Selecione uma opção</option>
-                          <option value="individual">Programa Individual</option>
-                          <option value="corporate">Programa Corporativo</option>
-                          <option value="other">Outro</option>
-                        </select>
-                      </div>
-                      <Button className="w-full bg-[#a3ff3c] hover:bg-[#92e636] text-[#161533] rounded-full">
-                        Enviar Mensagem
-                      </Button>
-                    </form>
+                    <HubSpotForm portalId="49530565" formId="8486bf2d-b6a7-457c-a228-3b4c032da860" />
                   </CardContent>
                 </Card>
               </div>
