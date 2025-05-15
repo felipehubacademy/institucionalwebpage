@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useState, type FormEvent, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { submitToHubSpot } from "@/utils/hubspot-submit"
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import PhoneInput from "@/components/phone-input"
 
 interface HubSpotFormProps {
   portalId: string
@@ -18,15 +19,33 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
     success?: boolean
     message?: string
   }>({})
+  const formRef = useRef<HTMLFormElement>(null)
+  const submitTimeRef = useRef<number | null>(null)
+  const [phoneValue, setPhoneValue] = useState("")
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // Prevent duplicate submissions (double-clicks)
+    const now = Date.now()
+    if (submitTimeRef.current && now - submitTimeRef.current < 1000) {
+      console.log("Preventing rapid resubmission")
+      return
+    }
+    submitTimeRef.current = now
+
+    // Stop propagation to prevent event bubbling
+    e.stopPropagation()
+
     setIsSubmitting(true)
     setFormStatus({})
 
     try {
       const form = e.currentTarget
       const formData = new FormData(form)
+
+      // Add a timestamp to help identify duplicate submissions
+      formData.append("_submitted_at", Date.now().toString())
 
       const result = await submitToHubSpot(formData, portalId, formId)
 
@@ -37,6 +56,7 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
 
       if (result.success) {
         form.reset()
+        setPhoneValue("")
       }
     } catch (error) {
       console.error("Form submission error:", error)
@@ -49,8 +69,12 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
     }
   }
 
+  const handlePhoneChange = (value: string) => {
+    setPhoneValue(value)
+  }
+
   return (
-    <div className={className}>
+    <div className={className} data-hubspot-form-id={formId}>
       {formStatus.success ? (
         <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
           <div className="flex justify-center mb-4">
@@ -66,14 +90,20 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
           </Button>
         </div>
       ) : (
-        <form className="grid gap-4" onSubmit={handleSubmit}>
+        <form
+          className="grid gap-4 hubspot-form"
+          onSubmit={handleSubmit}
+          ref={formRef}
+          data-form-id={formId}
+          id={`hubspot-form-${formId}`}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="firstname" className="text-sm font-medium leading-none">
+              <label htmlFor={`firstname-${formId}`} className="text-sm font-medium leading-none">
                 Nome
               </label>
               <input
-                id="firstname"
+                id={`firstname-${formId}`}
                 name="firstname"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Digite seu nome"
@@ -82,11 +112,11 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="lastname" className="text-sm font-medium leading-none">
+              <label htmlFor={`lastname-${formId}`} className="text-sm font-medium leading-none">
                 Sobrenome
               </label>
               <input
-                id="lastname"
+                id={`lastname-${formId}`}
                 name="lastname"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Digite seu sobrenome"
@@ -96,11 +126,11 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
             </div>
           </div>
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium leading-none">
+            <label htmlFor={`email-${formId}`} className="text-sm font-medium leading-none">
               Email
             </label>
             <input
-              id="email"
+              id={`email-${formId}`}
               name="email"
               type="email"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -110,24 +140,23 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="phone" className="text-sm font-medium leading-none">
+            <label htmlFor={`phone-${formId}`} className="text-sm font-medium leading-none">
               Telefone
             </label>
-            <input
-              id="phone"
+            <PhoneInput
+              id={`phone-${formId}`}
               name="phone"
-              type="tel"
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder="Digite seu telefone"
+              required
               disabled={isSubmitting}
+              onChange={handlePhoneChange}
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="interesse" className="text-sm font-medium leading-none">
+            <label htmlFor={`interesse-${formId}`} className="text-sm font-medium leading-none">
               Interesse
             </label>
             <select
-              id="interesse"
+              id={`interesse-${formId}`}
               name="interesse"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               required
@@ -142,11 +171,11 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
 
           {includeMessage && (
             <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-medium leading-none">
+              <label htmlFor={`message-${formId}`} className="text-sm font-medium leading-none">
                 Mensagem
               </label>
               <textarea
-                id="message"
+                id={`message-${formId}`}
                 name="message"
                 className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Digite sua mensagem"

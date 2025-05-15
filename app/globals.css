@@ -729,3 +729,10 @@ html {
   max-width: 100%;
   height: auto;
 }
+
+/* Add this to your globals.css file */
+/* This ensures only our designated forms are recognized by HubSpot */
+form:not(.hubspot-form) .grid.gap-4 {
+  /* This class prevents HubSpot from identifying non-form elements as forms */
+  --hubspot-ignore: true;
+}
