@@ -37,13 +37,7 @@ export async function submitToHubSpot(
     formData.forEach((value, name) => {
       // Skip any internal tracking fields
       if (!name.startsWith("_")) {
-        // Format phone number for HubSpot if needed
-        if (name === "phone" && typeof value === "string") {
-          // Phone is already formatted correctly from our PhoneInput component
-          formFields.push({ name, value: value.toString() })
-        } else {
-          formFields.push({ name, value: value.toString() })
-        }
+        formFields.push({ name, value: value.toString() })
       }
     })
 

@@ -4,7 +4,6 @@ import { useState, type FormEvent, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { submitToHubSpot } from "@/utils/hubspot-submit"
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react"
-import PhoneInput from "@/components/phone-input"
 
 interface HubSpotFormProps {
   portalId: string
@@ -21,7 +20,6 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
   }>({})
   const formRef = useRef<HTMLFormElement>(null)
   const submitTimeRef = useRef<number | null>(null)
-  const [phoneValue, setPhoneValue] = useState("")
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -56,7 +54,6 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
 
       if (result.success) {
         form.reset()
-        setPhoneValue("")
       }
     } catch (error) {
       console.error("Form submission error:", error)
@@ -67,10 +64,6 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  const handlePhoneChange = (value: string) => {
-    setPhoneValue(value)
   }
 
   return (
@@ -143,12 +136,13 @@ export default function HubSpotForm({ portalId, formId, includeMessage = false, 
             <label htmlFor={`phone-${formId}`} className="text-sm font-medium leading-none">
               Telefone
             </label>
-            <PhoneInput
+            <input
               id={`phone-${formId}`}
               name="phone"
-              required
+              type="tel"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="Digite seu telefone"
               disabled={isSubmitting}
-              onChange={handlePhoneChange}
             />
           </div>
           <div className="space-y-2">
