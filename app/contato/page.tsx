@@ -46,6 +46,7 @@ export default function ContatoPage() {
                     portalId="49530565"
                     formId="727fe665-19d0-43bf-9043-5b9785c81829"
                     includeMessage={true}
+                    messageRequired={false}
                   />
                 </CardContent>
               </Card>
