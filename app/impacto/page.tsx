@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, BarChart, Globe, Users, BookOpen, Award } from "lucide-react"
@@ -6,8 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TestimonialCarousel } from "@/components/testimonial-carousel"
+import { useIsMobile } from "@/hooks/use-media-query"
 
 export default function ImpactoPage() {
+  const isMobile = useIsMobile();
+
   return (
     <div>
       {/* Header */}
@@ -182,7 +187,7 @@ export default function ImpactoPage() {
                   rating: 5,
                 },
               ];
-              return <TestimonialCarousel testimonials={impactoTestimonials} autoPlay={false} />;
+              return <TestimonialCarousel testimonials={impactoTestimonials} autoPlay={false} showArrows={!isMobile} />;
             })()}
 
             {/* End carousel replacement */}
