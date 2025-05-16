@@ -9,6 +9,7 @@ import { ClientLogosCarousel } from "@/components/client-logos-carousel"
 import { TouchCarousel } from "@/components/touch-carousel"
 import { useIsMobile } from "@/hooks/use-media-query"
 import { useEffect } from "react"
+import { YouTubeCarousel } from "@/components/youtube-carousel"
 
 // Array com informações dos logos
 const clientLogos = [
@@ -113,86 +114,16 @@ export default function ClientesPage() {
             </div>
 
             <div className="relative max-w-full mx-auto overflow-hidden px-4">
-              {/* Video carousel with touch gestures */}
-              <div className="swipe-indicator-container">
-                <div className="swipe-indicator left"></div>
-                <div className="swipe-indicator right"></div>
-              </div>
-              <TouchCarousel
-                slidesToShow={isMobile ? 1 : 3}
-                gap={16}
+              <YouTubeCarousel
+                videos={[
+                  { id: "6eF14dFaPz8", title: "Depoimento de Cliente Hub Academy" },
+                  { id: "ZIZppX_zxaQ", title: "Depoimento de Cliente Hub Academy" },
+                  { id: "pFoCoO9icLg", title: "Depoimento de Cliente Hub Academy" },
+                  { id: "Jt_YDsEIzKI", title: "Depoimento de Cliente Hub Academy" }
+                ]}
+                showArrows={!isMobile}
                 showDots={true}
-                loop={true}
-                enableSwipe={true}
-                swipeThreshold={10}
-                touchEnabled={true}
-                preventDefault={false}
-                className="touch-carousel-mobile"
-              >
-                <div className="w-full pointer-events-auto">
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
-                    <div className="relative h-0 pb-[177.77%]">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/6eF14dFaPz8"
-                        title="Depoimento de Cliente Hub Academy"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full pointer-events-auto">
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
-                    <div className="relative h-0 pb-[177.77%]">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/ZIZppX_zxaQ"
-                        title="Depoimento de Cliente Hub Academy"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full pointer-events-auto">
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
-                    <div className="relative h-0 pb-[177.77%]">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/pFoCoO9icLg"
-                        title="Depoimento de Cliente Hub Academy"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full pointer-events-auto">
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md h-full">
-                    <div className="relative h-0 pb-[177.77%]">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/Jt_YDsEIzKI"
-                        title="Depoimento de Cliente Hub Academy"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-              </TouchCarousel>
+              />
             </div>
           </div>
         </section>

@@ -458,7 +458,7 @@ export default function Home() {
 
             {/* Testimonial carousel with touch gestures */}
             <div className="py-12">
-              <TestimonialCarousel testimonials={testimonials} />
+              <TestimonialCarousel testimonials={testimonials} showArrows={false} />
             </div>
           </div>
         </section>

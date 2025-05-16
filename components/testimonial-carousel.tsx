@@ -19,31 +19,34 @@ interface Testimonial {
 interface TestimonialCarouselProps {
   testimonials: Testimonial[]
   className?: string
+  autoPlay?: boolean
+  showArrows?: boolean
 }
 
-export function TestimonialCarousel({ testimonials, className }: TestimonialCarouselProps) {
+export function TestimonialCarousel({ testimonials, className, autoPlay = true, showArrows = false }: TestimonialCarouselProps) {
   const isMobile = useIsMobile()
   const [currentIndex, setCurrentIndex] = useState(0)
 
   // Determine how many slides to show based on screen size
-  const slidesToShow = isMobile ? 1 : 3
+  const slidesToShow = isMobile ? 1 : 2.95
 
   return (
-    <>
+    <div className="testimonial-carousel-outer px-4 md:px-8">
       <TouchCarousel
-        className={className}
+        className={cn(className)}
+        containerClassName="px-4 md:px-8"
         slidesToShow={slidesToShow}
-        autoPlay={true}
+        autoPlay={autoPlay}
         autoPlayInterval={5000}
-        showArrows={!isMobile}
+        showArrows={showArrows}
         showDots={false}
         loop={true}
-        gap={16}
+        gap={12}
         onSlideChange={(index: number) => setCurrentIndex(index)}
       >
         {testimonials.map((testimonial, index) => (
           <Card key={index} className="bg-white border-none shadow-md h-full">
-            <CardContent className="pt-6 h-full">
+            <CardContent className="p-6 h-full">
               <div className="flex flex-col gap-4 h-full">
                 <div className="flex gap-0.5">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -62,7 +65,7 @@ export function TestimonialCarousel({ testimonials, className }: TestimonialCaro
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-600 italic flex-grow text-sm md:text-base">{testimonial.text}</p>
+                <p className="text-gray-600 italic flex-grow text-sm md:text-base line-clamp-4">{testimonial.text}</p>
                 <div className="flex items-center gap-3 pt-4">
                   <div className="rounded-full bg-gray-200 p-1">
                     <LazyImage
@@ -74,7 +77,7 @@ export function TestimonialCarousel({ testimonials, className }: TestimonialCaro
                     />
                   </div>
                   <div>
-                    <p className="font-medium text-sm md:text-base">{testimonial.name}</p>
+                    <p className="font-medium text-sm md:text-base line-clamp-1">{testimonial.name}</p>
                     <p className="text-xs md:text-sm text-gray-500">{testimonial.role}</p>
                   </div>
                 </div>
@@ -109,6 +112,6 @@ export function TestimonialCarousel({ testimonials, className }: TestimonialCaro
           ))}
         </div>
       )}
-    </>
+    </div>
   )
 }

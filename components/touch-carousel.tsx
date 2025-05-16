@@ -8,6 +8,7 @@ import { useIsMobile } from "@/hooks/use-media-query"
 interface TouchCarouselProps {
   children: ReactNode[]
   className?: string
+  containerClassName?: string
   itemClassName?: string
   showArrows?: boolean
   showDots?: boolean
@@ -22,6 +23,7 @@ interface TouchCarouselProps {
 export function TouchCarousel({
   children,
   className,
+  containerClassName,
   itemClassName,
   showArrows = true,
   showDots = true,
@@ -73,7 +75,9 @@ export function TouchCarousel({
   // Calculate the width of each slide
   const getSlideWidth = () => {
     if (containerWidth === 0) return 0
-    return (containerWidth - gap * (slidesToShow - 1)) / slidesToShow
+    // px-4 = 16px * 2 = 32px, md:px-8 = 32px * 2 = 64px
+    const horizontalPadding = isMobile ? 32 : 64
+    return (containerWidth - horizontalPadding - gap * (slidesToShow - 1)) / slidesToShow
   }
 
   // Navigate to a specific slide
@@ -267,7 +271,7 @@ export function TouchCarousel({
     <div className={cn("relative touch-carousel-container", className)}>
       <div
         ref={containerRef}
-        className="overflow-hidden px-1 py-2 max-w-full"
+        className={cn("overflow-hidden px-1 py-2 max-w-full", containerClassName)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -293,9 +297,28 @@ export function TouchCarousel({
             </div>
           ))}
         </div>
+        {/* Navigation Arrows */}
+        {showArrows && totalSlides > slidesToShow && (
+          <>
+            <button
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100 transition"
+              onClick={goToPrev}
+              aria-label="Anterior"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <svg width="24" height="24" fill="none" stroke="#161533" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100 transition"
+              onClick={goToNext}
+              aria-label="Próximo"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <svg width="24" height="24" fill="none" stroke="#161533" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </>
+        )}
       </div>
-
-      {/* Arrows removed as requested */}
 
       {showDots && totalSlides > slidesToShow && (
         <div className="carousel-dots-container">

@@ -3,7 +3,7 @@
 import { TouchCarousel } from "@/components/touch-carousel"
 import { LogoImage } from "@/components/logo-image"
 import { useIsMobile, useIsTablet } from "@/hooks/use-media-query"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 interface ClientLogo {
@@ -40,26 +40,16 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
     }))
   }
 
+  // Create a duplicated array of logos for seamless infinite scroll
+  const duplicatedLogos = [...logos, ...logos]
+
   return (
-    <>
-      <TouchCarousel
-        ref={carouselRef}
-        className={className}
-        slidesToShow={slidesToShow}
-        autoPlay={true}
-        autoPlayInterval={3000}
-        showArrows={!isMobile}
-        showDots={false}
-        loop={true}
-        gap={16}
-        onSlideChange={(index) => {
-          setCurrentIndex(Math.floor(index / slidesToShow))
-        }}
-      >
-        {logos.map((logo, index) => (
+    <div className={cn("relative overflow-hidden", className)}>
+      <div className="carousel-track">
+        {duplicatedLogos.map((logo, index) => (
           <div
-            key={index}
-            className="bg-white p-3 md:p-4 rounded-lg shadow-sm flex items-center justify-center h-16 md:h-24 w-full min-h-[80px]"
+            key={`${logo.name}-${index}`}
+            className="bg-white p-2 md:p-3 rounded-lg shadow-sm flex items-center justify-center h-14 md:h-20 w-[140px] md:w-[180px] min-h-[56px]"
           >
             <div className="relative w-full h-full flex items-center justify-center">
               <LogoImage
@@ -67,27 +57,21 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
                 alt={`Logo de ${logo.name}`}
                 width={logo.width}
                 height={logo.height}
-                className="max-h-10 md:max-h-14 w-auto"
+                className="max-h-8 md:max-h-12 w-auto"
                 priority={index < 4}
                 quality={100}
               />
             </div>
           </div>
         ))}
-      </TouchCarousel>
+      </div>
       <div className="carousel-dots-container">
         {Array.from({ length: Math.ceil(logos.length / slidesToShow) }).map((_, index) => (
           <button
             key={index}
             className={cn("carousel-dot", currentIndex === index && "active")}
             onClick={() => {
-              // Just update the visual state for now
               setCurrentIndex(index)
-
-              // Add a note for developers
-              console.log(
-                `Dot ${index + 1} clicked. To make this fully functional, the TouchCarousel component needs to expose a goToSlide method.`,
-              )
             }}
             aria-label={`Go to logo group ${index + 1}`}
             style={{
@@ -98,15 +82,10 @@ export function ClientLogosCarousel({ logos, className }: ClientLogosCarouselPro
               margin: "0 4px",
               padding: 0,
               border: "none",
-              minWidth: "8px",
-              minHeight: "8px",
-              display: "block",
-              opacity: 1,
-              cursor: "pointer", // Add cursor pointer to indicate clickability
             }}
           />
         ))}
       </div>
-    </>
+    </div>
   )
 }

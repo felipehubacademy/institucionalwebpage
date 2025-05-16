@@ -92,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <meta name="msapplication-TileColor" content="#a3ff3c" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
@@ -106,7 +106,7 @@ export default function RootLayout({
         </Script>
         <link rel="canonical" href="https://hubacademybr.com" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

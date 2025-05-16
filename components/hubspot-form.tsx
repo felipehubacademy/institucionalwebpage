@@ -81,7 +81,6 @@ export default function HubSpotForm({
 
     try {
       const formData = new FormData(form)
-
       // Replace the phone field with our formatted phone number
       formData.set("phone", phoneNumber)
 

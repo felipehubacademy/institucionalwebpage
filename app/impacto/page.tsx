@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { TestimonialCarousel } from "@/components/testimonial-carousel"
 
 export default function ImpactoPage() {
   return (
@@ -149,111 +150,42 @@ export default function ImpactoPage() {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              <Card className="border-none shadow-md">
-                <CardHeader>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="rounded-full bg-gray-200 p-1">
-                      <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Bianca-DUWWkA5MVUUbuAdfHBiWyMoQ94H74Z.svg"
-                        width={64}
-                        height={64}
-                        alt="Foto de Bianca Lucena"
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div>
-                      <CardTitle>Bianca Lucena</CardTitle>
-                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    "Desde que eu comecei a estudar na Hub, eu estou me sentindo mais confiante para poder conversar em
-                    inglês, até mesmo com os nativos no meu serviço"
-                  </p>
-                </CardContent>
-              </Card>
+            {/* Testimonial carousel for Impacto nas Carreiras */}
+            {(() => {
+              const impactoTestimonials = [
+                {
+                  name: "Bianca Lucena",
+                  role: "Hub Academy - Student",
+                  image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Bianca-DUWWkA5MVUUbuAdfHBiWyMoQ94H74Z.svg",
+                  text: "Desde que eu comecei a estudar na Hub, eu estou me sentindo mais confiante para poder conversar em inglês, até mesmo com os nativos no meu serviço",
+                  rating: 5,
+                },
+                {
+                  name: "Daniela Lazarin",
+                  role: "Hub Academy - Student",
+                  image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Daniela-o0sxizKja1w2t3f1QqTLKdJryygJld.svg",
+                  text: "Eu faço aulas com a Hub Academy há mais de dois anos, eu gosto muito das aulas, são aulas bem customizadas e focadas no que o aluno realmente quer aprender",
+                  rating: 5,
+                },
+                {
+                  name: "Samuel Santana",
+                  role: "Hub Academy - Student",
+                  image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Samuel-HPtwZ4eJfBoOxq7EBbvoQ4PCNiRE2I.svg",
+                  text: "Essa experiencia tem sido muito importante e bacana para mim, porque eu estou superando os meus medos, principalmente de falar",
+                  rating: 5,
+                },
+                {
+                  name: "José Elivelton Barbosa",
+                  role: "Hub Academy - Student",
+                  image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Elivelton-QuirCKTT2D4qq4sYConPCCs1JVRkxH.svg",
+                  text: "É uma excelente escola, adoro muito a metodologia utilizada.....Nos ajuda muito no nosso entendimento do que é o inglês",
+                  rating: 5,
+                },
+              ];
+              return <TestimonialCarousel testimonials={impactoTestimonials} autoPlay={false} />;
+            })()}
 
-              <Card className="border-none shadow-md">
-                <CardHeader>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="rounded-full bg-gray-200 p-1">
-                      <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Daniela-o0sxizKja1w2t3f1QqTLKdJryygJld.svg"
-                        width={64}
-                        height={64}
-                        alt="Foto de Daniela Lazarin"
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div>
-                      <CardTitle>Daniela Lazarin</CardTitle>
-                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    "Eu faço aulas com a Hub Academy há mais de dois anos, eu gosto muito das aulas, são aulas bem
-                    customizadas e focadas no que o aluno realmente quer aprender"
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardHeader>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="rounded-full bg-gray-200 p-1">
-                      <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Samuel-HPtwZ4eJfBoOxq7EBbvoQ4PCNiRE2I.svg"
-                        width={64}
-                        height={64}
-                        alt="Foto de Samuel Santana"
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div>
-                      <CardTitle>Samuel Santana</CardTitle>
-                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    "Essa experiencia tem sido muito importante e bacana para mim, porque eu estou superando os meus
-                    medos, principalmente de falar"
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-none shadow-md">
-                <CardHeader>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="rounded-full bg-gray-200 p-1">
-                      <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avatar_Elivelton-QuirCKTT2D4qq4sYConPCCs1JVRkxH.svg"
-                        width={64}
-                        height={64}
-                        alt="Foto de José Elivelton Barbosa"
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div>
-                      <CardTitle>José Elivelton Barbosa</CardTitle>
-                      <p className="text-sm text-gray-500">Hub Academy - Student</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    "É uma excelente escola, adoro muito a metodologia utilizada.....Nos ajuda muito no nosso
-                    entendimento do que é o inglês"
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+            {/* End carousel replacement */}
           </div>
         </section>
 
