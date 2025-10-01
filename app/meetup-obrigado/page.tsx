@@ -54,12 +54,7 @@ export default function MeetupObrigadoPage() {
               </div>
             {/* Success Icon with Animation */}
             <div className="flex justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#a3ff3c]/20 rounded-full blur-2xl animate-pulse" />
-                <div className="relative rounded-full bg-gradient-to-br from-[#a3ff3c]/20 to-[#92e636]/20 p-8 border-4 border-[#a3ff3c]/30">
-                  <CheckCircle2 className="h-24 w-24 text-[#a3ff3c] animate-bounce" style={{ animationDuration: '2s' }} />
-                </div>
-              </div>
+              <CheckCircle2 className="h-24 w-24 text-[#a3ff3c] animate-bounce" style={{ animationDuration: '2s' }} />
             </div>
 
             {/* Title */}
