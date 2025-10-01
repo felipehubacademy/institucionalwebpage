@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, type FormEvent } from "react"
+import { useState, useEffect, type FormEvent, Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, CheckCircle, Calendar, MapPin, Clock } from "lucide-react"
@@ -10,7 +10,7 @@ import { LogoImage } from "@/components/logo-image"
 import Link from "next/link"
 import Image from "next/image"
 
-export default function MeetupPage() {
+function MeetupPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -568,6 +568,18 @@ export default function MeetupPage() {
         </div>
       </footer>
     </div>
+  )
+}
+
+export default function MeetupPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#161533] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#a3ff3c]" />
+      </div>
+    }>
+      <MeetupPageContent />
+    </Suspense>
   )
 }
 
