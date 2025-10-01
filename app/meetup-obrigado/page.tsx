@@ -1,11 +1,22 @@
 "use client"
 
+import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { CheckCircle2, Calendar, Mail, MessageCircle, Clock, MapPin } from "lucide-react"
+import { Calendar, CheckCircle2, Volume2, VolumeX } from "lucide-react"
 import { LogoImage } from "@/components/logo-image"
 import Link from "next/link"
 
 export default function MeetupObrigadoPage() {
+  const [isMuted, setIsMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
+  }
+
   const handleAddToCalendar = async () => {
     try {
       const response = await fetch("/api/meetup-ics")
@@ -25,154 +36,144 @@ export default function MeetupObrigadoPage() {
 
   return (
     <div className="min-h-screen bg-[#161533]">
-      {/* Invisible Header */}
-      <header className="w-full h-0 bg-[#161533]" />
+      {/* Video Hero Section */}
+      <section className="relative w-full h-screen overflow-hidden bg-[#161533]">
+        {/* Video Background */}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          preload="auto"
+        >
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#161533]/60 via-[#161533]/40 to-[#161533]" />
 
-      {/* Main Content */}
-      <main>
-        {/* Success Section */}
-        <section className="relative w-full min-h-screen pt-12 pb-16 md:pt-16 md:pb-24 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+        {/* Audio Control Button */}
+        <button
+          onClick={toggleMute}
+          className="absolute bottom-6 right-6 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center group"
+          aria-label={isMuted ? "Ativar som" : "Desativar som"}
+        >
+          {isMuted ? (
+            <Volume2 className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
+          ) : (
+            <VolumeX className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
+          )}
+        </button>
+
+        {/* Content Over Video */}
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center text-white">
+          {/* Logo */}
+          <div className="mb-12">
+            <Link href="/" className="inline-block">
+              <LogoImage
+                src="/images/Logo_horizontal_green.svg"
+                alt="Logo Hub Academy"
+                width={160}
+                height={48}
+                priority={true}
+                className="hover:opacity-80 transition-opacity"
+              />
+            </Link>
           </div>
 
-          <div className="container px-4 md:px-6 max-w-5xl mx-auto relative z-10">
-            <div className="text-center space-y-10">
-              {/* Logo */}
-              <div className="flex justify-center">
-                <Link href="/" className="inline-block">
-                  <LogoImage
-                    src="/images/Logo_horizontal_green.svg"
-                    alt="Logo Hub Academy"
-                    width={140}
-                    height={42}
-                    priority={true}
-                    className="hover:opacity-80 transition-opacity"
-                  />
-                </Link>
-              </div>
-            {/* Success Icon with Animation */}
-            <div className="flex justify-center">
-              <CheckCircle2 className="h-24 w-24 text-[#a3ff3c] animate-bounce" style={{ animationDuration: '2s' }} />
-            </div>
+          {/* Success Icon */}
+          <div className="mb-8">
+            <CheckCircle2 className="h-20 w-20 md:h-24 md:w-24 text-[#a3ff3c] animate-bounce mx-auto" style={{ animationDuration: '2s' }} />
+          </div>
 
-            {/* Title */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3ff3c] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a3ff3c]"></span>
-                </span>
-                <span className="text-sm font-medium text-[#a3ff3c]">Inscrição Confirmada</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
-                Tudo certo! ✅
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                Nos vemos em <span className="text-[#a3ff3c] font-bold">22/10, às 18h30</span>, em{" "}
-                <span className="text-[#a3ff3c] font-bold">São Paulo - Av. Paulista</span>.
+          {/* Success Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-md mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3ff3c] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a3ff3c]"></span>
+            </span>
+            <span className="text-sm font-medium text-[#a3ff3c]">Inscrição Confirmada</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-3xl">
+            Tudo certo!
+          </h1>
+
+          {/* Event Details */}
+          <div className="space-y-4 mb-10">
+            <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
+              Nos vemos no <span className="text-[#a3ff3c] font-bold">English Night Live</span>
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-base md:text-lg">
+              <span className="text-white/90">📅 22 de Outubro</span>
+              <span className="hidden sm:inline text-white/50">•</span>
+              <span className="text-white/90">🕕 18h30</span>
+              <span className="hidden sm:inline text-white/50">•</span>
+              <span className="text-white/90">📍 SP - Av. Paulista</span>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <Button
+            onClick={handleAddToCalendar}
+            className="group bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-lg md:text-xl px-10 py-7 font-bold shadow-2xl shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/50 transition-all duration-300 hover:scale-105 inline-flex items-center gap-3 mb-4"
+          >
+            <Calendar className="h-6 w-6" />
+            <span>Adicionar ao calendário</span>
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </Button>
+
+          {/* Helper Text */}
+          <p className="text-sm text-gray-400">
+            Você receberá confirmação por e-mail e WhatsApp
+          </p>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Info Section */}
+      <section className="relative w-full py-16 md:py-24 bg-white">
+        <div className="container px-4 md:px-6 max-w-2xl mx-auto">
+          <div className="text-center space-y-8">
+            {/* Simple confirmation text */}
+            <div className="space-y-4">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Você receberá a confirmação por <span className="font-semibold text-[#161533]">e-mail</span> e{" "}
+                <span className="font-semibold text-[#161533]">WhatsApp</span>.
               </p>
             </div>
 
-            {/* Calendar Button */}
-            <div className="pt-6">
-              <Button
-                onClick={handleAddToCalendar}
-                className="group bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-lg md:text-xl px-10 py-7 font-bold shadow-2xl shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/50 transition-all duration-300 hover:scale-105 inline-flex items-center gap-3"
-              >
-                <Calendar className="h-6 w-6" />
-                <span>Adicionar ao calendário</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </Button>
-              <p className="text-sm text-gray-400 mt-4">📅 Arquivo .ics compatível com Google, Outlook e Apple Calendar</p>
-            </div>
+            {/* Divider */}
+            <div className="w-16 h-0.5 bg-[#a3ff3c] mx-auto" />
 
-            {/* Next Steps */}
-            <div className="pt-12 space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold">Próximos passos</h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Email Card */}
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                  <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#a3ff3c] to-[#92e636] rounded-2xl flex items-center justify-center">
-                      <Mail className="h-8 w-8 text-[#161533]" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Confirmação por E-mail</h3>
-                      <p className="text-gray-300 leading-relaxed">
-                        Você receberá todos os detalhes do evento em sua caixa de entrada nos próximos minutos.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* WhatsApp Card */}
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                  <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#a3ff3c] to-[#92e636] rounded-2xl flex items-center justify-center">
-                      <MessageCircle className="h-8 w-8 text-[#161533]" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Lembrete por WhatsApp</h3>
-                      <p className="text-gray-300 leading-relaxed">
-                        Enviaremos informações adicionais e lembretes próximo à data do evento.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Additional Info */}
-              <div className="pt-6">
-                <p className="text-gray-400">
-                  Dúvidas? Entre em contato:{" "}
-                  <a
-                    href="mailto:contato@hubacademybr.com"
-                    className="text-[#a3ff3c] hover:text-[#92e636] font-semibold underline transition-colors"
-                  >
-                    contato@hubacademybr.com
-                  </a>
-                </p>
-              </div>
-            </div>
-
-              {/* Event Reminder */}
-              <div className="pt-12 border-t border-white/10">
-                <div className="bg-gradient-to-r from-[#a3ff3c]/10 to-[#92e636]/10 border border-[#a3ff3c]/20 rounded-3xl p-8 md:p-10">
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#a3ff3c] mb-8">
-                    English Night Live – Hub Academy Immersive Meetup
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
-                      <Calendar className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
-                      <p className="text-sm text-gray-400 mb-1">Data</p>
-                      <p className="text-xl font-semibold">22 de Outubro</p>
-                    </div>
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
-                      <Clock className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
-                      <p className="text-sm text-gray-400 mb-1">Horário</p>
-                      <p className="text-xl font-semibold">18h30</p>
-                    </div>
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
-                      <MapPin className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
-                      <p className="text-sm text-gray-400 mb-1">Local</p>
-                      <p className="text-xl font-semibold">SP - Av. Paulista</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Contact */}
+            <div>
+              <p className="text-sm text-gray-600">
+                Dúvidas?{" "}
+                <a
+                  href="mailto:contato@hubacademybr.com"
+                  className="text-[#161533] hover:text-[#a3ff3c] font-semibold transition-colors"
+                >
+                  contato@hubacademybr.com
+                </a>
+              </p>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      {/* Simple Footer */}
-      <footer className="w-full border-t py-12 bg-gradient-to-b from-[#161533] to-[#0d0c24] text-white border-[#232244]">
-        <div className="container text-center space-y-4">
+      {/* Footer */}
+      <footer className="w-full border-t py-12 bg-[#161533] text-white border-[#232244]">
+        <div className="container text-center">
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} Hub Academy. Todos os direitos reservados.
           </p>
@@ -181,5 +182,3 @@ export default function MeetupObrigadoPage() {
     </div>
   )
 }
-
-

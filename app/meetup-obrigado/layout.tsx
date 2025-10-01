@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 }
 
 export default function MeetupObrigadoLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <div className="-mt-16">
+      {children}
+    </div>
+  )
 }
 
 
