@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { CheckCircle2, Calendar, Mail, MessageCircle } from "lucide-react"
+import { CheckCircle2, Calendar, Mail, MessageCircle, Clock, MapPin } from "lucide-react"
 import { LogoImage } from "@/components/logo-image"
 import Link from "next/link"
 
@@ -24,26 +24,34 @@ export default function MeetupObrigadoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#161533] to-[#232244] text-white">
-      {/* Simple Header */}
-      <header className="fixed top-0 z-50 w-full bg-[#161533] text-white h-16 shadow-md">
-        <div className="container flex items-center justify-between h-full">
-          <Link href="/" className="flex items-center">
-            <LogoImage
-              src="/images/Logo_horizontal_green.svg"
-              alt="Logo Hub Academy"
-              width={140}
-              height={42}
-              priority={true}
-            />
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#161533]">
+      {/* Invisible Header */}
+      <header className="w-full h-0 bg-[#161533]" />
 
       {/* Main Content */}
-      <main className="pt-16 flex items-center justify-center min-h-screen">
-        <div className="container px-4 md:px-6 max-w-4xl mx-auto py-20">
-          <div className="text-center space-y-10">
+      <main>
+        {/* Success Section */}
+        <section className="relative w-full min-h-screen pt-12 pb-16 md:pt-16 md:pb-24 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+          </div>
+
+          <div className="container px-4 md:px-6 max-w-5xl mx-auto relative z-10">
+            <div className="text-center space-y-10">
+              {/* Logo */}
+              <div className="flex justify-center">
+                <Link href="/" className="inline-block">
+                  <LogoImage
+                    src="/images/Logo_horizontal_green.svg"
+                    alt="Logo Hub Academy"
+                    width={140}
+                    height={42}
+                    priority={true}
+                    className="hover:opacity-80 transition-opacity"
+                  />
+                </Link>
+              </div>
             {/* Success Icon with Animation */}
             <div className="flex justify-center">
               <div className="relative">
@@ -137,45 +145,39 @@ export default function MeetupObrigadoPage() {
               </div>
             </div>
 
-            {/* Event Reminder */}
-            <div className="pt-12 border-t border-white/10">
-              <div className="bg-gradient-to-r from-[#a3ff3c]/10 to-[#92e636]/10 border border-[#a3ff3c]/20 rounded-3xl p-8 md:p-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-[#a3ff3c] mb-6">English Night Live – Hub Academy Immersive Meetup</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                  <div className="space-y-2">
-                    <div className="text-4xl">📅</div>
-                    <p className="text-sm text-gray-400">Data</p>
-                    <p className="text-lg font-semibold">22 de Outubro</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-4xl">🕕</div>
-                    <p className="text-sm text-gray-400">Horário</p>
-                    <p className="text-lg font-semibold">18h30</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-4xl">📍</div>
-                    <p className="text-sm text-gray-400">Local</p>
-                    <p className="text-lg font-semibold">São Paulo - Av. Paulista</p>
+              {/* Event Reminder */}
+              <div className="pt-12 border-t border-white/10">
+                <div className="bg-gradient-to-r from-[#a3ff3c]/10 to-[#92e636]/10 border border-[#a3ff3c]/20 rounded-3xl p-8 md:p-10">
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#a3ff3c] mb-8">
+                    English Night Live – Hub Academy Immersive Meetup
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                      <Calendar className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
+                      <p className="text-sm text-gray-400 mb-1">Data</p>
+                      <p className="text-xl font-semibold">22 de Outubro</p>
+                    </div>
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                      <Clock className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
+                      <p className="text-sm text-gray-400 mb-1">Horário</p>
+                      <p className="text-xl font-semibold">18h30</p>
+                    </div>
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                      <MapPin className="h-8 w-8 text-[#a3ff3c] mx-auto mb-3" />
+                      <p className="text-sm text-gray-400 mb-1">Local</p>
+                      <p className="text-xl font-semibold">SP - Av. Paulista</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </main>
 
       {/* Simple Footer */}
       <footer className="w-full border-t py-12 bg-gradient-to-b from-[#161533] to-[#0d0c24] text-white border-[#232244]">
         <div className="container text-center space-y-4">
-          <Link href="/" className="inline-block">
-            <LogoImage
-              src="/images/Logo_horizontal_green.svg"
-              alt="Logo Hub Academy"
-              width={100}
-              height={30}
-              className="opacity-70 hover:opacity-100 transition-opacity"
-            />
-          </Link>
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} Hub Academy. Todos os direitos reservados.
           </p>
