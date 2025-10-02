@@ -137,4 +137,64 @@ export function generateMeetupConfirmationEmail(firstName: string): string {
   `.trim()
 }
 
+export function generateICSContent(): string {
+  const eventTitle = "English Night Live – Hub Academy Immersive Meetup"
+  const eventLocation = "Av. Paulista, 1374 - 12º andar - Brazilian Financial Center, São Paulo"
+  const eventDescription =
+    "Uma noite exclusiva de networking e prática de inglês em um ambiente dinâmico e imersivo."
 
+  const uid = `meetup-${Date.now()}@hubacademybr.com`
+  const now = new Date()
+  const timestamp =
+    now.getUTCFullYear() +
+    String(now.getUTCMonth() + 1).padStart(2, "0") +
+    String(now.getUTCDate()).padStart(2, "0") +
+    "T" +
+    String(now.getUTCHours()).padStart(2, "0") +
+    String(now.getUTCMinutes()).padStart(2, "0") +
+    String(now.getUTCSeconds()).padStart(2, "0") +
+    "Z"
+
+  const icsContent = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Hub Academy//English Night Live//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "X-WR-CALNAME:English Night Live",
+    "X-WR-TIMEZONE:America/Sao_Paulo",
+    "BEGIN:VTIMEZONE",
+    "TZID:America/Sao_Paulo",
+    "BEGIN:STANDARD",
+    "DTSTART:19700101T000000",
+    "TZOFFSETFROM:-0300",
+    "TZOFFSETTO:-0300",
+    "TZNAME:BRT",
+    "END:STANDARD",
+    "END:VTIMEZONE",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTAMP:${timestamp}`,
+    `DTSTART;TZID=America/Sao_Paulo:20251022T183000`,
+    `DTEND;TZID=America/Sao_Paulo:20251022T203000`,
+    `SUMMARY:${eventTitle}`,
+    `DESCRIPTION:${eventDescription.replace(/\n/g, "\\n")}`,
+    `LOCATION:${eventLocation}`,
+    "STATUS:CONFIRMED",
+    "SEQUENCE:0",
+    "BEGIN:VALARM",
+    "TRIGGER:-PT24H",
+    "DESCRIPTION:Lembrete: English Night Live amanhã às 18h30",
+    "ACTION:DISPLAY",
+    "END:VALARM",
+    "BEGIN:VALARM",
+    "TRIGGER:-PT2H",
+    "DESCRIPTION:Lembrete: English Night Live em 2 horas",
+    "ACTION:DISPLAY",
+    "END:VALARM",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n")
+
+  return icsContent
+}
