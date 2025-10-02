@@ -7,6 +7,7 @@ interface EmailOptions {
   subject: string
   htmlBody: string
   fromEmail: string
+  icsAttachment?: string
 }
 
 export async function sendEmail(
@@ -14,7 +15,7 @@ export async function sendEmail(
   accessToken: string,
 ): Promise<{ success: boolean; messageId?: string }> {
   try {
-    const message = {
+    const message: any = {
       message: {
         subject: options.subject,
         body: {
@@ -30,6 +31,19 @@ export async function sendEmail(
         ],
       },
       saveToSentItems: true,
+    }
+
+    // Add .ics attachment if provided
+    if (options.icsAttachment) {
+      const icsBase64 = Buffer.from(options.icsAttachment).toString('base64')
+      message.message.attachments = [
+        {
+          "@odata.type": "#microsoft.graph.fileAttachment",
+          name: "english-night-live-meetup.ics",
+          contentType: "text/calendar",
+          contentBytes: icsBase64,
+        },
+      ]
     }
 
     const response = await fetch(`https://graph.microsoft.com/v1.0/users/${options.fromEmail}/sendMail`, {
@@ -80,7 +94,7 @@ export function generateMeetupConfirmationEmail(firstName: string): string {
       <h3 style="color: #161533; margin-top: 0;">📅 Detalhes do Evento</h3>
       <p style="margin: 10px 0;"><strong>Data:</strong> 22 de Outubro de 2025</p>
       <p style="margin: 10px 0;"><strong>Horário:</strong> 18h30</p>
-      <p style="margin: 10px 0;"><strong>Local:</strong> São Paulo - Av. Paulista</p>
+      <p style="margin: 10px 0;"><strong>Local:</strong> Av. Paulista, 1374 - 12º andar - Brazilian Financial Center</p>
     </div>
     
     <p style="font-size: 16px;">

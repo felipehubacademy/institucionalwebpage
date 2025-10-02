@@ -7,7 +7,6 @@ interface ContactProperties {
   firstname: string
   lastname: string
   phone: string
-  english_level?: string
   hs_lead_status?: string
   hubspot_owner_id?: string
   lifecyclestage?: string
@@ -24,7 +23,7 @@ interface DealProperties {
   amount: string
   pipeline: string
   dealstage: string
-  source: string
+  dealtype?: string
 }
 
 export async function createOrUpdateContact(
@@ -75,7 +74,9 @@ export async function createOrUpdateContact(
       )
 
       if (!updateResponse.ok) {
-        throw new Error("Failed to update contact")
+        const errorData = await updateResponse.json()
+        console.error("HubSpot update contact error:", JSON.stringify(errorData, null, 2))
+        throw new Error(`Failed to update contact: ${errorData.message || updateResponse.statusText}`)
       }
 
       return { id: contactId, success: true, isNew: false }
@@ -91,7 +92,9 @@ export async function createOrUpdateContact(
       })
 
       if (!createResponse.ok) {
-        throw new Error("Failed to create contact")
+        const errorData = await createResponse.json()
+        console.error("HubSpot create contact error:", JSON.stringify(errorData, null, 2))
+        throw new Error(`Failed to create contact: ${errorData.message || createResponse.statusText}`)
       }
 
       const createData = await createResponse.json()

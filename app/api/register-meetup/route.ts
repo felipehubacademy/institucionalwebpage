@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { checkRateLimit } from "@/utils/rate-limit"
 import { createOrUpdateContact, createDeal } from "@/utils/hubspot-crm"
 import { sendWhatsAppMessage } from "@/utils/whatsapp-api"
-import { sendEmail, generateMeetupConfirmationEmail } from "@/utils/microsoft-graph"
+import { sendEmail, generateMeetupConfirmationEmail, generateICSContent } from "@/utils/microsoft-graph"
 
 interface RegistrationData {
   firstname: string
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
     const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
     const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
     const msGraphAccessToken = process.env.MS_GRAPH_ACCESS_TOKEN
-    const msGraphFromEmail = process.env.MS_GRAPH_FROM_EMAIL || "contato@hubacademybr.com"
+    const msGraphFromEmail = process.env.MS_GRAPH_FROM_EMAIL || "hub@hubacademybr.com"
 
     // HubSpot Integration
     if (hubspotApiKey) {
@@ -113,16 +113,16 @@ export async function POST(request: NextRequest) {
             firstname: sanitizedData.firstname,
             lastname: sanitizedData.lastname,
             phone: sanitizedData.phone,
-            english_level: sanitizedData.english_level,
             hs_lead_status: "NEW",
             hubspot_owner_id: "83528823",
             lifecyclestage: "lead",
-            origem: "MeetUP - Out/25",
-            utm_source: sanitizedData.utm_source,
-            utm_medium: sanitizedData.utm_medium,
-            utm_campaign: sanitizedData.utm_campaign,
-            utm_term: sanitizedData.utm_term,
-            utm_content: sanitizedData.utm_content,
+            origem: `MeetUP - Out/25 - ${sanitizedData.english_level}`,
+            // UTMs comentados - não existem no HubSpot
+            // utm_source: sanitizedData.utm_source,
+            // utm_medium: sanitizedData.utm_medium,
+            // utm_campaign: sanitizedData.utm_campaign,
+            // utm_term: sanitizedData.utm_term,
+            // utm_content: sanitizedData.utm_content,
           },
           hubspotApiKey,
         )
@@ -130,11 +130,11 @@ export async function POST(request: NextRequest) {
         // Create deal
         await createDeal(
           {
-            dealname: `Meetup 22/10 - ${sanitizedData.firstname} ${sanitizedData.lastname}`,
+            dealname: `${sanitizedData.firstname} ${sanitizedData.lastname} - MeetUP`,
             amount: "0",
             pipeline: hubspotPipeline,
             dealstage: hubspotDealStage,
-            source: "Meetup Landing",
+            dealtype: "newbusiness",
           },
           contactResult.id,
           hubspotApiKey,
@@ -153,7 +153,7 @@ export async function POST(request: NextRequest) {
     // WhatsApp Integration
     if (whatsappAccessToken && whatsappPhoneNumberId) {
       try {
-        const whatsappMessage = `Olá, ${sanitizedData.firstname}! Inscrição confirmada no English Night Live – Hub Academy Immersive Meetup (22/10, 18h30, São Paulo - Av. Paulista). Em breve enviaremos mais detalhes. Até lá! 💬`
+        const whatsappMessage = `Olá, ${sanitizedData.firstname}! Inscrição confirmada no English Night Live – Hub Academy Immersive Meetup (22/10, 18h30, Av. Paulista, 1374 - 12º andar - Brazilian Financial Center). Em breve enviaremos mais detalhes. Até lá! 💬`
 
         await sendWhatsAppMessage(
           sanitizedData.phone,
@@ -176,6 +176,7 @@ export async function POST(request: NextRequest) {
     if (msGraphAccessToken && msGraphFromEmail) {
       try {
         const emailHtml = generateMeetupConfirmationEmail(sanitizedData.firstname)
+        const icsContent = generateICSContent()
 
         await sendEmail(
           {
@@ -183,6 +184,7 @@ export async function POST(request: NextRequest) {
             subject: "Confirmação – English Night Live (22/10, 18h30)",
             htmlBody: emailHtml,
             fromEmail: msGraphFromEmail,
+            icsAttachment: icsContent,
           },
           msGraphAccessToken,
         )

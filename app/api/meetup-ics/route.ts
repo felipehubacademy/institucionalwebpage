@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 function generateICS(): string {
   // Event details
   const eventTitle = "English Night Live – Hub Academy Immersive Meetup"
-  const eventLocation = "São Paulo - Av. Paulista"
+  const eventLocation = "Av. Paulista, 1374 - 12º andar - Brazilian Financial Center, São Paulo"
   const eventDescription =
     "Uma noite exclusiva de networking e prática de inglês em um ambiente dinâmico e imersivo. Pratique inglês em dinâmicas reais de negócios, desenvolva soft skills estratégicas e conecte-se com profissionais de diversas áreas."
 
