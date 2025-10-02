@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
   title: "English Night Live – Hub Academy Immersive Meetup",
@@ -14,9 +14,18 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
+
 export default function MeetupLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="-mt-16">
+    <div className="-mt-16" style={{
+      paddingTop: 'env(safe-area-inset-top)',
+      paddingBottom: 'env(safe-area-inset-bottom)'
+    }}>
       {children}
     </div>
   )
