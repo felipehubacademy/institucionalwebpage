@@ -185,7 +185,7 @@ function MeetupPageContent() {
                       width={140}
                       height={42}
                       priority={true}
-                      className="hover:opacity-80 transition-opacity"
+                      className="hover:opacity-80 transition-opacity w-28 h-auto md:w-32 lg:w-[140px]"
                     />
                   </Link>
                 </div>

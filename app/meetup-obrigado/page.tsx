@@ -70,7 +70,7 @@ export default function MeetupObrigadoPage() {
         {/* Content Over Video */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center text-white">
           {/* Logo */}
-          <div className="mb-12">
+          <div className="mb-8 md:mb-12">
             <Link href="/" className="inline-block">
               <LogoImage
                 src="/images/Logo_horizontal_green.svg"
@@ -78,7 +78,7 @@ export default function MeetupObrigadoPage() {
                 width={160}
                 height={48}
                 priority={true}
-                className="hover:opacity-80 transition-opacity"
+                className="hover:opacity-80 transition-opacity w-28 h-auto md:w-36 lg:w-40"
               />
             </Link>
           </div>
