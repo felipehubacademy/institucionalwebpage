@@ -153,11 +153,9 @@ export async function POST(request: NextRequest) {
     // WhatsApp Integration
     if (whatsappAccessToken && whatsappPhoneNumberId) {
       try {
-        const whatsappMessage = `Olá, ${sanitizedData.firstname}! Inscrição confirmada no English Night Live – Hub Academy Immersive Meetup (22/10, 18h30, Av. Paulista, 1374 - 12º andar - Brazilian Financial Center). Em breve enviaremos mais detalhes. Até lá! 💬`
-
         await sendWhatsAppMessage(
           sanitizedData.phone,
-          whatsappMessage,
+          sanitizedData.firstname,
           whatsappAccessToken,
           whatsappPhoneNumberId,
         )

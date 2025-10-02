@@ -4,7 +4,7 @@
 
 export async function sendWhatsAppMessage(
   phoneNumber: string,
-  message: string,
+  firstName: string,
   accessToken: string,
   phoneNumberId: string,
 ): Promise<{ success: boolean; messageId?: string }> {
@@ -12,7 +12,7 @@ export async function sendWhatsAppMessage(
     // Remove any non-digit characters from phone number
     const cleanPhone = phoneNumber.replace(/\D/g, "")
 
-    const response = await fetch(`https://graph.facebook.com/v18.0/${phoneNumberId}/messages`, {
+    const response = await fetch(`https://graph.facebook.com/v21.0/${phoneNumberId}/messages`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -21,10 +21,24 @@ export async function sendWhatsAppMessage(
       body: JSON.stringify({
         messaging_product: "whatsapp",
         to: cleanPhone,
-        type: "text",
-        text: {
-          body: message,
-        },
+        type: "template",
+        template: {
+          name: "meetup_confirmacao_v2",
+          language: {
+            code: "pt_BR"
+          },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                {
+                  type: "text",
+                  text: firstName
+                }
+              ]
+            }
+          ]
+        }
       }),
     })
 
@@ -41,5 +55,3 @@ export async function sendWhatsAppMessage(
     throw error
   }
 }
-
-
