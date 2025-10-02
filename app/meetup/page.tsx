@@ -166,16 +166,16 @@ function MeetupPageContent() {
       {/* Main Content */}
       <main>
         {/* Hero Section */}
-        <section className="relative w-full pt-20 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
+        <section className="relative w-full py-24 md:py-24 lg:py-32 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
           </div>
           
           <div className="container px-4 md:px-6 max-w-7xl mx-auto relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Content */}
-              <div className="space-y-8 text-center lg:text-left">
+              <div className="space-y-8 text-center lg:text-left w-full">
                 {/* Logo */}
                 <div className="flex justify-center lg:justify-start">
                   <Link href="/" className="inline-block">
@@ -229,38 +229,71 @@ function MeetupPageContent() {
                 </p>
 
                 <div className="pt-4">
-                  <Button
-                    onClick={() => {
-                      document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })
-                    }}
-                    className="group relative bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-base md:text-lg px-8 py-6 font-bold shadow-2xl shadow-[#a3ff3c]/20 hover:shadow-[#a3ff3c]/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                <Button
+                  onClick={() => {
+                    document.getElementById("inscricao")?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className="group relative bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-base md:text-lg px-8 py-6 font-bold shadow-2xl shadow-[#a3ff3c]/20 hover:shadow-[#a3ff3c]/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   >
                   <span className="relative z-10">Garantir minha vaga →</span>
                 </Button>
                 <p className="text-sm text-gray-400 mt-4">Inscrição gratuita • Vagas limitadas</p>
+
+                {/* Event Info Cards - Mobile only, below CTA */}
+                <div className="lg:hidden grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8">
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 text-center">
+                    <Calendar className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Data</p>
+                    <p className="text-lg font-semibold">22/10</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 text-center">
+                    <Clock className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Horário</p>
+                    <p className="text-lg font-semibold">18h30</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 text-center">
+                    <MapPin className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Local</p>
+                    <p className="text-lg font-semibold">Av. Paulista</p>
+                  </div>
+                </div>
               </div>
               </div>
 
-              {/* Right Column - Event Info Cards */}
+              {/* Right Column - Image + Cards (Desktop) */}
               <div className="relative lg:block hidden space-y-6">
-                {/* Event Info Cards */}
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                    <Calendar className="h-8 w-8 text-[#a3ff3c] mb-3" />
-                    <p className="text-sm text-gray-400 mb-1">Data</p>
-                    <p className="text-2xl font-semibold">22 de Outubro</p>
+                {/* Image */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/MeetUP02.png"
+                    alt="English Night Live - Hub Academy Immersive Meetup"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#161533]/40 to-transparent" />
+                </div>
+
+                {/* Event Info Cards - Below image on desktop */}
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-300 text-center">
+                    <Calendar className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Data</p>
+                    <p className="text-base font-semibold">22/10</p>
                   </div>
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                    <Clock className="h-8 w-8 text-[#a3ff3c] mb-3" />
-                    <p className="text-sm text-gray-400 mb-1">Horário</p>
-                    <p className="text-2xl font-semibold">18h30</p>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-300 text-center">
+                    <Clock className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Horário</p>
+                    <p className="text-base font-semibold">18h30</p>
                   </div>
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
-                    <MapPin className="h-8 w-8 text-[#a3ff3c] mb-3" />
-                    <p className="text-sm text-gray-400 mb-1">Local</p>
-                    <p className="text-2xl font-semibold">SP - Av. Paulista</p>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-300 text-center">
+                    <MapPin className="h-6 w-6 text-[#a3ff3c] mb-2 mx-auto" />
+                    <p className="text-xs text-gray-400 mb-1">Local</p>
+                    <p className="text-base font-semibold">Av. Paulista</p>
                   </div>
                 </div>
+
                 {/* Decorative Element */}
                 <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#a3ff3c]/5 rounded-full blur-3xl" />
               </div>
