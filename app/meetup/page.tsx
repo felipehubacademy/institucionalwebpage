@@ -324,7 +324,7 @@ function MeetupPageContent() {
             {/* Bottom CTA */}
             <div className="mt-16 text-center bg-gradient-to-r from-[#161533] to-[#232244] rounded-3xl p-10 md:p-12">
               <p className="text-xl md:text-2xl text-white font-medium max-w-3xl mx-auto leading-relaxed">
-                Este não é apenas mais um encontro de conversação — é uma{" "}
+                Este não é apenas mais um encontro de conversação, é uma{" "}
                 <span className="text-[#a3ff3c] font-bold">experiência criada para quem entende</span> que inglês é
                 ferramenta de trabalho e deseja se destacar em um mercado cada vez mais competitivo.
               </p>
