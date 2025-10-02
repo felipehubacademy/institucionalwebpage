@@ -68,7 +68,7 @@ export default function MeetupObrigadoPage() {
         </button>
 
         {/* Content Over Video */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center text-white">
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 pt-8 text-center text-white">
           {/* Logo */}
           <div className="mb-8 md:mb-12">
             <Link href="/" className="inline-block">

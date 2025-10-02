@@ -166,7 +166,7 @@ function MeetupPageContent() {
       {/* Main Content */}
       <main>
         {/* Hero Section */}
-        <section className="relative w-full pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
+        <section className="relative w-full pt-20 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 bg-gradient-to-br from-[#161533] via-[#1e1d4a] to-[#232244] text-white overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
@@ -196,33 +196,31 @@ function MeetupPageContent() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3ff3c] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a3ff3c]"></span>
                   </span>
-                  <span className="text-sm font-medium text-[#a3ff3c]">Evento Presencial • Vagas Limitadas</span>
+                  <span className="text-sm font-medium text-[#a3ff3c]">Evento Presencial e Gratuito</span>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
-                  <span className="block text-white">English Night Live</span>
-                </h1>
-                
-                <p className="text-xl md:text-2xl font-light text-gray-300">
-                  Hub Academy Immersive Meetup
-                </p>
+                <div className="space-y-3">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight">
+                    <span className="block text-white">English Night Live</span>
+                  </h1>
+                  
+                  <p className="text-xl md:text-2xl font-light text-gray-300">
+                    Hub Academy Immersive Meetup
+                  </p>
+                </div>
 
-                {/* Event Info Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all duration-300">
-                    <Calendar className="h-6 w-6 text-[#a3ff3c] mb-2" />
-                    <p className="text-xs text-gray-400 mb-1">Data</p>
-                    <p className="text-lg font-semibold">22/10</p>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all duration-300">
-                    <Clock className="h-6 w-6 text-[#a3ff3c] mb-2" />
-                    <p className="text-xs text-gray-400 mb-1">Horário</p>
-                    <p className="text-lg font-semibold">18h30</p>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all duration-300">
-                    <MapPin className="h-6 w-6 text-[#a3ff3c] mb-2" />
-                    <p className="text-xs text-gray-400 mb-1">Local</p>
-                    <p className="text-lg font-semibold">SP - Av. Paulista</p>
+                {/* Mobile Image - Show here on mobile */}
+                <div className="lg:hidden">
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/images/MeetUP02.png"
+                      alt="English Night Live - Hub Academy Immersive Meetup"
+                      width={800}
+                      height={450}
+                      className="w-full h-auto object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#161533]/40 to-transparent" />
                   </div>
                 </div>
 
@@ -237,42 +235,34 @@ function MeetupPageContent() {
                     }}
                     className="group relative bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-base md:text-lg px-8 py-6 font-bold shadow-2xl shadow-[#a3ff3c]/20 hover:shadow-[#a3ff3c]/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   >
-                    <span className="relative z-10">Garantir minha vaga →</span>
-                  </Button>
-                  <p className="text-sm text-gray-400 mt-4">Inscrição gratuita • Sem compromisso</p>
-                </div>
+                  <span className="relative z-10">Garantir minha vaga →</span>
+                </Button>
+                <p className="text-sm text-gray-400 mt-4">Inscrição gratuita • Vagas limitadas</p>
+              </div>
               </div>
 
-              {/* Right Column - Image */}
-              <div className="relative lg:block hidden">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="/images/MeetUP02.png"
-                    alt="English Night Live - Hub Academy Immersive Meetup"
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#161533]/40 to-transparent" />
+              {/* Right Column - Event Info Cards */}
+              <div className="relative lg:block hidden space-y-6">
+                {/* Event Info Cards */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                    <Calendar className="h-8 w-8 text-[#a3ff3c] mb-3" />
+                    <p className="text-sm text-gray-400 mb-1">Data</p>
+                    <p className="text-2xl font-semibold">22 de Outubro</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                    <Clock className="h-8 w-8 text-[#a3ff3c] mb-3" />
+                    <p className="text-sm text-gray-400 mb-1">Horário</p>
+                    <p className="text-2xl font-semibold">18h30</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                    <MapPin className="h-8 w-8 text-[#a3ff3c] mb-3" />
+                    <p className="text-sm text-gray-400 mb-1">Local</p>
+                    <p className="text-2xl font-semibold">SP - Av. Paulista</p>
+                  </div>
                 </div>
                 {/* Decorative Element */}
                 <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#a3ff3c]/5 rounded-full blur-3xl" />
-              </div>
-            </div>
-
-            {/* Mobile Image */}
-            <div className="lg:hidden mt-12">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/MeetUP02.png"
-                  alt="English Night Live - Hub Academy Immersive Meetup"
-                  width={800}
-                  height={450}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161533]/40 to-transparent" />
               </div>
             </div>
           </div>
@@ -484,7 +474,7 @@ function MeetupPageContent() {
 
               {/* LGPD Consent */}
               <div className="space-y-3 pt-4">
-                <div className="flex items-start gap-4 p-5 bg-gray-50 rounded-xl border-2 border-gray-200 hover:border-[#a3ff3c]/30 transition-colors">
+                <div className="flex items-start gap-3 p-4 md:p-5 bg-gray-50 rounded-xl border-2 border-gray-200 hover:border-[#a3ff3c]/30 transition-colors">
                   <Checkbox
                     id="lgpdConsent"
                     checked={lgpdConsent}
@@ -493,7 +483,7 @@ function MeetupPageContent() {
                       handleFieldChange("lgpdConsent")
                     }}
                     disabled={isSubmitting}
-                    className="mt-1 h-5 w-5 data-[state=checked]:bg-[#a3ff3c] data-[state=checked]:border-[#a3ff3c]"
+                    className="mt-0.5 h-5 w-5 flex-shrink-0 data-[state=checked]:bg-[#a3ff3c] data-[state=checked]:border-[#a3ff3c]"
                   />
                   <label htmlFor="lgpdConsent" className="text-sm text-gray-700 cursor-pointer leading-relaxed flex-1">
                     Autorizo o contato da Hub Academy com informações sobre este evento.{" "}
