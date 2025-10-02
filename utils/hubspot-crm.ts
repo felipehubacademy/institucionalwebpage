@@ -8,6 +8,10 @@ interface ContactProperties {
   lastname: string
   phone: string
   english_level?: string
+  hs_lead_status?: string
+  hubspot_owner_id?: string
+  lifecyclestage?: string
+  origem?: string
   utm_source?: string
   utm_medium?: string
   utm_campaign?: string
