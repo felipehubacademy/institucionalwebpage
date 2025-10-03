@@ -508,17 +508,28 @@ function MeetupPageContent() {
               {/* LGPD Consent */}
               <div className="space-y-3 pt-4">
                 <div className="flex items-start gap-3 p-4 md:p-5 bg-gray-50 rounded-xl border-2 border-gray-200 hover:border-[#a3ff3c]/30 transition-colors">
-                  <Checkbox
-                    id="lgpdConsent"
-                    checked={lgpdConsent}
-                    onCheckedChange={(checked) => {
-                      setLgpdConsent(checked === true)
-                      handleFieldChange("lgpdConsent")
+                  <div className="flex-shrink-0 mt-0.5">
+                    <Checkbox
+                      id="lgpdConsent"
+                      checked={lgpdConsent}
+                      onCheckedChange={(checked) => {
+                        setLgpdConsent(checked === true)
+                        handleFieldChange("lgpdConsent")
+                      }}
+                      disabled={isSubmitting}
+                      className="h-5 w-5 data-[state=checked]:bg-[#a3ff3c] data-[state=checked]:border-[#a3ff3c] data-[state=checked]:text-[#161533] border-gray-400"
+                    />
+                  </div>
+                  <label 
+                    htmlFor="lgpdConsent" 
+                    className="text-sm text-gray-700 cursor-pointer leading-relaxed flex-1 select-none"
+                    onClick={() => {
+                      if (!isSubmitting) {
+                        setLgpdConsent(!lgpdConsent)
+                        handleFieldChange("lgpdConsent")
+                      }
                     }}
-                    disabled={isSubmitting}
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 data-[state=checked]:bg-[#a3ff3c] data-[state=checked]:border-[#a3ff3c]"
-                  />
-                  <label htmlFor="lgpdConsent" className="text-sm text-gray-700 cursor-pointer leading-relaxed flex-1">
+                  >
                     Autorizo o contato da Hub Academy com informações sobre este evento.{" "}
                     <span className="text-[#a3ff3c] font-bold">*</span>
                   </label>
