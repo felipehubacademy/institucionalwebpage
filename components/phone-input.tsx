@@ -1,11 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import PhoneInput from "react-phone-number-input"
-import "react-phone-number-input/style.css"
-import flags from "react-phone-number-input/flags"
-import { isValidPhoneNumber } from "react-phone-number-input"
-import { AlertCircle, ChevronDown } from "lucide-react"
+import { AlertCircle } from "lucide-react"
 
 interface PhoneInputProps {
   value: string
@@ -27,6 +23,45 @@ export default function CustomPhoneInput({
   const [mounted, setMounted] = useState(false)
   const [touched, setTouched] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [phoneNumber, setPhoneNumber] = useState("")
+
+  // Parse initial value (remove +55 if present)
+  useEffect(() => {
+    if (value) {
+      const cleanValue = value.replace(/[^\d]/g, "")
+      if (cleanValue.startsWith("55")) {
+        const numberWithoutCountry = cleanValue.slice(2)
+        // Format the number for display
+        if (numberWithoutCountry.length <= 2) {
+          setPhoneNumber(numberWithoutCountry)
+        } else if (numberWithoutCountry.length <= 7) {
+          setPhoneNumber(`${numberWithoutCountry.slice(0, 2)} ${numberWithoutCountry.slice(2)}`)
+        } else {
+          setPhoneNumber(`${numberWithoutCountry.slice(0, 2)} ${numberWithoutCountry.slice(2, 7)}-${numberWithoutCountry.slice(7, 11)}`)
+        }
+      } else {
+        // Format the number for display
+        if (cleanValue.length <= 2) {
+          setPhoneNumber(cleanValue)
+        } else if (cleanValue.length <= 7) {
+          setPhoneNumber(`${cleanValue.slice(0, 2)} ${cleanValue.slice(2)}`)
+        } else {
+          setPhoneNumber(`${cleanValue.slice(0, 2)} ${cleanValue.slice(2, 7)}-${cleanValue.slice(7, 11)}`)
+        }
+      }
+    }
+  }, [value])
+
+  // Update parent when phone changes (backend will add +55)
+  useEffect(() => {
+    // Send clean number to parent (without formatting)
+    const cleanNumber = phoneNumber.replace(/\D/g, "")
+    onChange(cleanNumber)
+    
+    if (touched) {
+      validatePhoneNumber(phoneNumber)
+    }
+  }, [phoneNumber, onChange, touched])
 
   // Validate phone number when value changes
   useEffect(() => {
@@ -44,7 +79,7 @@ export default function CustomPhoneInput({
     }
   }, [value, touched, required, onValidationChange])
 
-  // Validate phone number
+  // Validate Brazilian mobile phone number
   const validatePhoneNumber = (phoneNumber: string) => {
     if (!phoneNumber) {
       if (required) {
@@ -57,12 +92,31 @@ export default function CustomPhoneInput({
       return
     }
 
-    if (!isValidPhoneNumber(phoneNumber)) {
-      setError("Número de telefone inválido")
-      onValidationChange?.(false)
+    // Clean phone number for validation
+    const cleanNumber = phoneNumber.replace(/\D/g, "")
+
+    // Brazilian mobile validation: 11 digits (2 DDD + 9 number)
+    if (cleanNumber.length === 11) {
+      const ddd = cleanNumber.slice(0, 2)
+      const validDDDs = ["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]
+      
+      if (validDDDs.includes(ddd)) {
+        // Check if it's a mobile number (starts with 9)
+        const number = cleanNumber.slice(2)
+        if (number.startsWith("9")) {
+          setError(null)
+          onValidationChange?.(true)
+        } else {
+          setError("Número deve ser um celular (começar com 9)")
+          onValidationChange?.(false)
+        }
+      } else {
+        setError("DDD inválido")
+        onValidationChange?.(false)
+      }
     } else {
-      setError(null)
-      onValidationChange?.(true)
+      setError("Número deve ter 11 dígitos (DDD + 9 dígitos)")
+      onValidationChange?.(false)
     }
   }
 
@@ -71,92 +125,51 @@ export default function CustomPhoneInput({
     setMounted(true)
   }, [])
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let phoneValue = e.target.value.replace(/\D/g, "")
+    
+    // Auto-format for Brazilian mobile numbers (11 digits)
+    if (phoneValue.length === 0) {
+      phoneValue = ""
+    } else if (phoneValue.length <= 2) {
+      phoneValue = phoneValue
+    } else if (phoneValue.length <= 7) {
+      phoneValue = `${phoneValue.slice(0, 2)} ${phoneValue.slice(2)}`
+    } else {
+      phoneValue = `${phoneValue.slice(0, 2)} ${phoneValue.slice(2, 7)}-${phoneValue.slice(7, 11)}`
+    }
+    
+    setPhoneNumber(phoneValue)
+    if (!touched) setTouched(true)
+  }
+
   if (!mounted) {
     return (
-      <div className="flex h-14 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-5 py-3">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">🇧🇷</span>
-          <span className="text-gray-500">+55</span>
-          <input
-            type="tel"
-            className="flex-1 bg-transparent text-base font-medium placeholder:text-gray-400 focus:outline-none"
-            placeholder={placeholder}
-            disabled={disabled}
-            required={required}
-          />
-        </div>
+      <div className="flex h-14 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 py-3">
+        <input
+          type="tel"
+          className="flex-1 bg-transparent text-base font-medium placeholder:text-gray-400 focus:outline-none"
+          placeholder={placeholder}
+          disabled={disabled}
+          required={required}
+        />
       </div>
     )
   }
 
   return (
-    <div className="phone-input-wrapper">
-      <style jsx global>{`
-        .phone-input-wrapper .PhoneInput {
-          height: 56px;
-        }
-        
-        .phone-input-wrapper .PhoneInputInput {
-          height: 100%;
-          border: none;
-          background: transparent;
-          font-size: 16px;
-          font-weight: 500;
-          color: #161533;
-          padding-left: 0;
-          outline: none;
-        }
-        
-        .phone-input-wrapper .PhoneInputInput::placeholder {
-          color: #9ca3af;
-        }
-        
-        .phone-input-wrapper .PhoneInputCountrySelect {
-          height: 100%;
-          border: none;
-          background: transparent;
-          font-size: 16px;
-          font-weight: 500;
-          color: #161533;
-          padding: 0 12px 0 8px;
-          outline: none;
-          cursor: pointer;
-        }
-        
-        .phone-input-wrapper .PhoneInputCountryIcon {
-          width: 24px;
-          height: 18px;
-          margin-right: 8px;
-        }
-        
-        .phone-input-wrapper .PhoneInputCountrySelectArrow {
-          color: #161533;
-          margin-left: 4px;
-        }
-        
-        .phone-input-wrapper .PhoneInput--focus .PhoneInputInput {
-          outline: none;
-        }
-        
-        .phone-input-wrapper .PhoneInput--focus .PhoneInputCountrySelect {
-          outline: none;
-        }
-      `}</style>
-      
-      <div className={`phone-input-container flex h-14 w-full rounded-xl border-2 ${error ? "border-red-500 bg-red-50" : "border-gray-200 bg-gray-50 hover:border-gray-300"} px-5 py-3 transition-all focus-within:border-[#a3ff3c] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#a3ff3c]/10`}>
-        <PhoneInput
-          international
-          defaultCountry="BR"
-          flags={flags}
-          value={value}
-          onChange={(newValue) => {
-            onChange(newValue || "")
-            if (!touched) setTouched(true)
-          }}
+    <div>
+      <div className={`flex h-14 w-full rounded-xl border-2 ${error ? "border-red-500 bg-red-50" : "border-gray-200 bg-gray-50 hover:border-gray-300"} focus-within:border-[#a3ff3c] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#a3ff3c]/10 px-4 py-3 transition-all`}>
+        <input
+          type="tel"
+          value={phoneNumber}
+          onChange={handlePhoneChange}
+          onBlur={() => setTouched(true)}
+          className="flex-1 bg-transparent text-base font-medium placeholder:text-gray-400 focus:outline-none"
           placeholder={placeholder}
           disabled={disabled}
           required={required}
-          onBlur={() => setTouched(true)}
+          maxLength={15} // Allow for formatting characters
         />
       </div>
       {error && (

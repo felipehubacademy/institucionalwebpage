@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
       firstname: sanitizeInput(data.firstname),
       lastname: sanitizeInput(data.lastname),
       email: sanitizeInput(data.email),
-      phone: sanitizeInput(data.phone),
+      phone: `+55${sanitizeInput(data.phone).replace(/\D/g, "")}`, // Add +55 for Brazilian numbers
       english_level: sanitizeInput(data.english_level),
       utm_source: data.utm_source || "",
       utm_medium: data.utm_medium || "",

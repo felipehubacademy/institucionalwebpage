@@ -3,7 +3,7 @@
 import { useState, useEffect, type FormEvent, Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Loader2, CheckCircle, Calendar, MapPin, Clock } from "lucide-react"
+import { Loader2, CheckCircle, Calendar, MapPin, Clock, AlertCircle } from "lucide-react"
 import CustomPhoneInput from "@/components/phone-input"
 import { useRouter, useSearchParams } from "next/navigation"
 import { LogoImage } from "@/components/logo-image"
@@ -16,6 +16,7 @@ function MeetupPageContent() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState("")
   const [isPhoneValid, setIsPhoneValid] = useState(false)
+  const [isEmailValid, setIsEmailValid] = useState(false)
   const [lgpdConsent, setLgpdConsent] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -62,7 +63,7 @@ function MeetupPageContent() {
     if (!email?.trim()) {
       errors.email = "E-mail é obrigatório"
       isValid = false
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!validateEmail(email)) {
       errors.email = "E-mail inválido"
       isValid = false
     }
@@ -148,6 +149,56 @@ function MeetupPageContent() {
     }
   }
 
+  const validateEmail = (email: string): boolean => {
+    if (!email?.trim()) return false
+    
+    // Enhanced email validation with domain validation
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    
+    if (!emailRegex.test(email)) return false
+    if (email.length > 254) return false
+    if (email.split('@')[0].length > 64) return false
+    if (email.includes('..')) return false
+    if (email.startsWith('.') || email.endsWith('.')) return false
+    if (email.split('@')[0].startsWith('-') || email.split('@')[0].endsWith('-')) return false
+    
+    // Domain validation - check for valid TLD
+    const domain = email.split('@')[1]
+    const validTlds = [
+      // Generic TLDs
+      'com', 'org', 'net', 'edu', 'gov', 'mil', 'int', 'info', 'biz', 'name', 'pro', 'aero', 'coop', 'museum',
+      // Country TLDs (Brazil and major countries)
+      'com.br', 'org.br', 'net.br', 'gov.br', 'edu.br', 'mil.br', 'br',
+      'com.ar', 'org.ar', 'net.ar', 'gov.ar', 'edu.ar', 'ar',
+      'com.mx', 'org.mx', 'net.mx', 'gov.mx', 'edu.mx', 'mx',
+      'com.co', 'org.co', 'net.co', 'gov.co', 'edu.co', 'co',
+      'com.cl', 'org.cl', 'net.cl', 'gov.cl', 'edu.cl', 'cl',
+      'com.pe', 'org.pe', 'net.pe', 'gov.pe', 'edu.pe', 'pe',
+      'com.uy', 'org.uy', 'net.uy', 'gov.uy', 'edu.uy', 'uy',
+      'com.py', 'org.py', 'net.py', 'gov.py', 'edu.py', 'py',
+      'com.bo', 'org.bo', 'net.bo', 'gov.bo', 'edu.bo', 'bo',
+      'com.ec', 'org.ec', 'net.ec', 'gov.ec', 'edu.ec', 'ec',
+      'com.ve', 'org.ve', 'net.ve', 'gov.ve', 'edu.ve', 've',
+      'com.sr', 'org.sr', 'net.sr', 'gov.sr', 'edu.sr', 'sr',
+      'com.gy', 'org.gy', 'net.gy', 'gov.gy', 'edu.gy', 'gy',
+      // Major international TLDs
+      'com.us', 'org.us', 'net.us', 'gov.us', 'edu.us', 'us',
+      'com.uk', 'org.uk', 'net.uk', 'gov.uk', 'edu.uk', 'uk',
+      'com.de', 'org.de', 'net.de', 'gov.de', 'edu.de', 'de',
+      'com.fr', 'org.fr', 'net.fr', 'gov.fr', 'edu.fr', 'fr',
+      'com.it', 'org.it', 'net.it', 'gov.it', 'edu.it', 'it',
+      'com.es', 'org.es', 'net.es', 'gov.es', 'edu.es', 'es',
+      'com.ca', 'org.ca', 'net.ca', 'gov.ca', 'edu.ca', 'ca',
+      'com.au', 'org.au', 'net.au', 'gov.au', 'edu.au', 'au',
+      'com.jp', 'org.jp', 'net.jp', 'gov.jp', 'edu.jp', 'jp',
+      'com.cn', 'org.cn', 'net.cn', 'gov.cn', 'edu.cn', 'cn',
+      'com.in', 'org.in', 'net.in', 'gov.in', 'edu.in', 'in'
+    ]
+    
+    const hasValidTld = validTlds.some(tld => domain.endsWith('.' + tld) || domain === tld)
+    return hasValidTld
+  }
+
   const handleFieldChange = (fieldName: string) => {
     if (formErrors[fieldName]) {
       setFormErrors((prev) => {
@@ -155,6 +206,33 @@ function MeetupPageContent() {
         delete newErrors[fieldName]
         return newErrors
       })
+    }
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value
+    const isValid = validateEmail(email)
+    setIsEmailValid(isValid)
+    handleFieldChange("email")
+  }
+
+  const handleFieldBlur = (fieldName: string, value: string) => {
+    if (!value?.trim()) {
+      let errorMessage = ""
+      switch (fieldName) {
+        case "firstname":
+          errorMessage = "Nome é obrigatório"
+          break
+        case "lastname":
+          errorMessage = "Sobrenome é obrigatório"
+          break
+        case "english_level":
+          errorMessage = "Nível de inglês é obrigatório"
+          break
+        default:
+          errorMessage = "Campo obrigatório"
+      }
+      setFormErrors(prev => ({ ...prev, [fieldName]: errorMessage }))
     }
   }
 
@@ -402,11 +480,13 @@ function MeetupPageContent() {
                     placeholder="Seu nome"
                     disabled={isSubmitting}
                     onChange={() => handleFieldChange("firstname")}
+                    onBlur={(e) => handleFieldBlur("firstname", e.target.value)}
                   />
                   {formErrors.firstname && (
-                    <p className="text-sm text-red-500 flex items-center gap-1">
-                      <span>⚠️</span> {formErrors.firstname}
-                    </p>
+                    <div className="flex items-center gap-1 mt-1 text-red-500 text-sm">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>{formErrors.firstname}</span>
+                    </div>
                   )}
                 </div>
                 <div className="space-y-3">
@@ -421,11 +501,13 @@ function MeetupPageContent() {
                     placeholder="Seu sobrenome"
                     disabled={isSubmitting}
                     onChange={() => handleFieldChange("lastname")}
+                    onBlur={(e) => handleFieldBlur("lastname", e.target.value)}
                   />
                   {formErrors.lastname && (
-                    <p className="text-sm text-red-500 flex items-center gap-1">
-                      <span>⚠️</span> {formErrors.lastname}
-                    </p>
+                    <div className="flex items-center gap-1 mt-1 text-red-500 text-sm">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>{formErrors.lastname}</span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -442,12 +524,19 @@ function MeetupPageContent() {
                   className={`flex h-14 w-full rounded-xl border-2 ${formErrors.email ? "border-red-500 bg-red-50" : "border-gray-200 bg-gray-50"} px-5 py-3 text-base font-medium transition-all focus:border-[#a3ff3c] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#a3ff3c]/10 disabled:cursor-not-allowed disabled:opacity-50 hover:border-gray-300`}
                   placeholder="seu@email.com"
                   disabled={isSubmitting}
-                  onChange={() => handleFieldChange("email")}
+                  onChange={handleEmailChange}
+                  onBlur={(e) => {
+                    const email = e.target.value
+                    if (email && !validateEmail(email)) {
+                      setFormErrors(prev => ({ ...prev, email: "E-mail inválido" }))
+                    }
+                  }}
                 />
                 {formErrors.email && (
-                  <p className="text-sm text-red-500 flex items-center gap-1">
-                    <span>⚠️</span> {formErrors.email}
-                  </p>
+                  <div className="flex items-center gap-1 mt-1 text-red-500 text-sm">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{formErrors.email}</span>
+                  </div>
                 )}
               </div>
 
@@ -463,7 +552,7 @@ function MeetupPageContent() {
                     handleFieldChange("phone")
                   }}
                   disabled={isSubmitting}
-                  placeholder="+55 11 99999-9999"
+                  placeholder="11 99999-9999"
                   required={true}
                   onValidationChange={setIsPhoneValid}
                 />
@@ -488,7 +577,17 @@ function MeetupPageContent() {
                     backgroundPosition: "right 1rem center",
                   }}
                   disabled={isSubmitting}
-                  onChange={() => handleFieldChange("english_level")}
+                  onChange={(e) => {
+                    handleFieldChange("english_level")
+                    if (e.target.value) {
+                      setFormErrors(prev => {
+                        const newErrors = { ...prev }
+                        delete newErrors.english_level
+                        return newErrors
+                      })
+                    }
+                  }}
+                  onBlur={(e) => handleFieldBlur("english_level", e.target.value)}
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -499,9 +598,10 @@ function MeetupPageContent() {
                   <option value="Avançado">Avançado</option>
                 </select>
                 {formErrors.english_level && (
-                  <p className="text-sm text-red-500 flex items-center gap-1">
-                    <span>⚠️</span> {formErrors.english_level}
-                  </p>
+                  <div className="flex items-center gap-1 mt-1 text-red-500 text-sm">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{formErrors.english_level}</span>
+                  </div>
                 )}
               </div>
 
