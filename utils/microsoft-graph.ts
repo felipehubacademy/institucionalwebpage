@@ -10,11 +10,75 @@ interface EmailOptions {
   icsAttachment?: string
 }
 
+interface TokenResponse {
+  access_token: string
+  token_type: string
+  expires_in: number
+}
+
+// Cache for access token
+let tokenCache: { token: string; expiresAt: number } | null = null
+
+/**
+ * Get a valid access token using client credentials flow
+ */
+export async function getValidAccessToken(): Promise<string> {
+  const msGraphClientId = process.env.MS_GRAPH_CLIENT_ID
+  const msGraphClientSecret = process.env.MS_GRAPH_CLIENT_SECRET
+  const msGraphTenantId = process.env.MS_GRAPH_TENANT_ID
+
+  if (!msGraphClientId || !msGraphClientSecret || !msGraphTenantId) {
+    throw new Error("Microsoft Graph credentials not configured")
+  }
+
+  // Check if we have a valid cached token
+  if (tokenCache && tokenCache.expiresAt > Date.now() + 60000) { // 1 minute buffer
+    return tokenCache.token
+  }
+
+  try {
+    const response = await fetch(`https://login.microsoftonline.com/${msGraphTenantId}/oauth2/v2.0/token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        client_id: msGraphClientId,
+        client_secret: msGraphClientSecret,
+        scope: "https://graph.microsoft.com/.default",
+        grant_type: "client_credentials",
+      }),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error("Microsoft Graph token request failed:", errorText)
+      throw new Error(`Token request failed: ${response.status}`)
+    }
+
+    const data: TokenResponse = await response.json()
+
+    // Cache the token with expiration time
+    tokenCache = {
+      token: data.access_token,
+      expiresAt: Date.now() + (data.expires_in * 1000) - 60000, // 1 minute buffer
+    }
+
+    console.log("Microsoft Graph token refreshed successfully")
+    return data.access_token
+  } catch (error) {
+    console.error("Error refreshing Microsoft Graph token:", error)
+    throw error
+  }
+}
+
 export async function sendEmail(
   options: EmailOptions,
-  accessToken: string,
+  accessToken?: string,
 ): Promise<{ success: boolean; messageId?: string }> {
   try {
+    // Get a valid access token if not provided
+    const token = accessToken || await getValidAccessToken()
     const message: any = {
       message: {
         subject: options.subject,
@@ -49,7 +113,7 @@ export async function sendEmail(
     const response = await fetch(`https://graph.microsoft.com/v1.0/users/${options.fromEmail}/sendMail`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(message),

@@ -100,7 +100,6 @@ export async function POST(request: NextRequest) {
     const hubspotDealStage = process.env.HUBSPOT_MEETUP_DEALSTAGE || "appointmentscheduled"
     const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
     const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
-    const msGraphAccessToken = process.env.MS_GRAPH_ACCESS_TOKEN
     const msGraphFromEmail = process.env.MS_GRAPH_FROM_EMAIL || "hub@hubacademybr.com"
 
     // HubSpot Integration
@@ -171,7 +170,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Email Integration (Microsoft Graph)
-    if (msGraphAccessToken && msGraphFromEmail) {
+    if (msGraphFromEmail) {
       try {
         const emailHtml = generateMeetupConfirmationEmail(sanitizedData.firstname)
         const icsContent = generateICSContent()
@@ -184,7 +183,7 @@ export async function POST(request: NextRequest) {
             fromEmail: msGraphFromEmail,
             icsAttachment: icsContent,
           },
-          msGraphAccessToken,
+          // No need to pass accessToken - it will be obtained automatically
         )
 
         integrationResults.email = true
@@ -194,7 +193,7 @@ export async function POST(request: NextRequest) {
         // Don't fail the request
       }
     } else {
-      console.warn("Microsoft Graph credentials not configured")
+      console.warn("Microsoft Graph from email not configured")
     }
 
     // Return success response
