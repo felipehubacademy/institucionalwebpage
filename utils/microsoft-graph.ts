@@ -187,7 +187,7 @@ export function generateMeetupConfirmationEmail(firstName: string): string {
     
     <p style="font-size: 14px; color: #666; margin-top: 30px;">
       Caso tenha alguma dúvida, entre em contato conosco pelo e-mail 
-      <a href="mailto:contato@hubacademybr.com" style="color: #161533;">contato@hubacademybr.com</a>
+      <a href="mailto:hub@hubacademybr.com" style="color: #161533;">hub@hubacademybr.com</a>
     </p>
     
     <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">

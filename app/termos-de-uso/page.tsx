@@ -151,7 +151,7 @@ export default function TermosDeUsoPage() {
               <h2>11. Contato</h2>
               <p>
                 Se você tiver dúvidas sobre estes Termos de Uso, entre em contato conosco pelo e-mail:
-                contato@hubacademybr.com.
+                hub@hubacademybr.com.
               </p>
 
               <p className="text-sm text-gray-500 mt-8">Última atualização: 10 de maio de 2025</p>

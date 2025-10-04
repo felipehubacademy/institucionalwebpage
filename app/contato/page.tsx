@@ -59,10 +59,10 @@ export default function ContatoPage() {
                       <div>
                         <h3 className="font-medium text-[#161533]">Email</h3>
                         <a
-                          href="mailto:contato@hubacademybr.com?subject=Contato%20do%20Site&body=Olá,%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
+                          href="mailto:hub@hubacademybr.com?subject=Contato%20do%20Site&body=Olá,%20gostaria%20de%20mais%20informações%20sobre%20os%20programas."
                           className="text-gray-600 hover:text-[#a3ff3c] underline"
                         >
-                          contato@hubacademybr.com
+                          hub@hubacademybr.com
                         </a>
                       </div>
                     </div>

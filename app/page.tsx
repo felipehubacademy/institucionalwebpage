@@ -86,7 +86,7 @@ export default function Home() {
       addressCountry: "BR",
     },
     telephone: "+551152865668",
-    email: "contato@hubacademybr.com",
+    email: "hub@hubacademybr.com",
     sameAs: ["https://www.instagram.com/hubacademybr/", "https://www.linkedin.com/company/hub-academy-br/"],
     offers: {
       "@type": "Offer",

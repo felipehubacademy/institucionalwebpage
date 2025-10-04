@@ -71,8 +71,20 @@ export default function MeetupObrigadoPage() {
     const isAndroid = /android/i.test(userAgent)
     
     if (isIOS) {
-      // iOS - try Apple Calendar first, fallback to Google
-      window.open(appleUrl, '_blank')
+      // iOS - try to open Apple Calendar directly
+      // First try the data URL approach
+      const link = document.createElement('a')
+      link.href = appleUrl
+      link.download = 'meetup.ics'
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Fallback to Google Calendar after a short delay
+      setTimeout(() => {
+        window.open(googleUrl, '_blank')
+      }, 1000)
     } else if (isAndroid) {
       // Android - try Google Calendar
       window.open(googleUrl, '_blank')
@@ -117,9 +129,9 @@ export default function MeetupObrigadoPage() {
         </button>
 
         {/* Content Over Video */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 pt-8 text-center text-white">
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 pt-4 text-center text-white">
           {/* Logo */}
-          <div className="mb-8 md:mb-12">
+          <div className="mb-6 md:mb-8">
             <Link href="/" className="inline-block">
               <LogoImage
                 src="/images/Logo_horizontal_green.svg"
@@ -133,12 +145,12 @@ export default function MeetupObrigadoPage() {
           </div>
 
           {/* Success Icon */}
-          <div className="mb-8">
+          <div className="mb-6">
             <CheckCircle2 className="h-20 w-20 md:h-24 md:w-24 text-[#a3ff3c] animate-bounce mx-auto" style={{ animationDuration: '2s' }} />
           </div>
 
           {/* Success Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-md mb-6">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-md mb-4">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3ff3c] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a3ff3c]"></span>
@@ -147,12 +159,12 @@ export default function MeetupObrigadoPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-3xl">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 max-w-3xl">
             Tudo certo!
           </h1>
 
           {/* Event Details */}
-          <div className="space-y-4 mb-10">
+          <div className="space-y-4 mb-6">
             <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
               Nos vemos no <span className="text-[#a3ff3c] font-bold">English Night Live</span>
             </p>
@@ -185,14 +197,14 @@ export default function MeetupObrigadoPage() {
         </div>
 
         {/* Scroll Indicator - Desktop */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>
         </div>
 
         {/* Scroll Indicator - Mobile */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>
@@ -219,10 +231,10 @@ export default function MeetupObrigadoPage() {
               <p className="text-sm text-gray-600">
                 Dúvidas?{" "}
                 <a
-                  href="mailto:contato@hubacademybr.com"
+                  href="mailto:hub@hubacademybr.com"
                   className="text-[#161533] hover:text-[#a3ff3c] font-semibold transition-colors"
                 >
-                  contato@hubacademybr.com
+                  hub@hubacademybr.com
                 </a>
               </p>
             </div>
