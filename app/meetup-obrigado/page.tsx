@@ -17,20 +17,69 @@ export default function MeetupObrigadoPage() {
     }
   }
 
-  const handleAddToCalendar = async () => {
-    try {
-      const response = await fetch("/api/meetup-ics")
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement("a")
-      a.href = url
-      a.download = "english-night-live-meetup.ics"
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-      window.URL.revokeObjectURL(url)
-    } catch (error) {
-      console.error("Error downloading calendar file:", error)
+  const handleAddToCalendar = () => {
+    // Event details
+    const eventTitle = "English Night Live – Hub Academy Immersive Meetup"
+    const eventLocation = "Av. Paulista, 1374 - 12º andar - Brazilian Financial Center, São Paulo"
+    const eventDescription = "Uma noite exclusiva de networking e prática de inglês em um ambiente dinâmico e imersivo. Pratique inglês em dinâmicas reais de negócios, desenvolva soft skills estratégicas e conecte-se com profissionais de diversas áreas."
+    
+    // Event date: October 22, 2025, 18:30 to 22:00
+    const startDate = new Date("2025-10-22T18:30:00-03:00") // São Paulo timezone
+    const endDate = new Date("2025-10-22T22:00:00-03:00")
+    
+    // Format dates for different calendar services
+    const formatDate = (date: Date) => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+    }
+    
+    const startFormatted = formatDate(startDate)
+    const endFormatted = formatDate(endDate)
+    
+    // Generate Google Calendar URL
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startFormatted}/${endFormatted}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`
+    
+    // Generate Outlook URL
+    const outlookUrl = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(eventTitle)}&startdt=${startFormatted}&enddt=${endFormatted}&body=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`
+    
+    // Generate Apple Calendar data URL
+    const appleCalendarData = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Hub Academy//English Night Live//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      `UID:meetup-${Date.now()}@hubacademybr.com`,
+      `DTSTAMP:${formatDate(new Date())}`,
+      `DTSTART:${startFormatted}`,
+      `DTEND:${endFormatted}`,
+      `SUMMARY:${eventTitle}`,
+      `DESCRIPTION:${eventDescription.replace(/\n/g, "\\n")}`,
+      `LOCATION:${eventLocation}`,
+      "STATUS:CONFIRMED",
+      "SEQUENCE:0",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n")
+    
+    const appleUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(appleCalendarData)}`
+    
+    // Detect device and open appropriate calendar
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent)
+    const isIOS = /iphone|ipad|ipod/i.test(userAgent)
+    const isAndroid = /android/i.test(userAgent)
+    
+    if (isIOS) {
+      // iOS - try Apple Calendar first, fallback to Google
+      window.open(appleUrl, '_blank')
+    } else if (isAndroid) {
+      // Android - try Google Calendar
+      window.open(googleUrl, '_blank')
+    } else {
+      // Desktop - try to detect default calendar app
+      // For now, open Google Calendar as it's the most universal
+      window.open(googleUrl, '_blank')
     }
   }
 
@@ -131,12 +180,19 @@ export default function MeetupObrigadoPage() {
 
           {/* Helper Text */}
           <p className="text-sm text-gray-400">
-            Você receberá confirmação por e-mail e WhatsApp
+            Abre automaticamente no seu calendário
           </p>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        {/* Scroll Indicator - Desktop */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
+          </div>
+        </div>
+
+        {/* Scroll Indicator - Mobile */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>

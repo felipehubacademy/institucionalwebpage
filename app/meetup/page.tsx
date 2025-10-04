@@ -387,12 +387,13 @@ function MeetupPageContent() {
             </div>
           </div>
 
-          {/* Scroll Indicator - Mobile only */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
+          {/* Scroll Indicator - Desktop */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
             <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
               <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
             </div>
           </div>
+
         </section>
 
         {/* Benefits Section */}
