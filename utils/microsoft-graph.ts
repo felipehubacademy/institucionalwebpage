@@ -240,7 +240,7 @@ export function generateICSContent(): string {
     `UID:${uid}`,
     `DTSTAMP:${timestamp}`,
     `DTSTART;TZID=America/Sao_Paulo:20251022T183000`,
-    `DTEND;TZID=America/Sao_Paulo:20251022T203000`,
+    `DTEND;TZID=America/Sao_Paulo:20251022T220000`,
     `SUMMARY:${eventTitle}`,
     `DESCRIPTION:${eventDescription.replace(/\n/g, "\\n")}`,
     `LOCATION:${eventLocation}`,

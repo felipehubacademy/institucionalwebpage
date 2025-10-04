@@ -7,10 +7,10 @@ function generateICS(): string {
   const eventDescription =
     "Uma noite exclusiva de networking e prática de inglês em um ambiente dinâmico e imersivo. Pratique inglês em dinâmicas reais de negócios, desenvolva soft skills estratégicas e conecte-se com profissionais de diversas áreas."
 
-  // Event date: October 22, 2025, 18:30 (Brazil/Sao Paulo timezone = UTC-3)
-  // Converting to UTC: 18:30 BRT = 21:30 UTC
+  // Event date: October 22, 2025, 18:30 to 22:00 (Brazil/Sao Paulo timezone = UTC-3)
+  // Converting to UTC: 18:30 BRT = 21:30 UTC, 22:00 BRT = 01:00 UTC (next day)
   const startDate = "20251022T213000Z" // 2025-10-22 21:30:00 UTC
-  const endDate = "20251022T233000Z" // 2025-10-22 23:30:00 UTC (2 hours duration)
+  const endDate = "20251023T010000Z" // 2025-10-23 01:00:00 UTC (3.5 hours duration)
 
   // Generate unique ID
   const uid = `meetup-${Date.now()}@hubacademybr.com`
@@ -49,7 +49,7 @@ function generateICS(): string {
     `UID:${uid}`,
     `DTSTAMP:${timestamp}`,
     `DTSTART;TZID=America/Sao_Paulo:20251022T183000`,
-    `DTEND;TZID=America/Sao_Paulo:20251022T203000`,
+    `DTEND;TZID=America/Sao_Paulo:20251022T220000`,
     `SUMMARY:${eventTitle}`,
     `DESCRIPTION:${eventDescription.replace(/\n/g, "\\n")}`,
     `LOCATION:${eventLocation}`,

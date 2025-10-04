@@ -107,12 +107,15 @@ export default function MeetupObrigadoPage() {
             <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
               Nos vemos no <span className="text-[#a3ff3c] font-bold">English Night Live</span>
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-base md:text-lg">
-              <span className="text-white/90">📅 22 de Outubro</span>
-              <span className="hidden sm:inline text-white/50">•</span>
-              <span className="text-white/90">🕕 18h30</span>
-              <span className="hidden sm:inline text-white/50">•</span>
-              <span className="text-white/90">📍 SP - Av. Paulista</span>
+            <div className="flex flex-col items-center justify-center gap-2 text-base md:text-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+                <span className="text-white/90">📅 22 de Outubro</span>
+                <span className="hidden sm:inline text-white/50">•</span>
+                <span className="text-white/90">🕕 18h30 às 22h</span>
+              </div>
+              <div className="text-center">
+                <span className="text-white/90">📍 Av. Paulista, 1374 - 12º andar - Brazilian Financial Center, São Paulo</span>
+              </div>
             </div>
           </div>
 
@@ -133,12 +136,9 @@ export default function MeetupObrigadoPage() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-          <span className="text-sm text-white/80">Mais detalhes</span>
-          <div className="animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-              <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
-            </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>
         </div>
       </section>
@@ -152,9 +152,6 @@ export default function MeetupObrigadoPage() {
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 Você receberá a confirmação por <span className="font-semibold text-[#161533]">e-mail</span> e{" "}
                 <span className="font-semibold text-[#161533]">WhatsApp</span>.
-              </p>
-              <p className="text-base md:text-lg text-gray-600 leading-relaxed mt-4">
-                📍 <span className="font-semibold text-[#161533]">Av. Paulista, 1374 - 12º andar - Brazilian Financial Center, São Paulo</span>
               </p>
             </div>
 
