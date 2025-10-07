@@ -67,7 +67,7 @@ jobs:
         if: steps.calc_reminder.outputs.type != 'skip'
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
-            https://v0-hub-s-institucional-webpage-g4ujg0fg6.vercel.app/api/send-reminders \
+            https://hubacademybr.com/api/send-reminders \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             -d "{\"type\": \"${{ steps.calc_reminder.outputs.type }}\"}")
