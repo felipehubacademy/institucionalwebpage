@@ -1,0 +1,98 @@
+name: MeetUP Reminders
+
+on:
+  schedule:
+    # Executar todos os dias às 9h BRT (12h UTC)
+    - cron: '0 12 * * *'
+    
+  workflow_dispatch:
+    inputs:
+      reminder_type:
+        description: 'Tipo de lembrete (d7, d3, d1, followup)'
+        required: true
+        type: choice
+        options:
+          - d7
+          - d3
+          - d1
+          - followup
+      force:
+        description: 'Forçar envio (ignorar data)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  send-reminders:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Calculate reminder type based on event date
+        id: calc_reminder
+        run: |
+          # Data do evento: 22/10/2025
+          EVENT_DATE="2025-10-22"
+          TODAY=$(date -u +%Y-%m-%d)
+          
+          # Calcular diferença de dias (cross-platform)
+          if [[ "$OSTYPE" == "darwin"* ]]; then
+            DIFF=$(( ( $(date -jf "%Y-%m-%d" "$EVENT_DATE" +%s) - $(date -jf "%Y-%m-%d" "$TODAY" +%s) ) / 86400 ))
+          else
+            DIFF=$(( ( $(date -d "$EVENT_DATE" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+          fi
+          
+          echo "Days until event: $DIFF"
+          
+          # Manual override
+          if [ "${{ github.event.inputs.force }}" == "true" ]; then
+            REMINDER_TYPE="${{ github.event.inputs.reminder_type }}"
+            echo "Manual execution: $REMINDER_TYPE"
+          elif [ $DIFF -eq 7 ]; then
+            REMINDER_TYPE="d7"
+          elif [ $DIFF -eq 3 ]; then
+            REMINDER_TYPE="d3"
+          elif [ $DIFF -eq 1 ]; then
+            REMINDER_TYPE="d1"
+          else
+            REMINDER_TYPE="skip"
+            echo "Not a reminder day (event in $DIFF days)"
+          fi
+          
+          echo "type=$REMINDER_TYPE" >> $GITHUB_OUTPUT
+      
+      - name: Send reminders
+        if: steps.calc_reminder.outputs.type != 'skip'
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            https://institucionalwebpage.vercel.app/api/send-reminders \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -d "{\"type\": \"${{ steps.calc_reminder.outputs.type }}\"}")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          
+          echo "Response: $BODY"
+          echo "HTTP Code: $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ Failed to send reminders (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+          
+          echo "✅ Reminders sent successfully"
+      
+      - name: No reminders needed
+        if: steps.calc_reminder.outputs.type == 'skip'
+        run: |
+          echo "ℹ️ No reminders scheduled for today"
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Workflow failed - check logs"
+          # Adicionar notificação Slack/Discord aqui se necessário
+

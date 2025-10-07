@@ -96,8 +96,8 @@ export async function POST(request: NextRequest) {
 
     // Get environment variables
     const hubspotApiKey = process.env.HUBSPOT_API_KEY
-    const hubspotPipeline = process.env.HUBSPOT_MEETUP_PIPELINE || "default"
-    const hubspotDealStage = process.env.HUBSPOT_MEETUP_DEALSTAGE || "appointmentscheduled"
+    const hubspotPipeline = process.env.HUBSPOT_MEETUP_PIPELINE || "802447717"
+    const hubspotDealStage = process.env.HUBSPOT_MEETUP_DEALSTAGE || "1178499143"
     const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
     const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
     const msGraphFromEmail = process.env.MS_GRAPH_FROM_EMAIL || "hub@hubacademybr.com"

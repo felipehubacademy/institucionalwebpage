@@ -7,6 +7,7 @@ export async function sendWhatsAppMessage(
   firstName: string,
   accessToken: string,
   phoneNumberId: string,
+  templateName: string = "meetup_confirmacao_v2", // Default: confirmação inicial
 ): Promise<{ success: boolean; messageId?: string }> {
   try {
     // Remove any non-digit characters from phone number
@@ -23,7 +24,7 @@ export async function sendWhatsAppMessage(
         to: cleanPhone,
         type: "template",
         template: {
-          name: "meetup_confirmacao_v2",
+          name: templateName,
           language: {
             code: "pt_BR"
           },
