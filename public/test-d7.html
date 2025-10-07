@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test D-7 Reminder</title>
+</head>
+<body>
+    <h1>Test D-7 Reminder</h1>
+    <button onclick="testD7()">Test D-7 API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testD7() {
+            try {
+                const response = await fetch('/api/send-reminders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer Zqpuq7Uj5VQd1LpN+/WSP4VgAyEuPIX4WCFxry/slaI='
+                    },
+                    body: JSON.stringify({
+                        type: 'd7',
+                        pipeline: '802447717'
+                    })
+                });
+                
+                const data = await response.json();
+                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<pre>Error: ' + error.message + '</pre>';
+            }
+        }
+    </script>
+</body>
+</html>

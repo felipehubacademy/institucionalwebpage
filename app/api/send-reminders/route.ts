@@ -11,6 +11,10 @@ function validateAuth(req: NextRequest): boolean {
   const authHeader = req.headers.get("authorization")
   const expectedToken = process.env.CRON_SECRET
   
+  console.log("Auth header:", authHeader)
+  console.log("Expected token:", expectedToken)
+  console.log("Expected format:", `Bearer ${expectedToken}`)
+  
   if (!expectedToken) {
     console.warn("CRON_SECRET not configured")
     return false
@@ -43,11 +47,13 @@ function shouldSendEmail(reminderType: string): boolean {
  * Determine if WhatsApp should be sent for this reminder type
  */
 function shouldSendWhatsApp(reminderType: string): boolean {
-  return ["d3", "d1"].includes(reminderType)
+  return ["d7", "d3", "d1"].includes(reminderType)
 }
 
 export async function POST(req: NextRequest) {
   try {
+    console.log("=== SEND REMINDERS API CALLED ===")
+    
     // 1. Validate authentication
     if (!validateAuth(req)) {
       return NextResponse.json(
@@ -57,7 +63,9 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Parse request body
+    console.log("Parsing request body...")
     const body = await req.json()
+    console.log("Request body:", body)
     const { type } = body // 'd7' | 'd3' | 'd1' | 'followup'
 
     if (!type || !["d7", "d3", "d1", "followup"].includes(type)) {

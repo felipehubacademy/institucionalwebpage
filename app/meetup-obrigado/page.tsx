@@ -129,9 +129,9 @@ export default function MeetupObrigadoPage() {
         </button>
 
         {/* Content Over Video */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 pt-4 text-center text-white">
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 pt-4 md:pt-4 text-center text-white">
           {/* Logo */}
-          <div className="mb-6 md:mb-8">
+          <div className="mb-4 md:mb-8">
             <Link href="/" className="inline-block">
               <LogoImage
                 src="/images/Logo_horizontal_green.svg"
@@ -145,12 +145,12 @@ export default function MeetupObrigadoPage() {
           </div>
 
           {/* Success Icon */}
-          <div className="mb-6">
-            <CheckCircle2 className="h-20 w-20 md:h-24 md:w-24 text-[#a3ff3c] animate-bounce mx-auto" style={{ animationDuration: '2s' }} />
+          <div className="mb-4 md:mb-6">
+            <CheckCircle2 className="h-16 w-16 md:h-24 md:w-24 text-[#a3ff3c] animate-bounce mx-auto" style={{ animationDuration: '2s' }} />
           </div>
 
           {/* Success Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-md mb-4">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20 backdrop-blur-md mb-3 md:mb-4">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3ff3c] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a3ff3c]"></span>
@@ -159,16 +159,16 @@ export default function MeetupObrigadoPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 max-w-3xl">
+          <h1 className="text-3xl md:text-6xl font-bold mb-3 md:mb-4 max-w-3xl">
             Tudo certo!
           </h1>
 
           {/* Event Details */}
-          <div className="space-y-4 mb-6">
-            <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
+          <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
+            <p className="text-lg md:text-2xl text-gray-200 max-w-2xl mx-auto">
               Nos vemos no <span className="text-[#a3ff3c] font-bold">English Night Live</span>
             </p>
-            <div className="flex flex-col items-center justify-center gap-2 text-base md:text-lg">
+            <div className="flex flex-col items-center justify-center gap-2 text-sm md:text-lg">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
                 <span className="text-white/90">📅 22 de Outubro</span>
                 <span className="hidden sm:inline text-white/50">•</span>
@@ -183,28 +183,28 @@ export default function MeetupObrigadoPage() {
           {/* CTA Button */}
           <Button
             onClick={handleAddToCalendar}
-            className="group bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-lg md:text-xl px-10 py-7 font-bold shadow-2xl shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/50 transition-all duration-300 hover:scale-105 inline-flex items-center gap-3 mb-4"
+            className="group bg-gradient-to-r from-[#a3ff3c] to-[#92e636] hover:from-[#92e636] hover:to-[#a3ff3c] text-[#161533] rounded-full text-base md:text-xl px-6 md:px-10 py-4 md:py-7 font-bold shadow-2xl shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/50 transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 md:gap-3 mb-3 md:mb-4"
           >
-            <Calendar className="h-6 w-6" />
+            <Calendar className="h-5 w-5 md:h-6 md:w-6" />
             <span>Adicionar ao calendário</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Button>
 
           {/* Helper Text */}
-          <p className="text-sm text-gray-400">
+          <p className="text-xs md:text-sm text-gray-400">
             Abre automaticamente no seu calendário
           </p>
         </div>
 
         {/* Scroll Indicator - Desktop */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>
         </div>
 
         {/* Scroll Indicator - Mobile */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 md:hidden animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
           </div>
