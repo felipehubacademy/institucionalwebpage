@@ -328,7 +328,7 @@ export default function HubAssessmentLanding() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-[#161533] backdrop-blur-md shadow-lg border-b border-white/10"
-            : "bg-transparent"
+            : "bg-[#161533]/95 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -356,11 +356,7 @@ export default function HubAssessmentLanding() {
                   key={item.href}
                   href={item.href}
                   onClick={handleAnchorClick}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    isScrolled
-                      ? "text-slate-300 hover:text-[#a3ff3c]"
-                      : "text-white/90 hover:text-[#a3ff3c]"
-                  }`}
+                  className="text-sm font-medium text-slate-300 hover:text-[#a3ff3c] transition-colors duration-200"
                 >
                   {item.label}
                 </a>
