@@ -434,8 +434,8 @@ export default function HubAssessmentLanding() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-            {/* Conteúdo à esquerda */}
-            <div className="space-y-6">
+            {/* Conteúdo à esquerda - aparece primeiro no mobile */}
+            <div className="space-y-6 order-1 lg:order-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20">
                 <span className="w-2 h-2 rounded-full bg-[#a3ff3c] animate-pulse" />
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#a3ff3c]">
@@ -472,12 +472,12 @@ export default function HubAssessmentLanding() {
                 ))}
               </div>
 
-              {/* CTA Buttons */}
+              {/* CTA Button - Mobile: apenas botão principal, Desktop: ambos */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
                 <a
                   href="#formulario"
                   onClick={handleAnchorClick}
-                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm sm:text-base shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm sm:text-base shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95 w-full sm:w-auto"
                 >
                   Agendar meu assessment gratuito
                   <ArrowRightIcon className="hidden sm:block" />
@@ -485,7 +485,7 @@ export default function HubAssessmentLanding() {
                 <button
                   type="button"
                   onClick={() => setVideoModalOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
+                  className="hidden sm:inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
                   aria-label="Ver vídeo sobre o assessment"
                 >
                   <PlayIcon />
@@ -512,8 +512,8 @@ export default function HubAssessmentLanding() {
               </div>
             </div>
 
-            {/* Formulário à direita */}
-            <div id="formulario" className="lg:sticky lg:top-24 order-first lg:order-last">
+            {/* Formulário à direita - aparece depois no mobile */}
+            <div id="formulario" className="lg:sticky lg:top-24 order-2 lg:order-last">
               <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:p-6 lg:p-8 shadow-2xl">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold mb-2">Agende seu Assessment Gratuito</h2>
