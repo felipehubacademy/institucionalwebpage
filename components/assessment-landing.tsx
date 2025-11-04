@@ -5,6 +5,7 @@ import Link from "next/link"
 import { VideoModal } from "@/components/video-modal"
 import { LogoImage } from "@/components/logo-image"
 import { PhoneInput } from "@/components/phone-input"
+import { Menu, X } from "lucide-react"
 
 // Cores oficiais da Hub Academy
 const HUB_COLORS = {
@@ -94,6 +95,7 @@ export default function HubAssessmentLanding() {
   const [videoModalOpen, setVideoModalOpen] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
   const [form, setForm] = useState<FormData>({
     firstName: "",
@@ -325,22 +327,24 @@ export default function HubAssessmentLanding() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#161533]/95 backdrop-blur-md shadow-lg"
+            ? "bg-[#161533] backdrop-blur-md shadow-lg border-b border-white/10"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
               <LogoImage
                 src="/images/Logo_horizontal_green.svg"
                 alt="Hub Academy"
-                width={isScrolled ? 120 : 140}
-                height={isScrolled ? 36 : 42}
+                width={isScrolled ? 100 : 120}
+                height={isScrolled ? 30 : 36}
                 priority={true}
-                className="transition-all duration-300"
+                className="transition-all duration-300 sm:w-[120px] sm:h-[36px] md:w-[140px] md:h-[42px]"
               />
             </Link>
+            
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {[
                 { href: "#como-funciona", label: "Como funciona" },
@@ -352,25 +356,80 @@ export default function HubAssessmentLanding() {
                   key={item.href}
                   href={item.href}
                   onClick={handleAnchorClick}
-                  className="text-sm font-medium text-slate-300 hover:text-[#a3ff3c] transition-colors duration-200"
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    isScrolled
+                      ? "text-slate-300 hover:text-[#a3ff3c]"
+                      : "text-white/90 hover:text-[#a3ff3c]"
+                  }`}
                 >
                   {item.label}
                 </a>
               ))}
             </nav>
-            <a
-              href="#formulario"
-              onClick={handleAnchorClick}
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm shadow-lg shadow-[#a3ff3c]/20 hover:shadow-[#a3ff3c]/30"
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center gap-4">
+              <a
+                href="#formulario"
+                onClick={handleAnchorClick}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm shadow-lg shadow-[#a3ff3c]/20 hover:shadow-[#a3ff3c]/30"
+              >
+                Agendar grátis
+              </a>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
-              Agendar grátis
-            </a>
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-white/10 bg-[#161533]/95 backdrop-blur-md">
+              <nav className="flex flex-col py-4 space-y-2">
+                {[
+                  { href: "#como-funciona", label: "Como funciona" },
+                  { href: "#spo", label: "Método SPO" },
+                  { href: "#comparativo", label: "Comparativo" },
+                  { href: "#depoimentos", label: "Resultados" },
+                ].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => {
+                      handleAnchorClick(e)
+                      setMobileMenuOpen(false)
+                    }}
+                    className="px-4 py-3 text-base font-medium text-white/90 hover:text-[#a3ff3c] hover:bg-white/5 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a
+                  href="#formulario"
+                  onClick={(e) => {
+                    handleAnchorClick(e)
+                    setMobileMenuOpen(false)
+                  }}
+                  className="mx-4 mt-4 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold"
+                >
+                  Agendar grátis
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-24 md:pt-32 pb-16 md:pb-24">
+      <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24">
         {/* Background gradient */}
         <div className="absolute inset-0 -z-10" aria-hidden="true">
           <div className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-[#6366F1]/20 rounded-full blur-3xl opacity-30" />
@@ -378,7 +437,7 @@ export default function HubAssessmentLanding() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             {/* Conteúdo à esquerda */}
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#a3ff3c]/10 border border-[#a3ff3c]/20">
@@ -388,19 +447,19 @@ export default function HubAssessmentLanding() {
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Destrave sua comunicação em inglês e{" "}
                 <span className="text-[#a3ff3c]">pare de perder oportunidades</span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">
                 Você já entende inglês, mas não sente confiança para demonstrar seu potencial? Em
                 um encontro gratuito, um expert da Hub vai diagnosticar seu nível, mapear suas
                 travas e te mostrar o caminho até o próximo nível.
               </p>
 
               {/* Steps */}
-              <div id="como-funciona" className="grid grid-cols-3 gap-4 pt-4">
+              <div id="como-funciona" className="grid grid-cols-3 gap-2 sm:gap-4 pt-4">
                 {[
                   { step: "1", label: "Preencha", desc: "o formulário" },
                   { step: "2", label: "Agende", desc: "seu horário" },
@@ -408,29 +467,29 @@ export default function HubAssessmentLanding() {
                 ].map((item, i) => (
                   <div
                     key={item.step}
-                    className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-200"
+                    className="p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-200"
                   >
-                    <div className="text-2xl font-bold text-[#a3ff3c] mb-1">{item.step}</div>
-                    <div className="text-sm font-semibold text-white">{item.label}</div>
-                    <div className="text-xs text-slate-400 mt-0.5">{item.desc}</div>
+                    <div className="text-xl sm:text-2xl font-bold text-[#a3ff3c] mb-1">{item.step}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-white">{item.label}</div>
+                    <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5 hidden sm:block">{item.desc}</div>
                   </div>
                 ))}
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
                 <a
                   href="#formulario"
                   onClick={handleAnchorClick}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm sm:text-base shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95"
                 >
                   Agendar meu assessment gratuito
-                  <ArrowRightIcon />
+                  <ArrowRightIcon className="hidden sm:block" />
                 </a>
                 <button
                   type="button"
                   onClick={() => setVideoModalOpen(true)}
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium backdrop-blur-sm"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
                   aria-label="Ver vídeo sobre o assessment"
                 >
                   <PlayIcon />
@@ -439,7 +498,7 @@ export default function HubAssessmentLanding() {
               </div>
 
               {/* Pain points */}
-              <div className="grid sm:grid-cols-2 gap-3 pt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
                 {[
                   "Entendo, mas travo na hora de falar.",
                   "Evito riscos por causa do inglês e perco chances.",
@@ -458,8 +517,8 @@ export default function HubAssessmentLanding() {
             </div>
 
             {/* Formulário à direita */}
-            <div id="formulario" className="lg:sticky lg:top-24">
-              <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-8 shadow-2xl">
+            <div id="formulario" className="lg:sticky lg:top-24 order-first lg:order-last">
+              <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:p-6 lg:p-8 shadow-2xl">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold mb-2">Agende seu Assessment Gratuito</h2>
                   <p className="text-slate-300 text-sm">
@@ -467,9 +526,9 @@ export default function HubAssessmentLanding() {
                   </p>
                 </div>
 
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-3 sm:space-y-4" noValidate>
                   {/* Nome e Sobrenome */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label htmlFor="firstName" className="block text-sm font-medium text-slate-300 mb-1.5">
                         Nome <span className="text-red-400">*</span>
@@ -517,7 +576,7 @@ export default function HubAssessmentLanding() {
                   </div>
 
                   {/* Email e Telefone */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">
                         E-mail corporativo <span className="text-red-400">*</span>
@@ -560,7 +619,7 @@ export default function HubAssessmentLanding() {
                   </div>
 
                   {/* Empresa e Cargo */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-1.5">
                         Empresa
@@ -592,7 +651,7 @@ export default function HubAssessmentLanding() {
                   </div>
 
                   {/* Nível e Horário */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label htmlFor="level" className="block text-sm font-medium text-slate-300 mb-1.5">
                         Seu nível hoje
@@ -729,11 +788,11 @@ export default function HubAssessmentLanding() {
       </section>
 
       {/* Seção: Método SPO */}
-      <section id="spo" className="py-16 md:py-24 bg-gradient-to-b from-[#0B1020] to-[#161533]">
+      <section id="spo" className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-[#0B1020] to-[#161533]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
                 Método SPO + Comunicação Real
               </h2>
               <p className="text-lg text-slate-300 leading-relaxed">
@@ -805,12 +864,12 @@ export default function HubAssessmentLanding() {
       </section>
 
       {/* Comparativo */}
-      <section id="comparativo" className="py-16 md:py-24">
+      <section id="comparativo" className="py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Inglês Tradicional × Método Hub
           </h2>
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             <div className="rounded-2xl border border-red-500/20 bg-red-500/5 backdrop-blur-sm p-6 lg:p-8">
               <h3 className="text-xl font-semibold mb-4 text-red-400">Tradicional</h3>
               <ul className="space-y-3 text-slate-300">
@@ -850,12 +909,12 @@ export default function HubAssessmentLanding() {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="py-16 md:py-24 bg-gradient-to-b from-[#161533] to-[#0B1020]">
+      <section id="depoimentos" className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-[#161533] to-[#0B1020]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Resultados Reais
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
               {
                 quote:
@@ -894,12 +953,12 @@ export default function HubAssessmentLanding() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">
             Perguntas frequentes
           </h2>
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
             {[
               {
                 q: "Quanto tempo dura o assessment?",
@@ -931,30 +990,30 @@ export default function HubAssessmentLanding() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#a3ff3c]/10 via-[#6366F1]/10 to-[#a3ff3c]/5">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-[#a3ff3c]/10 via-[#6366F1]/10 to-[#a3ff3c]/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 lg:p-12 text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+          <div className="rounded-2xl sm:rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-8 lg:p-12 text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               Pronto para <span className="text-[#a3ff3c]">parar de travar</span> e crescer na
               carreira?
             </h2>
-            <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
               Agende seu assessment gratuito com um expert da Hub.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
                 href="#formulario"
                 onClick={handleAnchorClick}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#a3ff3c] text-[#161533] hover:bg-[#92e636] transition-all duration-200 font-semibold text-sm sm:text-base shadow-lg shadow-[#a3ff3c]/30 hover:shadow-[#a3ff3c]/40 hover:scale-105 active:scale-95"
               >
                 Agendar meu assessment gratuito
-                <ArrowRightIcon />
+                <ArrowRightIcon className="hidden sm:block" />
               </a>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium backdrop-blur-sm"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
               >
                 Falar no WhatsApp agora
               </a>
@@ -965,8 +1024,8 @@ export default function HubAssessmentLanding() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-[#161533]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-3 gap-8 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-sm">
             <div>
               <div className="font-semibold text-white mb-3">Hub Academy</div>
               <p className="text-slate-400 leading-relaxed">
