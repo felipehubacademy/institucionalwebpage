@@ -274,13 +274,13 @@ export function PhoneInput({
   value,
   onChange,
   className = "",
-  placeholder = "(11) 9 9999-9999",
+  placeholder = "(11) 99999-9999",
   disabled = false,
 }: PhoneInputProps) {
   const [formattedValue, setFormattedValue] = useState("")
 
   useEffect(() => {
-    // Format phone number for display
+    // Format phone number for display: (11) 99999-9999
     const digits = value.replace(/\D/g, "")
     if (digits.length === 0) {
       setFormattedValue("")
@@ -289,12 +289,15 @@ export function PhoneInput({
     } else if (digits.length <= 7) {
       setFormattedValue(`(${digits.slice(0, 2)}) ${digits.slice(2)}`)
     } else if (digits.length <= 11) {
+      // Format: (11) 99999-9999
       setFormattedValue(
         `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`
       )
     } else {
+      // Limit to 11 digits
+      const limited = digits.slice(0, 11)
       setFormattedValue(
-        `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`
+        `(${limited.slice(0, 2)}) ${limited.slice(2, 7)}-${limited.slice(7, 11)}`
       )
     }
   }, [value])
@@ -302,7 +305,7 @@ export function PhoneInput({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value
     const digits = input.replace(/\D/g, "")
-    // Limit to 11 digits (Brazilian mobile)
+    // Limit to 11 digits (Brazilian mobile: DDD + 9 digits)
     const limitedDigits = digits.slice(0, 11)
     onChange(limitedDigits)
   }
@@ -314,6 +317,7 @@ export function PhoneInput({
       onChange={handleChange}
       placeholder={placeholder}
       disabled={disabled}
+      maxLength={15} // (11) 99999-9999 = 15 chars
       className={className}
     />
   )

@@ -61,7 +61,6 @@ interface FormData {
   phone: string
   company: string
   role: string
-  level: string
   preferredTime: string
   consent: boolean
   utm_source: string
@@ -90,7 +89,6 @@ export default function HubAssessmentLanding() {
     phone: "",
     company: "",
     role: "",
-    level: "B1 (consigo, mas travo)",
     preferredTime: "",
     consent: false,
     utm_source: "",
@@ -557,9 +555,9 @@ export default function HubAssessmentLanding() {
                         onChange={handlePhoneChange}
                         className={`w-full rounded-xl bg-white/10 border ${
                           fieldErrors.phone
-                            ? "border-red-400/50 focus-within:border-red-400"
-                            : "border-white/10 focus-within:border-[#a3ff3c]"
-                        } focus-within:ring-2 focus-within:ring-[#a3ff3c]/20 transition-all duration-200`}
+                            ? "border-red-400/50 focus:border-red-400"
+                            : "border-white/10 focus:border-[#a3ff3c]"
+                        } px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#a3ff3c]/20 transition-all duration-200`}
                       />
                       {fieldErrors.phone && (
                         <p className="mt-1 text-xs text-red-400">{fieldErrors.phone}</p>
@@ -599,46 +597,25 @@ export default function HubAssessmentLanding() {
                     </div>
                   </div>
 
-                  {/* Nível e Horário */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    <div>
-                      <label htmlFor="level" className="block text-sm font-medium text-slate-300 mb-1.5">
-                        Seu nível hoje
-                      </label>
-                      <select
-                        id="level"
-                        name="level"
-                        value={form.level}
-                        onChange={handleChange}
-                        className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white outline-none focus:border-[#a3ff3c] focus:ring-2 focus:ring-[#a3ff3c]/20 transition-all duration-200 [&>option]:bg-[#161533]"
-                      >
-                        {[
-                          "A1 (iniciante)",
-                          "A2 (básico)",
-                          "B1 (consigo, mas travo)",
-                          "B2 (me viro, falta fluidez)",
-                          "C1 (avançado)",
-                        ].map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="preferredTime" className="block text-sm font-medium text-slate-300 mb-1.5">
-                        Melhor horário
-                      </label>
-                      <input
-                        id="preferredTime"
-                        name="preferredTime"
-                        type="text"
-                        value={form.preferredTime}
-                        onChange={handleChange}
-                        className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-[#a3ff3c] focus:ring-2 focus:ring-[#a3ff3c]/20 transition-all duration-200"
-                        placeholder="Ex: seg/qua à noite"
-                      />
-                    </div>
+                  {/* Melhor horário */}
+                  <div>
+                    <label htmlFor="preferredTime" className="block text-sm font-medium text-slate-300 mb-1.5">
+                      Melhor horário
+                    </label>
+                    <select
+                      id="preferredTime"
+                      name="preferredTime"
+                      value={form.preferredTime}
+                      onChange={handleChange}
+                      className="w-full rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-white outline-none focus:border-[#a3ff3c] focus:ring-2 focus:ring-[#a3ff3c]/20 transition-all duration-200 [&>option]:bg-[#161533]"
+                    >
+                      <option value="">Selecione um horário</option>
+                      {["Manhã", "Tarde", "Noite"].map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Consentimento LGPD */}

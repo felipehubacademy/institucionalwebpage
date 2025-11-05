@@ -22,6 +22,10 @@ interface ContactData {
   preferred_time?: string
   lgpd_consent?: boolean
   source?: string
+  hs_lead_status?: string
+  hubspot_owner_id?: string
+  lifecyclestage?: string
+  origem?: string
 }
 
 interface DealData {
@@ -72,23 +76,30 @@ export async function upsertContact(data: ContactData): Promise<{ vid: number }>
       properties.jobtitle = data.jobtitle
     }
 
-    // Campos customizados (ajustar nomes conforme configuração do HubSpot)
-    // IMPORTANTE: Verifique os nomes exatos dos campos customizados no HubSpot
-    // e ajuste conforme necessário
-    if (data.hub_level) {
-      properties.hub_level = data.hub_level
+    // Propriedades do HubSpot (mesmo padrão do MEETUP)
+    if (data.hs_lead_status) {
+      properties.hs_lead_status = data.hs_lead_status
     }
 
+    if (data.hubspot_owner_id) {
+      properties.hubspot_owner_id = data.hubspot_owner_id
+    }
+
+    if (data.lifecyclestage) {
+      properties.lifecyclestage = data.lifecyclestage
+    }
+
+    if (data.origem) {
+      properties.origem = data.origem
+    }
+
+    // Campo customizado: Preferência de Horário
+    // Criar no HubSpot: Settings > Properties > Contact Properties
+    // - Label: "Preferência de Horário"
+    // - Internal name: "preferred_time"
+    // - Type: Single-line text ou Dropdown (Manhã, Tarde, Noite)
     if (data.preferred_time) {
       properties.preferred_time = data.preferred_time
-    }
-
-    if (data.lgpd_consent !== undefined) {
-      properties.lgpd_consent = String(data.lgpd_consent)
-    }
-
-    if (data.source) {
-      properties.hs_analytics_source = data.source
     }
 
     if (existingContact) {
@@ -126,6 +137,10 @@ export async function createDeal(
 
     if (dealData.associatedcompanyid) {
       properties.associatedcompanyid = dealData.associatedcompanyid
+    }
+
+    if (dealData.hubspot_owner_id) {
+      properties.hubspot_owner_id = dealData.hubspot_owner_id
     }
 
     const createResponse = await hubspotClient.crm.deals.basicApi.create({

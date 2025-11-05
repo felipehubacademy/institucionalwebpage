@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import { leadSchema, sanitizePhone } from "@/lib/validations/lead"
+import { leadSchema, sanitizePhone, formatPhoneForHubSpot, formatPhoneForWhatsApp } from "@/lib/validations/lead"
 import { upsertContact, createDeal, getUTMSource } from "@/lib/hubspot/client"
 import { rateLimit, getClientIP } from "@/lib/rate-limit"
+import { sendWhatsAppMessage } from "@/utils/whatsapp-api"
 
 /**
  * POST /api/lead
@@ -92,18 +93,23 @@ export async function POST(request: NextRequest) {
       utm_term: data.utm_term,
     })
 
+    // Formatar telefone para HubSpot (com +55)
+    const phoneForHubSpot = formatPhoneForHubSpot(data.phone)
+
     // Upsert contato
+    // Configurações seguindo o padrão do MEETUP
     const contact = await upsertContact({
       firstname: data.firstName,
       lastname: data.lastName,
       email: data.email,
-      phone: sanitizedPhone,
+      phone: phoneForHubSpot, // Formato: +5511987654321
       company: data.company,
       jobtitle: data.role,
-      hub_level: data.level,
-      preferred_time: data.preferredTime,
-      lgpd_consent: true,
-      source: utmSource || "direct",
+      preferred_time: data.preferredTime, // Preferência de horário (Manhã, Tarde, Noite)
+      hs_lead_status: "NEW",
+      hubspot_owner_id: "83528823", // Marco
+      lifecyclestage: "lead",
+      origem: "Form Assessment",
     })
 
     // Criar Deal
@@ -120,9 +126,36 @@ export async function POST(request: NextRequest) {
           dealname: dealName,
           pipeline: pipelineId,
           dealstage: dealStageId,
+          hubspot_owner_id: "83528823", // Marco
         },
         contact.vid
       )
+    }
+
+    // WhatsApp Integration
+    const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
+    const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
+
+    if (whatsappAccessToken && whatsappPhoneNumberId) {
+      try {
+        // Formatar telefone para WhatsApp (sem +, só dígitos com 55)
+        const phoneForWhatsApp = formatPhoneForWhatsApp(data.phone)
+        
+        await sendWhatsAppMessage(
+          phoneForWhatsApp,
+          data.firstName,
+          whatsappAccessToken,
+          whatsappPhoneNumberId,
+          "assessment_confirmacao" // Template para assessment
+        )
+
+        console.log("WhatsApp message sent successfully")
+      } catch (error) {
+        console.error("WhatsApp integration error:", error)
+        // Não falha a requisição se WhatsApp der erro
+      }
+    } else {
+      console.warn("WhatsApp credentials not configured")
     }
 
     // Sucesso
