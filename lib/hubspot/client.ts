@@ -2,13 +2,13 @@ import { Client } from "@hubspot/api-client"
 
 /**
  * HubSpot Client wrapper - Unificado para Assessment e Meetup
- * Usa Private App Token para autenticação
+ * Usa Private App Token ou API Key para autenticação
  * 
- * Reutiliza HUBSPOT_PRIVATE_APP_TOKEN já deployado no projeto
+ * Prioriza HUBSPOT_PRIVATE_APP_TOKEN, usa HUBSPOT_API_KEY como fallback
  */
 
 const hubspotClient = new Client({
-  accessToken: process.env.HUBSPOT_PRIVATE_APP_TOKEN,
+  accessToken: process.env.HUBSPOT_PRIVATE_APP_TOKEN || process.env.HUBSPOT_API_KEY || "",
 })
 
 interface ContactData {
