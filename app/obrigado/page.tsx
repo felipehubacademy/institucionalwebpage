@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function ObrigoPage() {
   const whatsappUrl =
     process.env.NEXT_PUBLIC_WHATSAPP_URL ||
-    "https://wa.me/551152865668?text=Olá%20Hub!%20Quero%20agendar%20meu%20assessment."
+    "https://wa.me/5511990239079?text=Olá%20Hub!%20Quero%20agendar%20meu%20assessment."
 
   return (
     <div className="min-h-screen bg-[#0B1020] text-white">

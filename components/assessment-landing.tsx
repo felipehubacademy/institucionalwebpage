@@ -2,10 +2,9 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import Link from "next/link"
-import { VideoModal } from "@/components/video-modal"
 import { LogoImage } from "@/components/logo-image"
 import { PhoneInput } from "@/components/phone-input"
-import { Menu, X } from "lucide-react"
+import { Menu, X, XCircle } from "lucide-react"
 
 // Cores oficiais da Hub Academy
 const HUB_COLORS = {
@@ -39,18 +38,6 @@ function CheckIcon({ className = "" }: { className?: string }) {
   )
 }
 
-function PlayIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={`w-5 h-5 flex-shrink-0 ${className}`}
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      aria-hidden="true"
-    >
-      <path d="M6.5 5.5l7 4.5-7 4.5v-9z" />
-    </svg>
-  )
-}
 
 function ArrowRightIcon({ className = "" }: { className?: string }) {
   return (
@@ -92,7 +79,6 @@ interface FieldError {
 export default function HubAssessmentLanding() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [videoModalOpen, setVideoModalOpen] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -304,12 +290,6 @@ export default function HubAssessmentLanding() {
   }, [])
 
   // Memoized values
-  const whatsappUrl = useMemo(
-    () =>
-      process.env.NEXT_PUBLIC_WHATSAPP_URL ||
-      "https://wa.me/551152865668?text=Olá%20Hub!%20Quero%20agendar%20meu%20assessment.",
-    []
-  )
 
   const isFormValid = useMemo(
     () =>
@@ -472,8 +452,8 @@ export default function HubAssessmentLanding() {
                 ))}
               </div>
 
-              {/* CTA Button - Mobile: apenas botão principal, Desktop: ambos */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
+              {/* CTA Button - Apenas no mobile */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4 lg:hidden">
                 <a
                   href="#formulario"
                   onClick={handleAnchorClick}
@@ -482,33 +462,6 @@ export default function HubAssessmentLanding() {
                   Agendar meu assessment gratuito
                   <ArrowRightIcon className="hidden sm:block" />
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setVideoModalOpen(true)}
-                  className="hidden sm:inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
-                  aria-label="Ver vídeo sobre o assessment"
-                >
-                  <PlayIcon />
-                  Ver vídeo (2min)
-                </button>
-              </div>
-
-              {/* Pain points */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
-                {[
-                  "Entendo, mas travo na hora de falar.",
-                  "Evito riscos por causa do inglês e perco chances.",
-                  "Já estudei anos, mas não comunico com confiança.",
-                  "Tenho medo de errar em reuniões e apresentações.",
-                ].map((text, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-200"
-                  >
-                    <CheckIcon className="text-[#a3ff3c] mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-slate-200 leading-relaxed">{text}</p>
-                  </div>
-                ))}
               </div>
             </div>
 
@@ -783,6 +736,65 @@ export default function HubAssessmentLanding() {
         </div>
       </section>
 
+      {/* Seção: Antes e Depois */}
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-[#161533] to-[#0B1020]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Essa é sua realidade?
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+            {/* Card Único: Talvez essa seja sua realidade */}
+            <div className="rounded-2xl border border-red-500/20 bg-white/5 backdrop-blur-xl p-6 sm:p-8 lg:p-10 shadow-xl hover:border-red-500/30 hover:bg-white/10 transition-all duration-200">
+              <div className="flex items-center gap-3 mb-6 sm:mb-8 pb-4 border-b border-red-500/20">
+                <XCircle className="text-red-400 flex-shrink-0" size={28} />
+                <h3 className="text-xl sm:text-2xl font-bold text-red-400">Talvez essa seja sua realidade</h3>
+              </div>
+              <ul className="space-y-4 sm:space-y-5">
+                {[
+                  "Não me comunico com segurança e não sou levado a sério em reuniões com clientes ou líderes estrangeiros.",
+                  "Dependo de colegas para traduzir ideias e mensagens importantes, o que me faz parecer menos autônomo.",
+                  "Perco oportunidades de projetos internacionais ou promoções por falta de fluência.",
+                  "Evito participar de reuniões em inglês e acabo ficando invisível nas decisões estratégicas.",
+                  "Minha comunicação em inglês é superficial, o que limita minha capacidade de argumentar e negociar.",
+                  "Fico inseguro ao escrever e-mails ou apresentações, o que afeta minha imagem profissional.",
+                ].map((text, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <XCircle className="text-red-400 flex-shrink-0 mt-0.5" size={20} />
+                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">{text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Card Único: Onde você já deveria estar */}
+            <div className="rounded-2xl border border-[#a3ff3c]/20 bg-white/5 backdrop-blur-xl p-6 sm:p-8 lg:p-10 shadow-xl hover:border-[#a3ff3c]/30 hover:bg-white/10 transition-all duration-200">
+              <div className="flex items-center gap-3 mb-6 sm:mb-8 pb-4 border-b border-[#a3ff3c]/20">
+                <CheckIcon className="text-[#a3ff3c] flex-shrink-0" />
+                <h3 className="text-xl sm:text-2xl font-bold text-[#a3ff3c]">Onde você já deveria estar</h3>
+              </div>
+              <ul className="space-y-4 sm:space-y-5">
+                {[
+                  "Consigo me expressar com segurança e profundidade, sou percebido como um profissional confiante e preparado.",
+                  "Comunico minhas ideias com clareza e autoridade, sem precisar de intermediários.",
+                  "Amplio meu campo de atuação e sou considerado para projetos e cargos globais.",
+                  "Participo ativamente de discussões globais e tenho voz nas decisões da empresa.",
+                  "Consigo argumentar com profundidade, negociar melhor e transmitir credibilidade.",
+                  "Produzo comunicações profissionais, elegantes e estratégicas, que reforçam minha marca pessoal.",
+                ].map((text, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckIcon className="text-[#a3ff3c] flex-shrink-0 mt-0.5" />
+                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">{text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Seção: Método SPO */}
       <section id="spo" className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-[#0B1020] to-[#161533]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1005,14 +1017,6 @@ export default function HubAssessmentLanding() {
                 Agendar meu assessment gratuito
                 <ArrowRightIcon className="hidden sm:block" />
               </a>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 transition-all duration-200 font-medium text-sm sm:text-base backdrop-blur-sm"
-              >
-                Falar no WhatsApp agora
-              </a>
             </div>
           </div>
         </div>
@@ -1034,10 +1038,10 @@ export default function HubAssessmentLanding() {
                 São Paulo, Brasil
                 <br />
                 <a
-                  href="mailto:contato@hubacademy.com.br"
+                  href="mailto:contato@hubacademybr.com"
                   className="text-[#a3ff3c] hover:underline"
                 >
-                  contato@hubacademy.com.br
+                  contato@hubacademybr.com
                 </a>
               </p>
             </div>
@@ -1057,9 +1061,6 @@ export default function HubAssessmentLanding() {
           </div>
         </div>
       </footer>
-
-      {/* Modal de vídeo */}
-      <VideoModal isOpen={videoModalOpen} onClose={() => setVideoModalOpen(false)} />
     </div>
   )
 }
