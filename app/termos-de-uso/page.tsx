@@ -6,7 +6,7 @@ export default function TermosDeUsoPage() {
   return (
     <div>
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full bg-[#161533] text-white">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#161533] text-white">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/">
@@ -56,7 +56,7 @@ export default function TermosDeUsoPage() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 pt-16">
         <section className="w-full py-12 md:py-24 lg:py-32 bg-[#161533] text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">

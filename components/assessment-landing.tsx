@@ -422,8 +422,8 @@ export default function HubAssessmentLanding() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Destrave sua comunicação em inglês e{" "}
-                <span className="text-[#a3ff3c]">pare de perder oportunidades</span>
+                Pare de perder oportunidades e{" "}
+                <span className="text-[#a3ff3c]">destrave sua comunicação em inglês!</span>
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">
