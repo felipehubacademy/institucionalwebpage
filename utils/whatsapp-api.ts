@@ -136,9 +136,45 @@ export async function sendSalesRepNotification(
       throw new Error(`Failed to send sales rep notification: ${data.error?.message || "Unknown error"}`)
     }
 
+    const messageId = data.messages?.[0]?.id
     console.log("✅ Sales rep notification sent successfully")
-    console.log("   Message ID:", data.messages?.[0]?.id)
-    return { success: true, messageId: data.messages?.[0]?.id }
+    console.log("   Message ID:", messageId)
+    
+    // Verificar status da mensagem após 3 segundos (não bloqueia a resposta)
+    if (messageId) {
+      setTimeout(async () => {
+        try {
+          const statusResponse = await fetch(
+            `https://graph.facebook.com/v21.0/${messageId}?fields=status,errors`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          )
+          
+          if (statusResponse.ok) {
+            const statusData = await statusResponse.json()
+            console.log("📊 Status da mensagem após 3s:", statusData.status)
+            
+            if (statusData.status === 'failed') {
+              console.error("❌ Mensagem falhou ao entregar!")
+              if (statusData.errors) {
+                console.error("   Erros:", JSON.stringify(statusData.errors, null, 2))
+              }
+            } else if (statusData.status === 'delivered') {
+              console.log("✅ Mensagem entregue com sucesso!")
+            } else if (statusData.status === 'sent') {
+              console.log("⏳ Mensagem enviada, aguardando entrega...")
+            }
+          }
+        } catch (statusError) {
+          console.error("⚠️ Erro ao verificar status:", statusError)
+        }
+      }, 3000) // 3 segundos
+    }
+    
+    return { success: true, messageId }
   } catch (error) {
     console.error("Error sending sales rep notification:", error)
     throw error
