@@ -154,9 +154,16 @@ export async function POST(request: NextRequest) {
         console.log("WhatsApp message sent successfully to lead")
 
         // Enviar notificação para o sales rep
+        console.log("🔍 Verificando configuração do sales rep...")
+        console.log("SALES_REP_WHATSAPP_PHONE:", salesRepPhone ? "✅ Configurado" : "❌ Não configurado")
+        
         if (salesRepPhone) {
           try {
             const leadFullName = `${data.firstName} ${data.lastName}`
+            console.log(`📤 Enviando notificação para sales rep: ${salesRepPhone}`)
+            console.log(`   Lead: ${leadFullName}`)
+            console.log(`   Telefone do lead: ${phoneForWhatsApp}`)
+            
             await sendSalesRepNotification(
               salesRepPhone,
               leadFullName,
@@ -164,13 +171,18 @@ export async function POST(request: NextRequest) {
               whatsappAccessToken,
               whatsappPhoneNumberId
             )
-            console.log("Sales rep notification sent successfully")
-          } catch (salesRepError) {
-            console.error("Sales rep notification error:", salesRepError)
+            console.log("✅ Sales rep notification sent successfully")
+          } catch (salesRepError: any) {
+            console.error("❌ Sales rep notification error:", salesRepError)
+            console.error("   Error message:", salesRepError?.message)
+            console.error("   Error details:", JSON.stringify(salesRepError, null, 2))
             // Não falha a requisição se notificação para sales rep der erro
           }
         } else {
-          console.warn("SALES_REP_WHATSAPP_PHONE not configured - skipping sales rep notification")
+          console.warn("⚠️ SALES_REP_WHATSAPP_PHONE not configured - skipping sales rep notification")
+          console.warn("   Configure no Vercel: Settings > Environment Variables")
+          console.warn("   Name: SALES_REP_WHATSAPP_PHONE")
+          console.warn("   Value: 5511990239079")
         }
       } catch (error) {
         console.error("WhatsApp integration error:", error)

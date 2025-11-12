@@ -68,54 +68,76 @@ export async function sendSalesRepNotification(
   phoneNumberId: string,
 ): Promise<{ success: boolean; messageId?: string }> {
   try {
+    console.log("📱 sendSalesRepNotification chamada:")
+    console.log("   salesRepPhone:", salesRepPhone)
+    console.log("   leadName:", leadName)
+    console.log("   leadPhone:", leadPhone)
+    console.log("   phoneNumberId:", phoneNumberId)
+    
     // Remove any non-digit characters from phone numbers
     const cleanSalesRepPhone = salesRepPhone.replace(/\D/g, "")
     const cleanLeadPhone = leadPhone.replace(/\D/g, "")
+    
+    console.log("   cleanSalesRepPhone:", cleanSalesRepPhone)
+    console.log("   cleanLeadPhone:", cleanLeadPhone)
 
     // Formatar telefone do lead para exibição (formato brasileiro)
     const formattedLeadPhone = formatPhoneForDisplay(cleanLeadPhone)
+    console.log("   formattedLeadPhone:", formattedLeadPhone)
 
-    const response = await fetch(`https://graph.facebook.com/v21.0/${phoneNumberId}/messages`, {
+    const url = `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`
+    console.log("   URL:", url)
+    
+    const requestBody = {
+      messaging_product: "whatsapp",
+      to: cleanSalesRepPhone,
+      type: "template",
+      template: {
+        name: "novo_lead_notificacao_v2",
+        language: {
+          code: "pt_BR"
+        },
+        components: [
+          {
+            type: "body",
+            parameters: [
+              {
+                type: "text",
+                text: leadName
+              },
+              {
+                type: "text",
+                text: `+${cleanLeadPhone}` // Número completo com + para WhatsApp reconhecer como clicável
+              }
+            ]
+          }
+        ]
+      }
+    }
+    
+    console.log("   Request body:", JSON.stringify(requestBody, null, 2))
+
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        messaging_product: "whatsapp",
-        to: cleanSalesRepPhone,
-        type: "template",
-        template: {
-          name: "novo_lead_notificacao_v2",
-          language: {
-            code: "pt_BR"
-          },
-          components: [
-            {
-              type: "body",
-              parameters: [
-                {
-                  type: "text",
-                  text: leadName
-                },
-                {
-                  type: "text",
-                  text: `+${cleanLeadPhone}` // Número completo com + para WhatsApp reconhecer como clicável
-                }
-              ]
-            }
-          ]
-        }
-      }),
+      body: JSON.stringify(requestBody),
     })
 
+    console.log("   Response status:", response.status, response.statusText)
+    
+    const data = await response.json()
+    console.log("   Response data:", JSON.stringify(data, null, 2))
+    
     if (!response.ok) {
-      const errorData = await response.json()
-      console.error("WhatsApp API error (sales rep notification):", errorData)
-      throw new Error("Failed to send sales rep notification")
+      console.error("❌ WhatsApp API error (sales rep notification):", data)
+      throw new Error(`Failed to send sales rep notification: ${data.error?.message || "Unknown error"}`)
     }
 
-    const data = await response.json()
+    console.log("✅ Sales rep notification sent successfully")
+    console.log("   Message ID:", data.messages?.[0]?.id)
     return { success: true, messageId: data.messages?.[0]?.id }
   } catch (error) {
     console.error("Error sending sales rep notification:", error)
