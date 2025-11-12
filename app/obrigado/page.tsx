@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MessageCircle, Calendar, Sparkles, ArrowRight } from "lucide-react"
 import { LogoImage } from "@/components/logo-image"
+import { LeadTracking } from "@/components/lead-tracking"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function ObrigoPage() {
 
   return (
     <div className="min-h-screen bg-[#0B1020] text-white antialiased">
+      <LeadTracking />
       {/* Background gradient - igual ao assessment */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-[#6366F1]/20 rounded-full blur-3xl opacity-30" />

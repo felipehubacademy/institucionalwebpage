@@ -106,6 +106,7 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`}
           </Script>
         )}
+        {/* Meta Pixel removido do código - agora gerenciado via GTM */}
         <link rel="canonical" href="https://hubacademybr.com" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
@@ -121,6 +122,7 @@ export default function RootLayout({
           </noscript>
         )}
         {/* End Google Tag Manager (noscript) */}
+        {/* Meta Pixel (noscript) removido - agora gerenciado via GTM */}
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <FaviconLoader />

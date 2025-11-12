@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import Link from "next/link"
 import { LogoImage } from "@/components/logo-image"
 import { PhoneInput } from "@/components/phone-input"
-import { Menu, X, XCircle } from "lucide-react"
+import { Menu, X, XCircle, Check } from "lucide-react"
 
 // Cores oficiais da Hub Academy
 const HUB_COLORS = {
@@ -235,34 +235,17 @@ export default function HubAssessmentLanding() {
           throw new Error(data.error || "Falha ao enviar. Tente novamente.")
         }
 
-        // Tracking events
-        if (typeof window !== "undefined") {
-          // GTM
-          if (window.dataLayer) {
-            window.dataLayer.push({
-              event: "generate_lead",
-              lead_type: "assessment",
-              form_location: "assessment_landing",
-            })
-          }
-
-          // Meta Pixel
-          if ((window as any).fbq) {
-            ;(window as any).fbq("track", "Lead", {
-              content_name: "Assessment Gratuito",
-              content_category: "Assessment",
-            })
-          }
-
-          // LinkedIn
-          if ((window as any).lintrk) {
-            const linkedinPid =
-              (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_LINKEDIN_PID ||
-              process.env.NEXT_PUBLIC_LINKEDIN_PID
-            if (linkedinPid) {
-              ;(window as any).lintrk("track", { conversion_id: linkedinPid })
-            }
-          }
+        // Tracking events via dataLayer (GTM gerencia Meta Pixel, LinkedIn, etc)
+        if (typeof window !== "undefined" && window.dataLayer) {
+          window.dataLayer.push({
+            event: "generate_lead",
+            lead_type: "assessment",
+            form_location: "assessment_landing",
+            // Meta Pixel - evento Lead (GTM vai capturar e enviar)
+            fb_event: "Lead",
+            fb_content_name: "Assessment Gratuito",
+            fb_content_category: "Assessment",
+          })
         }
 
         // Redirecionar
@@ -621,14 +604,27 @@ export default function HubAssessmentLanding() {
                   {/* Consentimento LGPD */}
                   <div>
                     <label className="flex items-start gap-3 text-sm text-slate-300 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        name="consent"
-                        checked={form.consent}
-                        onChange={handleChange}
-                        required
-                        className="mt-1 w-4 h-4 rounded border-white/20 bg-white/10 text-[#a3ff3c] focus:ring-2 focus:ring-[#a3ff3c]/20 transition-all duration-200"
-                      />
+                      <div className="relative mt-1 flex-shrink-0">
+                        <input
+                          type="checkbox"
+                          name="consent"
+                          checked={form.consent}
+                          onChange={handleChange}
+                          required
+                          className="sr-only"
+                        />
+                        <div
+                          className={`w-4 h-4 rounded border-2 transition-all duration-200 flex items-center justify-center ${
+                            form.consent
+                              ? "bg-[#a3ff3c] border-[#a3ff3c]"
+                              : "bg-white/10 border-white/20 group-hover:border-[#a3ff3c]/50"
+                          }`}
+                        >
+                          {form.consent && (
+                            <Check className="w-3 h-3 text-[#161533] stroke-[3]" />
+                          )}
+                        </div>
+                      </div>
                       <span className="flex-1">
                         Autorizo o contato por WhatsApp/e-mail para agendamento e receberei
                         materiais sobre o programa. Você pode cancelar a qualquer momento.{" "}

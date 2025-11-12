@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { leadSchema, sanitizePhone, formatPhoneForHubSpot, formatPhoneForWhatsApp } from "@/lib/validations/lead"
 import { upsertContact, createDeal, getUTMSource } from "@/lib/hubspot/client"
 import { rateLimit, getClientIP } from "@/lib/rate-limit"
-import { sendWhatsAppMessage } from "@/utils/whatsapp-api"
+import { sendWhatsAppMessage, sendSalesRepNotification } from "@/utils/whatsapp-api"
 
 /**
  * POST /api/lead
@@ -135,12 +135,14 @@ export async function POST(request: NextRequest) {
     // WhatsApp Integration
     const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
     const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
+    const salesRepPhone = process.env.SALES_REP_WHATSAPP_PHONE // Número do sales rep (ex: 5511990239079)
 
     if (whatsappAccessToken && whatsappPhoneNumberId) {
       try {
         // Formatar telefone para WhatsApp (sem +, só dígitos com 55)
         const phoneForWhatsApp = formatPhoneForWhatsApp(data.phone)
         
+        // Enviar mensagem para o lead
         await sendWhatsAppMessage(
           phoneForWhatsApp,
           data.firstName,
@@ -149,7 +151,27 @@ export async function POST(request: NextRequest) {
           "assessment_confirmacao" // Template para assessment
         )
 
-        console.log("WhatsApp message sent successfully")
+        console.log("WhatsApp message sent successfully to lead")
+
+        // Enviar notificação para o sales rep
+        if (salesRepPhone) {
+          try {
+            const leadFullName = `${data.firstName} ${data.lastName}`
+            await sendSalesRepNotification(
+              salesRepPhone,
+              leadFullName,
+              phoneForWhatsApp,
+              whatsappAccessToken,
+              whatsappPhoneNumberId
+            )
+            console.log("Sales rep notification sent successfully")
+          } catch (salesRepError) {
+            console.error("Sales rep notification error:", salesRepError)
+            // Não falha a requisição se notificação para sales rep der erro
+          }
+        } else {
+          console.warn("SALES_REP_WHATSAPP_PHONE not configured - skipping sales rep notification")
+        }
       } catch (error) {
         console.error("WhatsApp integration error:", error)
         // Não falha a requisição se WhatsApp der erro
