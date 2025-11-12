@@ -88,12 +88,15 @@ export async function sendSalesRepNotification(
     const url = `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`
     console.log("   URL:", url)
     
+    // Usar template UTILITY para sales rep (sem limites de marketing)
+    const templateName = process.env.SALES_REP_TEMPLATE_NAME || "sistema_crm_registro"
+    
     const requestBody = {
       messaging_product: "whatsapp",
       to: cleanSalesRepPhone,
       type: "template",
       template: {
-        name: "novo_lead_notificacao_v2",
+        name: templateName, // Template UTILITY - sem limites de marketing
         language: {
           code: "pt_BR"
         },
@@ -114,6 +117,8 @@ export async function sendSalesRepNotification(
         ]
       }
     }
+    
+    console.log("   Template usado:", templateName)
     
     console.log("   Request body:", JSON.stringify(requestBody, null, 2))
 
