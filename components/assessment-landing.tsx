@@ -337,6 +337,10 @@ export default function HubAssessmentLanding() {
       english_situation: string
       english_pain_points: string
       motivation: string
+      timeline: string
+      previous_investment: string
+      budget: string
+      personalized_plan: string
     }) => {
       try {
         const res = await fetch("/api/lead/qualification", {
@@ -348,6 +352,10 @@ export default function HubAssessmentLanding() {
             english_situation: answers.english_situation,
             english_pain_points: answers.english_pain_points,
             motivation: answers.motivation,
+            timeline: answers.timeline,
+            previous_investment: answers.previous_investment,
+            budget: answers.budget,
+            personalized_plan: answers.personalized_plan,
           }),
         })
 
