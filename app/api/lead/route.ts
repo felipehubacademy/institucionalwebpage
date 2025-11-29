@@ -108,8 +108,8 @@ export async function POST(request: NextRequest) {
       preferred_time: data.preferredTime, // Preferência de horário (Manhã, Tarde, Noite)
       hs_lead_status: "NEW",
       hubspot_owner_id: "83528823", // Marco
-      lifecyclestage: "lead",
-      // origem: "Form Assessment", // Removido temporariamente - verificar se propriedade existe no HubSpot
+      // lifecyclestage: "lead", // Removido - HubSpot define automaticamente
+      origem: "Form Assessment",
     })
 
     // Criar Deal
