@@ -102,6 +102,8 @@ export async function upsertContact(data: ContactData): Promise<{ vid: number }>
       properties.preferred_time = data.preferred_time
     }
 
+    console.log("📤 Enviando para HubSpot:", JSON.stringify(properties, null, 2))
+
     if (existingContact) {
       // Atualizar contato existente
       await hubspotClient.crm.contacts.basicApi.update(existingContact.id, {
