@@ -19,12 +19,12 @@ export default function ObrigoPage() {
     "https://wa.me/5511990239079?text=Olá%20Hub!%20Quero%20agendar%20meu%20assessment."
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-white antialiased">
+    <div className="min-h-screen bg-[#0B1020] text-white antialiased overflow-x-hidden">
       <LeadTracking />
       {/* Background gradient - igual ao assessment */}
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-[#6366F1]/20 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-0 -right-1/4 w-[600px] h-[600px] bg-[#a3ff3c]/10 rounded-full blur-3xl opacity-20" />
+      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#6366F1]/20 rounded-full blur-3xl opacity-30" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#a3ff3c]/10 rounded-full blur-3xl opacity-20" />
       </div>
 
       {/* Header */}

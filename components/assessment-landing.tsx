@@ -324,7 +324,7 @@ export default function HubAssessmentLanding() {
   )
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-white antialiased">
+    <div className="min-h-screen bg-[#0B1020] text-white antialiased overflow-x-hidden">
       {/* Header fixo com scroll */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
