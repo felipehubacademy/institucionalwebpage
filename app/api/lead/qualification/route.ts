@@ -14,10 +14,20 @@ import { sendWhatsAppMessage } from "@/utils/whatsapp-api"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { email, career_level, english_situation, english_pain_points, motivation } = body
+    const { 
+      email, 
+      career_level, 
+      english_situation, 
+      english_pain_points, 
+      motivation,
+      timeline,
+      previous_investment,
+      budget,
+      personalized_plan
+    } = body
 
     // Validação básica
-    if (!email || !career_level || !english_situation || !english_pain_points || !motivation) {
+    if (!email || !career_level || !english_situation || !english_pain_points || !motivation || !timeline || !previous_investment || !budget || !personalized_plan) {
       return NextResponse.json(
         {
           error: "Dados incompletos. Todas as respostas são obrigatórias.",
@@ -43,6 +53,10 @@ export async function POST(request: NextRequest) {
       assessment_english_situation: english_situation,
       assessment_english_pain_points: english_pain_points,
       assessment_motivation: motivation,
+      assessment_timeline: timeline,
+      assessment_previous_investment: previous_investment,
+      assessment_budget: budget,
+      assessment_personalized_plan: personalized_plan,
     })
 
     console.log(`✅ Qualification data updated for contact: ${email}`)

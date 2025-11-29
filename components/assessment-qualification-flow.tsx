@@ -8,6 +8,10 @@ interface QualificationAnswers {
   english_situation: string
   english_pain_points: string
   motivation: string
+  timeline: string
+  previous_investment: string
+  budget: string
+  personalized_plan: string
 }
 
 interface AssessmentQualificationFlowProps {
@@ -60,6 +64,45 @@ const QUESTIONS = [
       "Perdi uma oportunidade recentemente por causa do idioma",
       "Quero me preparar para uma oportunidade",
       "Quero melhorar comunicação como líder",
+    ],
+  },
+  {
+    id: "timeline",
+    question: "Em qual prazo você gostaria de atingir fluência profissional?",
+    options: [
+      "3 meses",
+      "6 meses",
+      "12 meses",
+      "Sem pressa (não é prioridade agora)",
+    ],
+  },
+  {
+    id: "previous_investment",
+    question: "Você já investiu em cursos de inglês antes?",
+    options: [
+      "Sim, mas não supriram minha necessidade",
+      "Sim, tive avanços, mas parei",
+      "Não, será minha primeira vez",
+      "Não, e não tenho intenção de investir agora",
+    ],
+  },
+  {
+    id: "budget",
+    question: "Qual faixa de investimento você considera realista para um programa profissional?",
+    options: [
+      "Até R$200/mês (busco algo mais básico)",
+      "Entre R$300 e R$700/mês",
+      "Entre R$701 e R$1.500/mês",
+      "Acima de R$1.500/mês (busco resultado rápido e personalizado)",
+    ],
+  },
+  {
+    id: "personalized_plan",
+    question: "Você gostaria de conhecer um plano personalizado baseado no seu perfil?",
+    options: [
+      "Sim, quero analisar a proposta",
+      "Talvez, dependendo do formato",
+      "Não, estou só explorando opções",
     ],
   },
 ]
@@ -186,7 +229,7 @@ export function AssessmentQualificationFlow({
               Quase lá
             </p>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-relaxed mb-6 sm:mb-8">
-              Para uma experiência ainda mais direcionada a você, precisamos que responda 4 perguntas rápidas.
+              Para uma experiência ainda mais direcionada a você, precisamos que responda 8 perguntas rápidas.
             </h2>
 
             {/* Progress bar */}

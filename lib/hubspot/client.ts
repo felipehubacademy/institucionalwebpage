@@ -170,6 +170,10 @@ export async function updateContactQualification(
     assessment_english_situation?: string
     assessment_english_pain_points?: string
     assessment_motivation?: string
+    assessment_timeline?: string
+    assessment_previous_investment?: string
+    assessment_budget?: string
+    assessment_personalized_plan?: string
   }
 ): Promise<{ success: boolean }> {
   try {
@@ -214,6 +218,22 @@ export async function updateContactQualification(
 
     if (qualificationData.assessment_motivation) {
       properties.assessment_motivation = qualificationData.assessment_motivation
+    }
+
+    if (qualificationData.assessment_timeline) {
+      properties.assessment_timeline = qualificationData.assessment_timeline
+    }
+
+    if (qualificationData.assessment_previous_investment) {
+      properties.assessment_previous_investment = qualificationData.assessment_previous_investment
+    }
+
+    if (qualificationData.assessment_budget) {
+      properties.assessment_budget = qualificationData.assessment_budget
+    }
+
+    if (qualificationData.assessment_personalized_plan) {
+      properties.assessment_personalized_plan = qualificationData.assessment_personalized_plan
     }
 
     // Atualizar contato
