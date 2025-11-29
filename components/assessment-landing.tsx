@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import Link from "next/link"
 import { LogoImage } from "@/components/logo-image"
 import { PhoneInput } from "@/components/phone-input"
+import { AssessmentQualificationFlow } from "@/components/assessment-qualification-flow"
 import { Menu, X, XCircle, Check } from "lucide-react"
 
 // Cores oficiais da Hub Academy
@@ -81,6 +82,7 @@ export default function HubAssessmentLanding() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showQualification, setShowQualification] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
   const [form, setForm] = useState<FormData>({
     firstName: "",
@@ -248,14 +250,53 @@ export default function HubAssessmentLanding() {
           })
         }
 
-        // Redirecionar
-        window.location.href = "/obrigado"
+        // Mostrar modal de qualificação ao invés de redirecionar
+        setLoading(false)
+        setShowQualification(true)
       } catch (err: any) {
         setError(err.message || "Erro inesperado. Por favor, tente novamente.")
         setLoading(false)
       }
     },
     [form]
+  )
+
+  // Handler para completar qualificação
+  const handleQualificationComplete = useCallback(
+    async (answers: {
+      career_level: string
+      english_situation: string
+      english_pain_points: string
+      motivation: string
+    }) => {
+      try {
+        const res = await fetch("/api/lead/qualification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: form.email,
+            career_level: answers.career_level,
+            english_situation: answers.english_situation,
+            english_pain_points: answers.english_pain_points,
+            motivation: answers.motivation,
+          }),
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+          throw new Error(data.error || "Falha ao finalizar qualificação. Tente novamente.")
+        }
+
+        // Redirecionar para obrigado após sucesso
+        window.location.href = "/obrigado"
+      } catch (err: any) {
+        console.error("Error completing qualification:", err)
+        setError(err.message || "Erro ao finalizar qualificação. Você já está cadastrado!")
+        setShowQualification(false)
+      }
+    },
+    [form.email]
   )
 
   // Smooth scroll para âncoras
@@ -1034,6 +1075,14 @@ export default function HubAssessmentLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Modal de Qualificação */}
+      <AssessmentQualificationFlow
+        isOpen={showQualification}
+        onClose={() => setShowQualification(false)}
+        onComplete={handleQualificationComplete}
+        userEmail={form.email}
+      />
     </div>
   )
 }

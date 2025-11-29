@@ -132,7 +132,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // WhatsApp Integration
+    // WhatsApp Integration - Apenas notificação para sales rep
+    // Mensagem para o lead será enviada após completar qualificação
     const whatsappAccessToken = process.env.WHATSAPP_ACCESS_TOKEN
     const whatsappPhoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID
     const salesRepPhone = process.env.SALES_REP_WHATSAPP_PHONE // Número do sales rep (ex: 5511990239079)
@@ -141,17 +142,6 @@ export async function POST(request: NextRequest) {
       try {
         // Formatar telefone para WhatsApp (sem +, só dígitos com 55)
         const phoneForWhatsApp = formatPhoneForWhatsApp(data.phone)
-        
-        // Enviar mensagem para o lead
-        await sendWhatsAppMessage(
-          phoneForWhatsApp,
-          data.firstName,
-          whatsappAccessToken,
-          whatsappPhoneNumberId,
-          "assessment_confirmacao" // Template para assessment
-        )
-
-        console.log("WhatsApp message sent successfully to lead")
 
         // Enviar notificação para o sales rep
         console.log("🔍 Verificando configuração do sales rep...")
@@ -184,6 +174,10 @@ export async function POST(request: NextRequest) {
           console.warn("   Name: SALES_REP_WHATSAPP_PHONE")
           console.warn("   Value: 5511990239079")
         }
+
+        // NOTA: Mensagem WhatsApp para o lead será enviada após completar qualificação
+        // via endpoint /api/lead/qualification
+        console.log("ℹ️ WhatsApp message to lead will be sent after qualification completion")
       } catch (error) {
         console.error("WhatsApp integration error:", error)
         // Não falha a requisição se WhatsApp der erro

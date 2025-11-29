@@ -161,6 +161,113 @@ export async function createDeal(
 }
 
 /**
+ * Update contact qualification properties
+ */
+export async function updateContactQualification(
+  email: string,
+  qualificationData: {
+    assessment_career_level?: string
+    assessment_english_situation?: string
+    assessment_english_pain_points?: string
+    assessment_motivation?: string
+  }
+): Promise<{ success: boolean }> {
+  try {
+    // Buscar contato por email
+    const searchResponse = await hubspotClient.crm.contacts.searchApi.doSearch({
+      query: email,
+      filterGroups: [
+        {
+          filters: [
+            {
+              propertyName: "email",
+              operator: "EQ",
+              value: email,
+            },
+          ],
+        },
+      ],
+      limit: 1,
+      properties: ["id", "email"],
+    })
+
+    const contact = searchResponse.results?.[0]
+
+    if (!contact) {
+      throw new Error(`Contato não encontrado com email: ${email}`)
+    }
+
+    // Preparar propriedades para atualização
+    const properties: Record<string, string> = {}
+
+    if (qualificationData.assessment_career_level) {
+      properties.assessment_career_level = qualificationData.assessment_career_level
+    }
+
+    if (qualificationData.assessment_english_situation) {
+      properties.assessment_english_situation = qualificationData.assessment_english_situation
+    }
+
+    if (qualificationData.assessment_english_pain_points) {
+      properties.assessment_english_pain_points = qualificationData.assessment_english_pain_points
+    }
+
+    if (qualificationData.assessment_motivation) {
+      properties.assessment_motivation = qualificationData.assessment_motivation
+    }
+
+    // Atualizar contato
+    await hubspotClient.crm.contacts.basicApi.update(contact.id, {
+      properties,
+    })
+
+    return { success: true }
+  } catch (error: any) {
+    console.error("HubSpot updateContactQualification error:", error)
+    throw new Error(`Falha ao atualizar qualificação: ${error.message || "Erro desconhecido"}`)
+  }
+}
+
+/**
+ * Get contact by email (for retrieving phone number)
+ */
+export async function getContactByEmail(email: string): Promise<{ vid: number; phone?: string; firstname?: string } | null> {
+  try {
+    const searchResponse = await hubspotClient.crm.contacts.searchApi.doSearch({
+      query: email,
+      filterGroups: [
+        {
+          filters: [
+            {
+              propertyName: "email",
+              operator: "EQ",
+              value: email,
+            },
+          ],
+        },
+      ],
+      limit: 1,
+      properties: ["id", "email", "phone", "firstname"],
+    })
+
+    const contact = searchResponse.results?.[0]
+
+    if (!contact) {
+      return null
+    }
+
+    return {
+      vid: Number(contact.id),
+      phone: contact.properties?.phone,
+      firstname: contact.properties?.firstname,
+    }
+  } catch (error: any) {
+    console.error("HubSpot getContactByEmail error:", error)
+    throw new Error(`Falha ao buscar contato: ${error.message || "Erro desconhecido"}`)
+  }
+}
+
+/**
  * Get UTM source string from individual UTM parameters
  */
 export function getUTMSource(utm: {
