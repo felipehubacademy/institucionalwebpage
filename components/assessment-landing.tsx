@@ -135,10 +135,41 @@ export default function HubAssessmentLanding() {
         }
         break
       case "email":
-        if (typeof value === "string") {
+        if (typeof value === "string" && value.length > 0) {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          
+          // Verificar formato básico
           if (!emailRegex.test(value)) {
             errors.email = "E-mail inválido"
+          } else {
+            // Verificar domínio válido (pelo menos 2 caracteres após o ponto)
+            const domainMatch = value.match(/@([^.]+)\.(.+)$/)
+            if (domainMatch) {
+              const [, domain, tld] = domainMatch
+              
+              // Lista de typos comuns em domínios conhecidos
+              const commonTypos: Record<string, string> = {
+                "gmail.copm": "gmail.com",
+                "gmail.con": "gmail.com",
+                "gmail.co": "gmail.com",
+                "hotmail.con": "hotmail.com",
+                "hotmail.co": "hotmail.com",
+                "hotmail.copm": "hotmail.com",
+                "outlook.con": "outlook.com",
+                "outlook.co": "outlook.com",
+                "yahoo.con": "yahoo.com",
+                "yahoo.co": "yahoo.com",
+              }
+              
+              const domainKey = `${domain}.${tld}`
+              if (commonTypos[domainKey]) {
+                errors.email = `Domínio inválido. Você quis dizer ${domain}@${commonTypos[domainKey]}?`
+              } else if (tld.length < 2) {
+                errors.email = "Domínio inválido. Verifique o final do e-mail (ex: .com, .com.br)"
+              } else if (domain.length < 1) {
+                errors.email = "Domínio inválido"
+              }
+            }
           }
         }
         break
@@ -202,8 +233,42 @@ export default function HubAssessmentLanding() {
       const errors: Record<string, string> = {}
       if (!form.firstName || form.firstName.length < 2) errors.firstName = "Nome obrigatório"
       if (!form.lastName || form.lastName.length < 2) errors.lastName = "Sobrenome obrigatório"
-      if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-        errors.email = "E-mail inválido"
+      
+      // Validação de email melhorada
+      if (!form.email) {
+        errors.email = "E-mail obrigatório"
+      } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(form.email)) {
+          errors.email = "E-mail inválido"
+        } else {
+          // Verificar domínio válido
+          const domainMatch = form.email.match(/@([^.]+)\.(.+)$/)
+          if (domainMatch) {
+            const [, domain, tld] = domainMatch
+            
+            // Lista de typos comuns em domínios conhecidos
+            const commonTypos: Record<string, string> = {
+              "gmail.copm": "gmail.com",
+              "gmail.con": "gmail.com",
+              "gmail.co": "gmail.com",
+              "hotmail.con": "hotmail.com",
+              "hotmail.co": "hotmail.com",
+              "hotmail.copm": "hotmail.com",
+              "outlook.con": "outlook.com",
+              "outlook.co": "outlook.com",
+              "yahoo.con": "yahoo.com",
+              "yahoo.co": "yahoo.com",
+            }
+            
+            const domainKey = `${domain}.${tld}`
+            if (commonTypos[domainKey]) {
+              errors.email = `Domínio inválido. Você quis dizer ${domain}@${commonTypos[domainKey]}?`
+            } else if (tld.length < 2) {
+              errors.email = "Domínio inválido. Verifique o final do e-mail (ex: .com, .com.br)"
+            }
+          }
+        }
       }
       const phoneDigits = form.phone.replace(/\D/g, "")
       if (!form.phone || phoneDigits.length < 10) {
@@ -314,13 +379,22 @@ export default function HubAssessmentLanding() {
   // Memoized values
 
   const isFormValid = useMemo(
-    () =>
-      form.firstName.length >= 2 &&
-      form.lastName.length >= 2 &&
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
-      form.phone.replace(/\D/g, "").length >= 10 &&
-      form.consent,
-    [form]
+    () => {
+      // Verificar se há erros de validação
+      const hasErrors = Object.keys(fieldErrors).length > 0
+      
+      // Validação básica dos campos obrigatórios
+      const basicValidation =
+        form.firstName.length >= 2 &&
+        form.lastName.length >= 2 &&
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
+        form.phone.replace(/\D/g, "").length >= 10 &&
+        form.consent
+      
+      // Formulário válido apenas se não houver erros E passar na validação básica
+      return !hasErrors && basicValidation
+    },
+    [form, fieldErrors]
   )
 
   return (
