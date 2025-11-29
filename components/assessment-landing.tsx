@@ -143,9 +143,11 @@ export default function HubAssessmentLanding() {
             errors.email = "E-mail inválido"
           } else {
             // Verificar domínio válido (pelo menos 2 caracteres após o ponto)
+            const emailParts = value.split("@")
             const domainMatch = value.match(/@([^.]+)\.(.+)$/)
-            if (domainMatch) {
+            if (domainMatch && emailParts.length === 2) {
               const [, domain, tld] = domainMatch
+              const username = emailParts[0]
               
               // Lista de typos comuns em domínios conhecidos
               const commonTypos: Record<string, string> = {
@@ -163,7 +165,7 @@ export default function HubAssessmentLanding() {
               
               const domainKey = `${domain}.${tld}`
               if (commonTypos[domainKey]) {
-                errors.email = `Domínio inválido. Você quis dizer ${domain}@${commonTypos[domainKey]}?`
+                errors.email = `Domínio inválido. Você quis dizer ${username}@${commonTypos[domainKey]}?`
               } else if (tld.length < 2) {
                 errors.email = "Domínio inválido. Verifique o final do e-mail (ex: .com, .com.br)"
               } else if (domain.length < 1) {
@@ -243,9 +245,11 @@ export default function HubAssessmentLanding() {
           errors.email = "E-mail inválido"
         } else {
           // Verificar domínio válido
+          const emailParts = form.email.split("@")
           const domainMatch = form.email.match(/@([^.]+)\.(.+)$/)
-          if (domainMatch) {
+          if (domainMatch && emailParts.length === 2) {
             const [, domain, tld] = domainMatch
+            const username = emailParts[0]
             
             // Lista de typos comuns em domínios conhecidos
             const commonTypos: Record<string, string> = {
@@ -263,7 +267,7 @@ export default function HubAssessmentLanding() {
             
             const domainKey = `${domain}.${tld}`
             if (commonTypos[domainKey]) {
-              errors.email = `Domínio inválido. Você quis dizer ${domain}@${commonTypos[domainKey]}?`
+              errors.email = `Domínio inválido. Você quis dizer ${username}@${commonTypos[domainKey]}?`
             } else if (tld.length < 2) {
               errors.email = "Domínio inválido. Verifique o final do e-mail (ex: .com, .com.br)"
             }
